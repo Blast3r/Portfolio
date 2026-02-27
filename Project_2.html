@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 2</title>
+    <link rel="stylesheet" href="Project_2.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay origin-left bg-black"></div>
+
+    <nav class="wireframe-nav">
+        <a href="cv.html" class="nav-item brand">
+            <span class="nav-text">Melih G. Kutsal</span>
+            <span class="nav-sub">[CV]</span>
+        </a>
+
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+
+        <div class="nav-group">
+            <a href="architecture.html" class="nav-item active">Architecture</a>
+            <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+        </div>
+    </nav>
+
+    <main class="project-layout">
+        
+        <section class="hero-overlap-section">
+            <div class="placeholder-box hero-bg-box">
+                <span>ANA_KAPAK_GORSELI.JPG</span>
+                <img src="" alt="Hero Main" class="zoomable">
+            </div>
+
+            <div class="hero-logo-box">
+                <span class="logo-text">LOGO</span>
+                <img src="" alt="Project Logo" class="zoomable">
+            </div>
+
+            <div class="hero-text-box">
+                <h1>PROJECT_2</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+                <br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </section>
+
+        <section class="zig-zag">
+            <div class="zig-left">
+                <div class="placeholder-box tall-img-box">
+                    <span>GORSEL_1.JPG</span>
+                    <img src="" alt="View 1" class="zoomable">
+                </div>
+            </div>
+            <div class="zig-right">
+                <h2>01. CONCEPT & FORM</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.</p>
+            </div>
+        </section>
+
+        <section class="zig-zag reverse">
+            <div class="zig-left">
+                <div class="placeholder-box tall-img-box">
+                    <span>GORSEL_2.JPG</span>
+                    <img src="" alt="View 2" class="zoomable">
+                </div>
+            </div>
+            <div class="zig-right">
+                <h2>02. SPATIAL QUALITY</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </section>
+
+        <section class="gallery-grid">
+            <div class="placeholder-box grid-img-box">
+                <span>GRID_1.JPG</span>
+                <img src="" alt="Grid 1" class="zoomable">
+            </div>
+            <div class="placeholder-box grid-img-box">
+                <span>GRID_2.JPG</span>
+                <img src="" alt="Grid 2" class="zoomable">
+            </div>
+            <div class="placeholder-box grid-img-box">
+                <span>GRID_3.JPG</span>
+                <img src="" alt="Grid 3" class="zoomable">
+            </div>
+            <div class="placeholder-box grid-img-box">
+                <span>GRID_4.JPG</span>
+                <img src="" alt="Grid 4" class="zoomable">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="project-footer">
+        <a href="Project_1.html" class="footer-link"><- PREV: PROJECT_1</a>
+        <a href="Project_3.html" class="footer-link">NEXT: PROJECT_3 -></a>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img src="" alt="Zoomed Image" class="lightbox-content" id="lightbox-content">
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) {
+                setTimeout(() => { overlay.classList.add('reveal-x'); }, 50);
+            }
+        });
+
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl === '#') return;
+
+                e.preventDefault(); 
+                const overlay = document.querySelector('.page-transition-overlay');
+                if (overlay) {
+                    overlay.className = 'page-transition-overlay bg-black';
+                    if (targetUrl.includes('cv.html')) {
+                        overlay.classList.add('origin-bottom', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else if (targetUrl.includes('index.html')) {
+                        overlay.classList.add('origin-top', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else {
+                        overlay.classList.add('origin-left', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                }
+                setTimeout(() => { window.location.href = targetUrl; }, 600);
+            });
+        });
+
+        const zoomables = document.querySelectorAll('.zoomable');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        if(zoomables.length > 0 && lightbox) {
+            zoomables.forEach(img => {
+                img.addEventListener('click', function() {
+                    if(this.getAttribute('src')) {
+                        lightboxContent.src = this.src;
+                        lightbox.classList.add('active');
+                    }
+                });
+            });
+
+            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) lightbox.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>

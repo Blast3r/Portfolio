@@ -23,7 +23,6 @@ body {
 .bg-black { background-color: var(--c-blk); }
 .bg-purple { background-color: var(--c-pur); }
 
-/* --- PAGE TRANSITION --- */
 .page-transition-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: 9999; pointer-events: none;
@@ -38,7 +37,6 @@ body {
 .cover-x { transform: scaleX(1); }
 .cover-y { transform: scaleY(1); }
 
-/* --- NAVIGATION --- */
 .wireframe-nav {
     position: fixed; top: 0; width: 100%; height: 60px;
     display: flex; justify-content: space-between;
@@ -63,50 +61,35 @@ body {
 .brand { border-left: none; border-right: 2px solid var(--c-blk); font-weight: 700; gap: 10px; }
 .nav-item:hover, .nav-item.active { background-color: var(--c-blk); color: var(--c-wht); }
 
-/* --- LAYOUT --- */
 .project-layout {
     width: 85%;
     max-width: 1400px;
-    margin: 140px auto 100px auto;
+    margin: 120px auto 80px auto;
 }
 
-/* --- YENİ WIDE HERO SECTION --- */
-.hero-wide {
-    border: 2px solid var(--c-blk);
-    margin-bottom: 120px;
-    background-color: var(--c-wht);
-    display: flex;
-    flex-direction: column;
-}
-
-.hero-img-wrapper {
-    width: 100%;
-    border-bottom: 2px solid var(--c-blk);
-}
-
-.hero-img-box {
-    width: 100%;
-    height: 75vh; /* Geniş manzara renderı için oldukça yüksek */
-    border: none !important; 
-}
-
-.hero-info-wide {
-    display: flex;
-    padding: 50px 40px 40px 40px;
+/* --- OVERLAP HERO SECTION --- */
+.hero-overlap-section {
     position: relative;
-    gap: 40px;
+    width: 100%;
+    margin-bottom: 180px; 
 }
 
+.hero-bg-box {
+    width: 100%;
+    height: 70vh; 
+}
+
+/* YENİ LOGO KÜRESİ AYARLARI */
 .hero-logo-box {
     position: absolute;
-    top: -60px; /* Görsel ile yazının birleşim çizgisine tam oturur */
-    left: 40px;
-    width: 120px;
-    height: 120px;
+    top: 50px;
+    left: 50px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    background-color: var(--c-pur);
+    background-color: var(--c-pur); 
     border: 2px solid var(--c-blk);
-    z-index: 5;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -120,102 +103,57 @@ body {
     z-index: 1;
 }
 
-.title-meta {
-    flex: 1;
-    padding-top: 40px; /* Logonun altına inmesi için boşluk */
-}
-
-.title-meta h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--c-pur);
-    margin-bottom: 15px;
-    text-transform: uppercase;
-}
-
-.meta-data {
-    display: flex;
-    gap: 20px;
-    font-weight: 500;
-    border-bottom: 1px solid var(--c-blk);
-    padding-bottom: 10px;
-}
-
-.desc-text {
-    flex: 1.5;
-    padding-top: 40px; /* Başlıkla aynı hizada olması için boşluk */
-}
-
-/* --- OVERLAP ROWS --- */
-.overlap-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 120px;
-    position: relative;
-}
-
-.overlap-img {
-    width: 65%;
-    height: 600px;
-}
-
-.overlap-text {
-    width: 45%;
-    padding: 50px;
+.hero-text-box {
+    position: absolute;
+    bottom: -80px;
+    left: 50px;
+    width: 40%;
     background-color: var(--c-wht);
     border: 2px solid var(--c-blk);
-    margin-left: -10%; 
-    z-index: 5;
+    padding: 40px;
+    z-index: 4;
 }
 
-.overlap-row.reverse {
-    flex-direction: row-reverse;
-}
-
-.overlap-row.reverse .overlap-text {
-    margin-left: 0;
-    margin-right: -10%;
-}
-
-.overlap-text h2 {
-    font-size: 2rem;
+.hero-text-box h1 {
+    font-size: 3rem;
     font-weight: 700;
-    color: var(--c-pur);
+    color: var(--c-pur); 
     margin-bottom: 20px;
 }
 
-/* --- TECHNICAL SECTION --- */
-.technical-section {
+/* --- ZIG ZAG SECTIONS --- */
+.zig-zag {
+    display: flex;
+    gap: 60px;
     margin-bottom: 100px;
-    border-top: 2px solid var(--c-blk);
-    padding-top: 60px;
+    align-items: center;
 }
 
-.technical-section h2 {
-    font-size: 2.5rem;
+.zig-zag.reverse {
+    flex-direction: row-reverse;
+}
+
+.zig-left { flex: 1; }
+.zig-right { flex: 1; }
+
+.zig-right h2 {
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--c-pur);
-    margin-bottom: 10px;
-    text-align: center;
+    color: var(--c-pur); 
+    margin-bottom: 20px;
 }
 
-.tech-desc {
-    text-align: center;
-    margin-bottom: 60px;
-    font-weight: 500;
+.zig-right p {
+    font-size: 1.1rem;
+    color: var(--c-blk);
 }
 
-.plans-grid {
+/* --- GALLERY GRID --- */
+.gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 40px;
-    margin-bottom: 40px;
-}
-
-.sections-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    margin-bottom: 100px;
 }
 
 /* --- PLACEHOLDERS --- */
@@ -237,8 +175,15 @@ body {
     z-index: 1;
 }
 
-.tech-img-box { width: 100%; height: 500px; }
-.section-img-box { width: 100%; height: 400px; }
+.tall-img-box {
+    width: 100%;
+    height: 700px;
+}
+
+.grid-img-box {
+    width: 100%;
+    aspect-ratio: 1 / 1; 
+}
 
 img {
     width: 100%;
@@ -306,18 +251,15 @@ img[src=""] { opacity: 0; }
 /* --- MOBILE --- */
 @media (max-width: 900px) {
     .project-layout, .project-footer { width: 95%; }
-    .hero-wide { flex-direction: column; }
-    .hero-info-wide { flex-direction: column; padding: 20px; gap: 20px; }
-    .hero-img-box { height: 400px; }
-    .title-meta, .desc-text { padding-top: 0; }
-    .hero-logo-box { position: relative; top: 0; left: 0; margin-bottom: 20px; }
+    .hero-bg-box { height: 400px; }
+    .hero-logo-box { width: 100px; height: 100px; top: 20px; left: 20px; }
+    .hero-text-box { position: relative; width: 100%; bottom: 0; left: 0; border-top: none; }
+    .hero-overlap-section { margin-bottom: 60px; }
     
-    .overlap-row, .overlap-row.reverse { flex-direction: column; }
-    .overlap-img { width: 100%; height: 400px; }
-    .overlap-text { width: 90%; margin-left: 0; margin-top: -30px; }
-    .overlap-row.reverse .overlap-text { margin-right: 0; margin-top: -30px; }
+    .zig-zag, .zig-zag.reverse { flex-direction: column; gap: 20px; }
+    .tall-img-box { height: 400px; }
+    .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
     
-    .plans-grid { grid-template-columns: 1fr; }
     .logo-link { display: none; }
     .wireframe-nav { padding: 0; }
 }

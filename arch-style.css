@@ -1,6 +1,6 @@
 :root {
-    --c-blk: #111111;
     --c-wht: #ffffff;
+    --c-blk: #111111;
     --c-pur: #8a2be2;
 }
 
@@ -11,15 +11,13 @@
 }
 
 body {
-    /* Bliss Pro Font Ailesi - Varsayılan Regular */
     font-family: 'Bliss Pro', Courier, monospace;
     font-weight: 400; 
-    background-color: var(--c-wht); /* %60 Beyaz Boşluk */
+    background-color: var(--c-wht);
     color: var(--c-blk);
     overflow: hidden;
 }
 
-/* --- PAGE TRANSITION OVERLAY TEMEL AYARLARI --- */
 .bg-black { background-color: var(--c-blk); }
 
 .page-transition-overlay {
@@ -41,7 +39,6 @@ body {
 .cover-x { transform: scaleX(1); }
 .cover-y { transform: scaleY(1); }
 
-/* --- NAVIGATION --- */
 .wireframe-nav {
     position: fixed;
     top: 0;
@@ -74,17 +71,20 @@ body {
     color: var(--c-blk);
     border-left: 2px solid var(--c-blk);
     font-size: 0.9rem;
-    font-weight: 500; /* Medium */
+    font-weight: 500; 
     text-transform: uppercase;
     transition: background-color 0.2s, color 0.2s;
 }
 
 .nav-group { display: flex; }
 .nav-group .nav-item:first-child { border-left: 2px solid var(--c-blk); }
-.brand { border-left: none; border-right: 2px solid var(--c-blk); font-weight: 700; gap: 10px; } /* Bold */
-.nav-item:hover, .nav-item.active { background-color: var(--c-blk); color: var(--c-wht); }
+.brand { border-left: none; border-right: 2px solid var(--c-blk); font-weight: 700; gap: 10px; } 
 
-/* --- COMPOSITION CANVAS --- */
+.brand:hover { background-color: var(--c-blk); color: var(--c-wht); }
+.nav-arch:hover, .nav-arch.active { background-color: var(--c-blk); color: var(--c-wht); }
+.nav-media:hover, .nav-media.active { background-color: var(--c-blk); color: var(--c-wht); }
+.nav-articles:hover, .nav-articles.active { background-color: var(--c-blk); color: var(--c-wht); }
+
 .composition-canvas {
     position: relative;
     width: 100vw;
@@ -92,7 +92,6 @@ body {
     margin-top: 60px;
 }
 
-/* --- ORNAMENTS --- */
 .ornament {
     position: absolute;
     z-index: 1;
@@ -127,7 +126,6 @@ body {
     background-color: transparent !important;
 }
 
-/* --- PROJECT BLOCKS --- */
 .project-block {
     position: absolute;
     display: flex;
@@ -135,6 +133,7 @@ body {
     color: var(--c-wht);
     transition: top 0.4s ease, left 0.4s ease, width 0.4s ease, height 0.4s ease, box-shadow 0.4s ease;
     border: 2px solid var(--c-blk);
+    overflow: hidden; 
 }
 
 .project-block:hover {
@@ -142,45 +141,42 @@ body {
     box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
-/* Layout Coordinates */
-.p1 { top: 20%; left: 5%; width: 8%; height: 75%; z-index: 10; }
-.p2 { top: 50%; left: 3%; width: 40%; height: 15%; z-index: 20; }
-.p3 { top: 5%; left: 25%; width: 8%; height: 55%; z-index: 15; }
-.p4 { top: 30%; left: 28%; width: 32%; height: 15%; z-index: 25; }
-.p5 { top: 40%; left: 45%; width: 8%; height: 55%; z-index: 5; }
-.p6 { top: 5%; left: 62%; width: 8%; height: 65%; z-index: 12; }
-.p7 { top: 20%; left: 65%; width: 30%; height: 15%; z-index: 30; }
-.p8 { top: 25%; left: 72%; width: 8%; height: 65%; z-index: 35; }
-.p9 { top: 5%; left: 85%; width: 8%; height: 70%; z-index: 10; }
-.p10 { top: 80%; left: 55%; width: 38%; height: 15%; z-index: 40; }
+/* Yeni 7 Proje Koordinatları */
+.p1 { top: 15%; left: 8%; width: 10%; height: 70%; z-index: 10; }
+.p2 { top: 50%; left: 5%; width: 35%; height: 16%; z-index: 20; }
+.p3 { top: 5%; left: 30%; width: 10%; height: 55%; z-index: 15; }
+.p4 { top: 25%; left: 35%; width: 35%; height: 16%; z-index: 25; }
+.p5 { top: 40%; left: 55%; width: 10%; height: 50%; z-index: 5; }
+.p6 { top: 70%; left: 50%; width: 40%; height: 16%; z-index: 30; }
+.p7 { top: 10%; left: 80%; width: 10%; height: 75%; z-index: 35; }
 
-/* HOVER EXPANSION LOGIC */
-.p1:hover, .p3:hover, .p5:hover, .p6:hover, .p8:hover, .p9:hover {
-    top: 0 !important;
-    height: 100% !important;
-}
+/* Hover Expansion Logic */
+.p1:hover { top: 0 !important; height: 100% !important; left: 6% !important; width: 14% !important; }
+.p3:hover { top: 0 !important; height: 100% !important; left: 28% !important; width: 14% !important; }
+.p5:hover { top: 0 !important; height: 100% !important; left: 53% !important; width: 14% !important; }
+.p7:hover { top: 0 !important; height: 100% !important; left: 78% !important; width: 14% !important; }
 
-.p2:hover, .p4:hover, .p7:hover, .p10:hover {
-    left: 0 !important;
-    width: 100% !important;
-}
+.p2:hover { left: 0 !important; width: 100% !important; top: 48% !important; height: 20% !important; }
+.p4:hover { left: 0 !important; width: 100% !important; top: 23% !important; height: 20% !important; }
+.p6:hover { left: 0 !important; width: 100% !important; top: 68% !important; height: 20% !important; }
 
-/* Colors */
 .bg-white { background-color: var(--c-wht); }
 .bg-purple { background-color: var(--c-pur); }
+.bg-black { background-color: var(--c-blk); }
+
 .text-black { color: var(--c-blk); }
 .text-white { color: var(--c-wht); }
 .border-black { border-color: var(--c-blk) !important; }
 
-/* Typography */
 .p-num {
     position: absolute;
     top: 10px; left: 10px;
     font-size: 0.8rem;
-    font-weight: 700; /* Bold */
+    font-weight: 700; 
     padding: 3px 6px;
-    border: 1px solid var(--c-wht);
+    border: 1px solid currentColor;
     z-index: 50;
+    background-color: transparent;
 }
 
 .p-name {
@@ -188,31 +184,28 @@ body {
     bottom: 10px; right: 10px;
     font-size: 1rem;
     text-transform: uppercase;
-    font-weight: 700; /* Bold */
+    font-weight: 700; 
     letter-spacing: 1px;
     z-index: 50;
     padding: 3px 6px;
     border: 1px solid transparent;
 }
 
-/* Image Backgrounds */
-.panel-bg {
+.project-img {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    object-fit: cover;
     opacity: 0;
-    transition: opacity 0.5s;
-    background-size: cover;
-    background-position: center;
+    transition: opacity 0.5s ease, transform 0.5s ease;
     mix-blend-mode: multiply;
 }
 
-.color-img {
-    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.5) 0, rgba(0,0,0,0.5) 2px, transparent 2px, transparent 15px);
+.project-block:hover .project-img { 
+    opacity: 0.5; 
+    transform: scale(1.1);
 }
 
-.project-block:hover .panel-bg { opacity: 0.5; }
-
-/* Mobile Fallback */
 @media (max-width: 900px) {
     .composition-canvas {
         display: flex;
@@ -231,7 +224,6 @@ body {
     }
 }
 
-/* --- PAGE TRANSITION (Expanding Block Effect) --- */
 .project-block.expanding {
     position: fixed !important;
     top: 0 !important;
@@ -246,7 +238,7 @@ body {
 
 .project-block.expanding .p-num,
 .project-block.expanding .p-name,
-.project-block.expanding .panel-bg {
+.project-block.expanding .project-img {
     opacity: 0;
     transition: opacity 0.2s ease;
 }

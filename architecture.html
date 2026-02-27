@@ -21,9 +21,9 @@
         </a>
 
         <div class="nav-group">
-            <a href="architecture.html" class="nav-item active">Architecture</a>
-            <a href="media-art.html" class="nav-item">Media Art</a>
-            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+            <a href="architecture.html" class="nav-item nav-arch active">Architecture</a>
+            <a href="media-art.html" class="nav-item nav-media">Media Art</a>
+            <a href="https://example.com/articles" target="_blank" class="nav-item nav-articles">Articles</a>
         </div>
     </nav>
 
@@ -34,69 +34,50 @@
         <div class="ornament tri-3 bg-black"></div>
 
         <a href="Project_1.html" class="project-block p1 bg-purple">
-            <div class="panel-bg color-img"></div>
+            <img src="assets/project1.jpg" alt="Project 1" class="project-img">
             <span class="p-num">01</span>
             <span class="p-name">Project 1</span>
         </a>
 
         <a href="Project_2.html" class="project-block p2 bg-black">
-            <div class="panel-bg color-img"></div>
+            <img src="assets/project2.jpg" alt="Project 2" class="project-img">
             <span class="p-num">02</span>
             <span class="p-name">Project 2</span>
         </a>
 
         <a href="Project_3.html" class="project-block p3 bg-white text-black">
-            <div class="panel-bg color-img"></div>
+            <img src="assets/project3.jpg" alt="Project 3" class="project-img">
             <span class="p-num border-black">03</span>
             <span class="p-name border-black">Project 3</span>
         </a>
 
-        <a href="Project_4.html" class="project-block p4 bg-purple text-white">
-            <div class="panel-bg color-img"></div>
+        <a href="Project_4.html" class="project-block p4 bg-purple">
+            <img src="assets/project4.jpg" alt="Project 4" class="project-img">
             <span class="p-num">04</span>
             <span class="p-name">Project 4</span>
         </a>
 
         <a href="Project_5.html" class="project-block p5 bg-black">
-            <div class="panel-bg color-img"></div>
+            <img src="assets/project5.jpg" alt="Project 5" class="project-img">
             <span class="p-num">05</span>
             <span class="p-name">Project 5</span>
         </a>
 
         <a href="Project_6.html" class="project-block p6 bg-white text-black">
-            <div class="panel-bg color-img"></div>
+            <img src="assets/project6.jpg" alt="Project 6" class="project-img">
             <span class="p-num border-black">06</span>
             <span class="p-name border-black">Project 6</span>
         </a>
 
-        <a href="Project_7.html" class="project-block p7 bg-black">
-            <div class="panel-bg color-img"></div>
+        <a href="Project_7.html" class="project-block p7 bg-purple">
+            <img src="assets/project7.jpg" alt="Project 7" class="project-img">
             <span class="p-num">07</span>
             <span class="p-name">Project 7</span>
-        </a>
-
-        <a href="Project_8.html" class="project-block p8 bg-purple text-white">
-            <div class="panel-bg color-img"></div>
-            <span class="p-num">08</span>
-            <span class="p-name">Project 8</span>
-        </a>
-
-        <a href="Project_9.html" class="project-block p9 bg-black">
-            <div class="panel-bg color-img"></div>
-            <span class="p-num">09</span>
-            <span class="p-name">Project 9</span>
-        </a>
-
-        <a href="Project_10.html" class="project-block p10 bg-purple">
-            <div class="panel-bg color-img"></div>
-            <span class="p-num">10</span>
-            <span class="p-name">Project 10</span>
         </a>
 
     </main>
 
     <script>
-        // 1. Sayfa Açılış Animasyonu
         window.addEventListener('load', () => {
             const overlay = document.querySelector('.page-transition-overlay');
             if(overlay) {
@@ -110,7 +91,6 @@
             }
         });
 
-        // 2. Linklere Tıklama Yönlendirmesi
         const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
 
         transitionLinks.forEach(link => {
@@ -120,16 +100,14 @@
 
                 e.preventDefault(); 
                 
-                // Eğer tıklanan bir proceyse ekranı kaplayan animasyonu çalıştır
                 if (this.classList.contains('project-block')) {
                     this.classList.add('expanding');
                     setTimeout(() => {
                         window.location.href = targetUrl;
                     }, 600);
-                    return; // Diğer overlay animasyonunu pas geç
+                    return; 
                 }
 
-                // Normal menü butonlarına tıklandıysa kayan overlay animasyonunu çalıştır
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
