@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Projects</title>
+    <link rel="stylesheet" href="arch-style.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay origin-left bg-black"></div>
+
+    <nav class="wireframe-nav">
+        <a href="cv.html" class="nav-item brand">
+            <span class="nav-text">Melih G. Kutsal</span>
+            <span class="nav-sub">[CV]</span>
+        </a>
+
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+
+        <div class="nav-group">
+            <a href="architecture.html" class="nav-item active">Architecture</a>
+            <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+        </div>
+    </nav>
+
+    <main class="composition-canvas">
+        
+        <div class="ornament tri-1 border-black"></div>
+        <div class="ornament tri-2 bg-purple"></div>
+        <div class="ornament tri-3 bg-black"></div>
+
+        <a href="Project_1.html" class="project-block p1 bg-purple">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">01</span>
+            <span class="p-name">Project 1</span>
+        </a>
+
+        <a href="Project_2.html" class="project-block p2 bg-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">02</span>
+            <span class="p-name">Project 2</span>
+        </a>
+
+        <a href="Project_3.html" class="project-block p3 bg-white text-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num border-black">03</span>
+            <span class="p-name border-black">Project 3</span>
+        </a>
+
+        <a href="Project_4.html" class="project-block p4 bg-purple text-white">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">04</span>
+            <span class="p-name">Project 4</span>
+        </a>
+
+        <a href="Project_5.html" class="project-block p5 bg-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">05</span>
+            <span class="p-name">Project 5</span>
+        </a>
+
+        <a href="Project_6.html" class="project-block p6 bg-white text-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num border-black">06</span>
+            <span class="p-name border-black">Project 6</span>
+        </a>
+
+        <a href="Project_7.html" class="project-block p7 bg-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">07</span>
+            <span class="p-name">Project 7</span>
+        </a>
+
+        <a href="Project_8.html" class="project-block p8 bg-purple text-white">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">08</span>
+            <span class="p-name">Project 8</span>
+        </a>
+
+        <a href="Project_9.html" class="project-block p9 bg-black">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">09</span>
+            <span class="p-name">Project 9</span>
+        </a>
+
+        <a href="Project_10.html" class="project-block p10 bg-purple">
+            <div class="panel-bg color-img"></div>
+            <span class="p-num">10</span>
+            <span class="p-name">Project 10</span>
+        </a>
+
+    </main>
+
+    <script>
+        // 1. Sayfa Açılış Animasyonu
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) {
+                setTimeout(() => {
+                    if (overlay.classList.contains('origin-top') || overlay.classList.contains('origin-bottom')) {
+                        overlay.classList.add('reveal-y');
+                    } else {
+                        overlay.classList.add('reveal-x');
+                    }
+                }, 50);
+            }
+        });
+
+        // 2. Linklere Tıklama Yönlendirmesi
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl === '#') return;
+
+                e.preventDefault(); 
+                
+                // Eğer tıklanan bir proceyse ekranı kaplayan animasyonu çalıştır
+                if (this.classList.contains('project-block')) {
+                    this.classList.add('expanding');
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 600);
+                    return; // Diğer overlay animasyonunu pas geç
+                }
+
+                // Normal menü butonlarına tıklandıysa kayan overlay animasyonunu çalıştır
+                const overlay = document.querySelector('.page-transition-overlay');
+                if (overlay) {
+                    overlay.className = 'page-transition-overlay bg-black';
+                    
+                    if (targetUrl.includes('cv.html')) {
+                        overlay.classList.add('origin-bottom', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } 
+                    else if (targetUrl.includes('index.html')) {
+                        overlay.classList.add('origin-top', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } 
+                    else if (targetUrl.includes('architecture') || targetUrl.includes('Project_')) {
+                        overlay.classList.add('origin-left', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    } 
+                    else if (targetUrl.includes('media') || targetUrl.includes('project')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                }
+
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 600);
+            });
+        });
+    </script>
+</body>
+</html>

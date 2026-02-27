@@ -1,0 +1,245 @@
+:root {
+    /* 60-30-10 Kuralı */
+    --c-wht: #ffffff;   /* %60 Ana Arkaplan */
+    --c-blk: #111111;   /* %30 Metinler, Çizgiler, Kutu Arkaplanları */
+    --c-pur: #8a2be2;   /* %10 Vurgu, Hover, Geçiş Efekti */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Bliss Pro Font Ailesi */
+    font-family: 'Bliss Pro', Courier, monospace;
+    font-weight: 400; /* Regular */
+    background-color: var(--c-wht);
+    color: var(--c-blk);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Sayfa Geçiş Overlay */
+.page-transition-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9999;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.swipe-left { transform-origin: left; }
+.page-transition-overlay.reveal { transform: scaleX(0); }
+.bg-purple { background-color: var(--c-pur); }
+
+/* Navigasyon */
+.wireframe-nav {
+    position: fixed;
+    top: 0; width: 100%; height: 60px;
+    display: flex; justify-content: space-between;
+    border-bottom: 2px solid var(--c-blk);
+    background-color: var(--c-wht);
+    z-index: 1000;
+}
+
+.logo-link {
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+}
+
+.nav-logo { height: 30px; width: auto; }
+
+.nav-item {
+    display: flex; align-items: center; padding: 0 30px;
+    text-decoration: none; color: var(--c-blk);
+    border-left: 2px solid var(--c-blk);
+    font-size: 0.9rem; 
+    font-weight: 500; /* Medium */
+    text-transform: uppercase;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-group { display: flex; }
+.nav-group .nav-item:first-child { border-left: 2px solid var(--c-blk); }
+.brand { border-left: none; border-right: 2px solid var(--c-blk); font-weight: 700; gap: 10px; } /* Bold */
+.nav-item:hover, .nav-item.active { background-color: var(--c-blk); color: var(--c-wht); }
+
+/* Ana Konteyner */
+.media-project-container {
+    margin-top: 60px;
+    padding: 60px 10%;
+    min-height: calc(100vh - 120px);
+}
+
+/* Başlık Alanı */
+.project-info {
+    max-width: 800px;
+    margin-bottom: 60px;
+}
+
+.project-info h1 {
+    font-size: 4rem;
+    font-weight: 700; /* Bold */
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--c-blk);
+    padding-bottom: 10px;
+}
+
+.project-info p {
+    font-weight: 400; /* Regular */
+}
+
+.info-meta {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    font-weight: 500; /* Medium */
+}
+
+.info-meta span {
+    border: 1px solid var(--c-blk);
+    padding: 5px 10px;
+    background-color: var(--c-blk);
+    color: var(--c-wht);
+}
+
+/* Medya Grid */
+.media-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.media-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.full-width { width: 100%; }
+.half-width { width: calc(50% - 20px); }
+
+/* Video ve Görsel Yer Tutucuları */
+.video-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--c-blk);
+    color: var(--c-wht);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--c-blk);
+    font-size: 1.2rem;
+    font-weight: 500; /* Medium */
+    letter-spacing: 2px;
+}
+
+.img-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background-color: var(--c-blk);
+    border: 2px solid var(--c-blk);
+    background-size: cover;
+    background-position: center;
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tall-img {
+    aspect-ratio: 21 / 9;
+}
+
+.img-placeholder:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 10px 10px 0px var(--c-pur);
+}
+
+/* Kendi görsellerinizi eklemek için (Örnek sınıflar) */
+.img-bg-1 { background-image: repeating-linear-gradient(45deg, #222 0, #222 2px, #111 2px, #111 10px); }
+.img-bg-2 { background-image: repeating-linear-gradient(-45deg, #222 0, #222 2px, #111 2px, #111 10px); }
+.img-bg-3 { background-image: repeating-radial-gradient(#222 0, #222 2px, #111 2px, #111 10px); }
+.img-bg-4 { background-image: repeating-linear-gradient(90deg, #222 0, #222 2px, #111 2px, #111 10px); }
+.img-bg-5 { background-image: repeating-linear-gradient(0deg, #222 0, #222 2px, #111 2px, #111 10px); }
+
+/* Alt Yazılar */
+.media-caption {
+    margin-top: 15px;
+    font-size: 0.85rem;
+    font-weight: 700; /* Bold */
+    text-transform: uppercase;
+    border-bottom: 1px dashed var(--c-blk);
+    padding-bottom: 5px;
+    display: inline-block;
+    align-self: flex-start;
+}
+
+/* Footer */
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    background-color: var(--c-wht);
+    border-top: 2px solid var(--c-blk);
+}
+
+.footer-link {
+    width: 50%;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--c-blk);
+    font-weight: 700; /* Bold */
+    text-transform: uppercase;
+    border-right: 2px solid var(--c-blk);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.footer-link:last-child { border-right: none; }
+.footer-link:hover { background-color: var(--c-pur); color: var(--c-wht); }
+
+/* Görsel Büyütme (Lightbox) Sistemi */
+.lightbox {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(17, 17, 17, 0.95);
+    z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+    opacity: 1; pointer-events: auto;
+}
+
+.lightbox-content {
+    width: 90vw; height: 90vh;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px; right: 40px;
+    color: var(--c-wht);
+    font-size: 3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+    color: var(--c-pur);
+}
+
+/* Mobil Uyum */
+@media (max-width: 900px) {
+    .media-project-container { padding: 40px 5%; }
+    .half-width { width: 100%; }
+    .logo-link { display: none; }
+    .project-info h1 { font-size: 2.5rem; }
+    .project-info { margin-bottom: 40px; }
+}

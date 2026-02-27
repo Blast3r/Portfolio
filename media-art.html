@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Art Projects</title>
+    <link rel="stylesheet" href="media-style.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay origin-right bg-black"></div>
+
+    <nav class="wireframe-nav">
+        <a href="cv.html" class="nav-item brand">
+            <span class="nav-text">Melih G. Kutsal</span>
+            <span class="nav-sub">[CV]</span>
+        </a>
+
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+
+        <div class="nav-group">
+            <a href="architecture.html" class="nav-item">Architecture</a>
+            <a href="media-art.html" class="nav-item active">Media Art</a>
+            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+        </div>
+    </nav>
+
+    <main class="directory-container">
+        
+        <div class="list-section">
+            <div class="list-header">
+                <span>ID</span>
+                <span>PROJECT_TITLE</span>
+                <span>YEAR</span>
+            </div>
+
+            <a href="project1_media.html" class="project-row">
+                <span class="p-id">M_001</span>
+                <span class="p-title">Project 1</span>
+                <span class="p-year">2023</span>
+                <div class="preview-panel color-1">
+                    <div class="preview-meta">SYS.RENDER: M_001</div>
+                </div>
+            </a>
+
+            <a href="project2_media.html" class="project-row">
+                <span class="p-id">M_002</span>
+                <span class="p-title">Project 2</span>
+                <span class="p-year">2022</span>
+                <div class="preview-panel color-2">
+                    <div class="preview-meta">SYS.RENDER: M_002</div>
+                </div>
+            </a>
+
+            <a href="project3_media.html" class="project-row">
+                <span class="p-id">M_003</span>
+                <span class="p-title">Project 3</span>
+                <span class="p-year">2021</span>
+                <div class="preview-panel color-3">
+                    <div class="preview-meta">SYS.RENDER: M_003</div>
+                </div>
+            </a>
+
+            <a href="project4_media.html" class="project-row">
+                <span class="p-id">M_004</span>
+                <span class="p-title">Project 4</span>
+                <span class="p-year">2021</span>
+                <div class="preview-panel color-4">
+                    <div class="preview-meta">SYS.RENDER: M_004</div>
+                </div>
+            </a>
+            
+            <a href="project5_media.html" class="project-row">
+                <span class="p-id">M_005</span>
+                <span class="p-title">Project 5</span>
+                <span class="p-year">2020</span>
+                <div class="preview-panel color-1">
+                    <div class="preview-meta">SYS.RENDER: M_005</div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="default-preview">
+            <div class="crosshair">+</div>
+            <p>AWAITING_INPUT</p>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Sayfa Açılış Animasyonu
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) {
+                setTimeout(() => {
+                    if (overlay.classList.contains('origin-top') || overlay.classList.contains('origin-bottom')) {
+                        overlay.classList.add('reveal-y');
+                    } else {
+                        overlay.classList.add('reveal-x');
+                    }
+                }, 50);
+            }
+        });
+
+        // 2. Linklere Tıklama ve Yönlendirme Animasyonu
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl === '#') return;
+
+                e.preventDefault(); 
+                const overlay = document.querySelector('.page-transition-overlay');
+                
+                if (overlay) {
+                    overlay.className = 'page-transition-overlay bg-black';
+                    
+                    if (targetUrl.includes('cv.html')) {
+                        overlay.classList.add('origin-bottom', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } 
+                    else if (targetUrl.includes('index.html')) {
+                        overlay.classList.add('origin-top', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } 
+                    else if (targetUrl.includes('architecture') || targetUrl.includes('Project_')) {
+                        overlay.classList.add('origin-left', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    } 
+                    else if (targetUrl.includes('media') || targetUrl.includes('project')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                }
+
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 600);
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melih G. Kutsal - Index</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay origin-top bg-black"></div>
+
+    <header class="top-bar">
+        <a href="cv.html" class="name-link">Melih G. Kutsal [CV]</a>
+        
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+
+        <span class="sys-text">SYS.ONLINE</span>
+    </header>
+
+    <main class="wireframe-container">
+        
+        <a href="media-art.html" class="split-panel left-panel">
+            <span class="label-top-left">[FIG. 01]</span>
+            
+            <h1 class="wordplay-text align-right">
+                MEDIA<span class="reveal">&nbsp;ART</span>
+            </h1>
+
+            <span class="label-btm-right">VIEW_WORKS -></span>
+        </a>
+
+        <a href="architecture.html" class="split-panel right-panel">
+            <span class="label-top-right">[FIG. 02]</span>
+            
+            <h1 class="wordplay-text align-left">
+                ARCHITECT<span class="reveal">URE</span>
+            </h1>
+
+            <span class="label-btm-left"><- VIEW_PROJECTS</span>
+        </a>
+
+        <div class="crosshair center-cross">+</div>
+
+    </main>
+
+    <footer class="status-bar">
+        <a href="https://example.com/articles" target="_blank" class="article-link">
+            <span class="blink-cursor">></span> 
+            READ_EXTERNAL_LOGS [ARTICLES]
+        </a>
+    </footer>
+
+    <script>
+        // 1. Sayfa Açılış Animasyonu
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) {
+                setTimeout(() => {
+                    overlay.classList.add('reveal-y');
+                }, 50);
+            }
+        });
+
+        // 2. Linklere Tıklama ve Yönlendirme Animasyonu
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl === '#') return;
+
+                e.preventDefault(); 
+                
+                // Panel Genişleme Animasyonları (Media Art ve Architecture)
+                if (this.classList.contains('split-panel')) {
+                    if (this.classList.contains('left-panel')) {
+                        this.classList.add('expand-left');
+                    } else {
+                        this.classList.add('expand-right');
+                    }
+                } 
+                // Üst Bar Yönlendirme Animasyonları (CV ve Ana Sayfa)
+                else {
+                    const overlay = document.querySelector('.page-transition-overlay');
+                    if (overlay) {
+                        overlay.className = 'page-transition-overlay bg-black';
+                        
+                        if (targetUrl.includes('cv.html')) {
+                            overlay.classList.add('origin-bottom', 'reveal-y');
+                            setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                        } 
+                        else if (targetUrl.includes('index.html')) {
+                            overlay.classList.add('origin-top', 'reveal-y');
+                            setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                        }
+                    }
+                }
+
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 600);
+            });
+        });
+    </script>
+
+</body>
+</html>

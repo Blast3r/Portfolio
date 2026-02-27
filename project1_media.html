@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 1 - Media Art</title>
+    <link rel="stylesheet" href="project1_media.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay swipe-left bg-purple"></div>
+
+    <nav class="wireframe-nav">
+        <a href="index.html" class="nav-item brand">
+            <span class="nav-text">Melih G. Kutsal</span>
+            <span class="nav-sub">[INDEX]</span>
+        </a>
+
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+
+        <div class="nav-group">
+            <a href="architecture.html" class="nav-item">Architecture</a>
+            <a href="media-art.html" class="nav-item active">Media Art</a>
+            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+        </div>
+    </nav>
+
+    <main class="media-project-container">
+        
+        <header class="project-info">
+            <h1>PROJECT 1</h1>
+            <div class="info-meta">
+                <span>YEAR: 2023</span>
+                <span>TYPE: INTERACTIVE</span>
+            </div>
+            <p>Bu proje, görsel ve işitsel verilerin algoritmik olarak işlenmesini araştırır. İzleyici etkileşimi, formun anlık olarak yeniden yaratılmasını sağlar. Temel tasarım dili Bauhaus sadeliğine dayanır.</p>
+        </header>
+
+        <div class="media-grid">
+            
+            <div class="media-block full-width">
+                <div class="video-placeholder">
+                    <span>[ VİDEO OYNATICI ALANI ]</span>
+                </div>
+                <p class="media-caption">VİDEO 01 / PROJE SİMÜLASYONU</p>
+            </div>
+
+            <div class="media-block half-width">
+                <div class="img-placeholder zoomable img-bg-1"></div>
+                <p class="media-caption">GÖRSEL 01 / KONSEPT AŞAMASI</p>
+            </div>
+            <div class="media-block half-width">
+                <div class="img-placeholder zoomable img-bg-2"></div>
+                <p class="media-caption">GÖRSEL 02 / ETKİLEŞİM DİYAGRAMI</p>
+            </div>
+
+            <div class="media-block full-width">
+                <div class="img-placeholder zoomable tall-img img-bg-3"></div>
+                <p class="media-caption">GÖRSEL 03 / ANA EKRAN GÖRÜNTÜSÜ</p>
+            </div>
+
+            <div class="media-block half-width">
+                <div class="img-placeholder zoomable img-bg-4"></div>
+                <p class="media-caption">GÖRSEL 04 / ARAYÜZ DETAYI</p>
+            </div>
+            <div class="media-block half-width">
+                <div class="img-placeholder zoomable img-bg-5"></div>
+                <p class="media-caption">GÖRSEL 05 / VERİ AKIŞI</p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="project-footer">
+        <a href="media-art.html" class="footer-link"><- BACK_TO_MEDIA</a>
+        <a href="project2_media.html" class="footer-link">NEXT: PROJECT 2 -></a>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <div class="lightbox-content" id="lightbox-content"></div>
+    </div>
+
+    <script>
+        // Sayfa Geçiş Animasyonu
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            setTimeout(() => {
+                overlay.classList.add('reveal');
+            }, 50);
+        });
+
+        // Görsel Büyütme (Lightbox) İşlemi
+        const zoomables = document.querySelectorAll('.zoomable');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        zoomables.forEach(el => {
+            el.addEventListener('click', function() {
+                // Tıklanan öğenin stilini kopyala (Arkaplan resmi vb. için)
+                const computedStyle = window.getComputedStyle(this);
+                lightboxContent.style.backgroundImage = computedStyle.backgroundImage;
+                lightbox.classList.add('active');
+            });
+        });
+
+        // Lightbox Kapatma
+        closeBtn.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

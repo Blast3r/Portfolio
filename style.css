@@ -1,0 +1,303 @@
+:root {
+    --bg-color: #ffffff;
+    --line-color: #111111;
+    --accent-color: #8a2be2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Bliss Pro Font Ailesi - Varsayılan Regular */
+    font-family: 'Bliss Pro', Courier, monospace;
+    font-weight: 400; 
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-color);
+    color: var(--line-color);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- PAGE TRANSITION OVERLAY TEMEL AYARLARI --- */
+.bg-black { background-color: #111111; }
+
+.page-transition-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 9999;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    pointer-events: none;
+}
+
+.origin-left { transform-origin: left; }
+.origin-right { transform-origin: right; }
+.origin-top { transform-origin: top; }
+.origin-bottom { transform-origin: bottom; }
+
+.reveal-x { transform: scaleX(0); }
+.reveal-y { transform: scaleY(0); }
+.cover-x { transform: scaleX(1); }
+.cover-y { transform: scaleY(1); }
+
+/* --- ARAYÜZ --- */
+.top-bar {
+    height: 50px;
+    border-bottom: 1px solid var(--line-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-color);
+    position: relative; 
+}
+
+.name-link {
+    text-decoration: none;
+    color: var(--line-color);
+    font-weight: 700; /* Bold */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--line-color);
+    transition: all 0.2s;
+}
+
+.name-link:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+}
+
+.logo-link {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-logo {
+    height: 30px;
+    width: auto;
+}
+
+.sys-text {
+    padding: 0 20px;
+    font-size: 0.8rem;
+    font-weight: 400; /* Regular */
+    opacity: 0.5;
+}
+
+.wireframe-container {
+    flex-grow: 1;
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid var(--line-color);
+}
+
+.split-panel {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    text-decoration: none;
+    color: var(--line-color);
+    background-color: var(--bg-color);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    overflow: hidden;
+}
+
+.left-panel {
+    border-right: 1px solid var(--line-color);
+}
+
+.split-panel:hover {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    width: 55%; 
+}
+
+.wireframe-container:hover .split-panel:not(:hover) {
+    width: 45%;
+    opacity: 0.3; 
+}
+
+.wordplay-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 4.5rem;
+    font-weight: 700; /* Bold */
+    letter-spacing: -2px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.align-right {
+    right: 25px; 
+}
+
+.align-left {
+    left: 25px; 
+}
+
+.reveal {
+    display: inline-block;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width 0.5s ease, opacity 0.5s ease;
+}
+
+.split-panel:hover .reveal {
+    max-width: 300px;
+    opacity: 1;
+}
+
+.label-top-left, .label-top-right, .label-btm-left, .label-btm-right {
+    position: absolute;
+    font-size: 0.65rem;
+    font-weight: 500; /* Medium */
+    padding: 10px;
+    letter-spacing: 1px;
+}
+
+.label-top-left { top: 0; left: 0; border-bottom: 1px solid currentColor; border-right: 1px solid currentColor; }
+.label-top-right { top: 0; right: 0; border-bottom: 1px solid currentColor; border-left: 1px solid currentColor; }
+.label-btm-right { bottom: 0; right: 0; padding-bottom: 20px; }
+.label-btm-left { bottom: 0; left: 0; padding-bottom: 20px; }
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 700; /* Bold */
+    z-index: 20;
+    pointer-events: none;
+    color: var(--line-color);
+    background: var(--bg-color);
+    padding: 0 5px;
+    transition: background-color 0.4s, color 0.4s;
+}
+
+.wireframe-container:hover .crosshair {
+    background: transparent;
+    color: var(--bg-color);
+}
+
+.status-bar {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 0.8rem;
+    font-weight: 400; /* Regular */
+    background-color: var(--bg-color);
+}
+
+.article-link {
+    text-decoration: none;
+    color: var(--line-color);
+    font-weight: 700; /* Bold */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: color 0.2s;
+}
+
+.article-link:hover {
+    color: var(--accent-color);
+}
+
+.blink-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .wireframe-container {
+        flex-direction: column;
+    }
+    
+    .logo-link {
+        display: none; 
+    }
+
+    .split-panel {
+        width: 100%;
+        height: 50%;
+        justify-content: center;
+    }
+
+    .left-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--line-color);
+    }
+
+    .split-panel:hover {
+        width: 100%;
+        height: 55%;
+    }
+    
+    .wireframe-container:hover .split-panel:not(:hover) {
+        width: 100%;
+        height: 45%;
+    }
+
+    .wordplay-text {
+        position: relative;
+        top: auto;
+        transform: none;
+        left: auto;
+        right: auto;
+        font-size: 2.5rem;
+    }
+
+    .crosshair {
+        display: none; 
+    }
+}
+
+/* --- PAGE TRANSITION (Expanding Panels) --- */
+.expand-left {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+
+.expand-right {
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    left: auto !important; 
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 9999 !important;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important;
+}
+
+/* Hide text content smoothly during expansion */
+.expand-left .wordplay-text, .expand-right .wordplay-text,
+.expand-left span, .expand-right span {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
