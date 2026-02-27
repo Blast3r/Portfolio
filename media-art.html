@@ -140,6 +140,20 @@
                 setTimeout(() => { window.location.href = targetUrl; }, 600);
             });
         });
+
+        window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        // Geçiş ekranını sıfırla
+        const overlay = document.querySelector('.page-transition-overlay');
+        if (overlay) {
+            overlay.className = 'page-transition-overlay bg-black';
+        }
+        
+        // Büyüyen modülleri eski haline getir
+        const expandedModules = document.querySelectorAll('.expanding');
+        expandedModules.forEach(el => el.classList.remove('expanding'));
+    }
+});
     </script>
 </body>
 </html>
