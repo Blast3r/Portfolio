@@ -135,12 +135,36 @@ body {
     border: 2px solid var(--c-blk);
     overflow: hidden; 
 }
+.project-img {
+    position: absolute;
+    top: 0; left: 0; 
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.15; /* Görsel başlangıçta çok silik, arka plan rengi hakim */
+    mix-blend-mode: luminosity; /* Siyah arka planda bile görselin hatlarını korur */
+    transition: opacity 0.5s ease, transform 0.5s ease, mix-blend-mode 0s;
+    z-index: 1; /* Metinlerin (z-index: 50) altında kalması için */
+}
 
+/* Hover durumunda görselin asıl rengiyle ve parlak olarak ortaya çıkması */
+.project-block:hover .project-img { 
+    opacity: 0.9; /* Görünürlüğü artır */
+    mix-blend-mode: normal; /* Kendi renklerine dön */
+    transform: scale(1.05); /* Hafifçe büyüt */
+}
+
+/* 1. Kapsayıcı kutuyu en öne çıkar */
 .project-block:hover {
-    z-index: 100 !important; 
+    z-index: 999 !important; 
     box-shadow: 0 15px 30px rgba(0,0,0,0.3);
 }
 
+/* 2. Görselin efektlerini düzenle */
+.project-block:hover .project-img { 
+    opacity: 1; 
+    mix-blend-mode: normal;
+    transform: scale(1.1);
+}
 /* Yeni 7 Proje Koordinatları */
 .p1 { top: 15%; left: 8%; width: 10%; height: 70%; z-index: 10; }
 .p2 { top: 50%; left: 5%; width: 35%; height: 16%; z-index: 20; }
@@ -191,15 +215,7 @@ body {
     border: 1px solid transparent;
 }
 
-.project-img {
-    position: absolute;
-    top: 0; left: 0; 
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    mix-blend-mode: multiply;
-}
+
 
 .project-block:hover .project-img { 
     opacity: 0.5; 
