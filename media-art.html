@@ -3,109 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Art Projects</title>
+    <title>Media Art</title>
     <link rel="stylesheet" href="media-style.css">
 </head>
 <body>
 
-    <div class="page-transition-overlay origin-right bg-black"></div>
+    <div class="page-transition-overlay origin-left bg-purple"></div>
 
     <nav class="wireframe-nav">
         <a href="cv.html" class="nav-item brand">
             <span class="nav-text">Melih G. Kutsal</span>
             <span class="nav-sub">[CV]</span>
         </a>
-
-        <a href="index.html" class="logo-link">
-            <img src="logo.png" alt="Logo" class="nav-logo">
+        <a href="index.html" class="logo-link dynamic-logo-container">
+            <svg class="dynamic-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="triangle-group">
+                    <polygon class="triangle triangle-1" points="50,15 70,50 30,50" />
+                    <polygon class="triangle triangle-2" points="30,50 50,85 10,85" />
+                    <polygon class="triangle triangle-3" points="70,50 90,85 50,85" />
+                </g>
+            </svg>
+            <span class="nav-logo-text" style="display: none;">Odyssey</span>
         </a>
-
         <div class="nav-group">
             <a href="architecture.html" class="nav-item">Architecture</a>
             <a href="media-art.html" class="nav-item active">Media Art</a>
-            <a href="https://example.com/articles" target="_blank" class="nav-item">Articles</a>
+            <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
 
-    <main class="board-canvas">
+    <main class="media-layout">
+        <div class="media-list">
+            <a href="project1_media.html" class="media-item active" data-src="Images/MediaArt/project1.jpg">
+                <h2>01. Generative Growth</h2>
+                <p>Algorithm-based real-time visual rendering.</p>
+            </a>
+            <a href="project2_media.html" class="media-item" data-src="Images/MediaArt/project2.jpg">
+                <h2>02. Sound Reactive</h2>
+                <p>Audio-visual spatial installation.</p>
+            </a>
+            <a href="project3_media.html" class="media-item" data-src="Images/MediaArt/project3.jpg">
+                <h2>03. Projection Mapping</h2>
+                <p>Augmented reality on physical structures.</p>
+            </a>
+            <a href="project4_media.html" class="media-item" data-src="Images/MediaArt/project4.jpg">
+                <h2>04. Digital Sculptures</h2>
+                <p>3D rendered abstract forms and textures.</p>
+            </a>
+            <a href="project5_media.html" class="media-item" data-src="Images/MediaArt/project5.jpg">
+                <h2>05. Data Visualization</h2>
+                <p>Translating data sets into geometric patterns.</p>
+            </a>
+        </div>
         
-        <svg class="lines-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path class="line-base" d="M 22 50 L 55 50 L 55 60 L 70 60 L 70 22.5 L 75 22.5 M 25 30 L 25 50 M 37 50 L 37 65 M 55 40 L 55 50 M 63 60 L 63 75 M 70 60 L 74 60" />
-            <path class="line-mask" d="M 22 50 L 55 50 L 55 60 L 70 60 L 70 22.5 L 75 22.5 M 25 30 L 25 50 M 37 50 L 37 65 M 55 40 L 55 50 M 63 60 L 63 75 M 70 60 L 74 60" />
-            <path class="line-center" d="M 22 50 L 55 50 L 55 60 L 70 60 L 70 22.5 L 75 22.5 M 25 30 L 25 50 M 37 50 L 37 65 M 55 40 L 55 50 M 63 60 L 63 75 M 70 60 L 74 60" />
-            <path class="line-pulse" d="M 22 50 L 55 50 L 55 60 L 70 60 L 70 22.5 L 75 22.5 M 25 30 L 25 50 M 37 50 L 37 65 M 55 40 L 55 50 M 63 60 L 63 75 M 70 60 L 74 60" />
-        </svg>
-
-        <a href="project1_media.html" class="proj-box m1">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media1.jpg" alt="Media 1">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 1</h2>
-                <span>M_001</span>
-            </div>
-        </a>
-
-        <a href="project2_media.html" class="proj-box m2">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media2.jpg" alt="Media 2">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 2</h2>
-                <span>M_002</span>
-            </div>
-        </a>
-
-        <a href="project3_media.html" class="proj-box m3">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media3.jpg" alt="Media 3">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 3</h2>
-                <span>M_003</span>
-            </div>
-        </a>
-
-        <a href="project4_media.html" class="proj-box m4">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media4.jpg" alt="Media 4">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 4</h2>
-                <span>M_004</span>
-            </div>
-        </a>
-
-        <a href="project5_media.html" class="proj-box m5">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media5.jpg" alt="Media 5">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 5</h2>
-                <span>M_005</span>
-            </div>
-        </a>
-
-        <a href="project6_media.html" class="proj-box m6">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media6.jpg" alt="Media 6">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 6</h2>
-                <span>M_006</span>
-            </div>
-        </a>
-
-        <a href="project7_media.html" class="proj-box m7">
-            <div class="crosshair tl">+</div><div class="crosshair tr">+</div><div class="crosshair bl">+</div><div class="crosshair br">+</div>
-            <img src="assets/media7.jpg" alt="Media 7">
-            <div class="scanner-line"></div>
-            <div class="box-content">
-                <h2>PROJECT 7</h2>
-                <span>M_007</span>
-            </div>
-        </a>
-
+        <div class="media-preview">
+            <canvas id="preview-canvas"></canvas>
+        </div>
     </main>
 
     <script>
@@ -116,31 +69,116 @@
             }
         });
 
-        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                const overlay = document.querySelector('.page-transition-overlay');
+                if (overlay) {
+                    overlay.classList.remove('cover-x', 'cover-y');
+                    if (overlay.classList.contains('origin-top') || overlay.classList.contains('origin-bottom')) {
+                        overlay.classList.add('reveal-y');
+                    } else {
+                        overlay.classList.add('reveal-x');
+                    }
+                }
+            }
+        });
 
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
         transitionLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 const targetUrl = this.getAttribute('href');
                 if (!targetUrl || targetUrl === '#') return;
 
                 e.preventDefault(); 
-                
-                if (this.classList.contains('proj-box')) {
-                    this.classList.add('expanding');
-                    setTimeout(() => { window.location.href = targetUrl; }, 600);
-                    return;
-                }
-
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    overlay.classList.add('origin-right', 'reveal-x');
-                    setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    if (targetUrl.includes('cv.html')) {
+                        overlay.classList.add('origin-bottom', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else if (targetUrl.includes('index.html')) {
+                        overlay.classList.add('origin-top', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else {
+                        overlay.classList.add('origin-left', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
                 }
                 setTimeout(() => { window.location.href = targetUrl; }, 600);
             });
         });
 
+        const mediaItems = document.querySelectorAll('.media-item');
+        const canvas = document.getElementById('preview-canvas');
+        const ctx = canvas.getContext('2d');
+        let currentImg = new Image();
+        let animId;
+
+        function drawPixelated(img, size) {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.imageSmoothingEnabled = false;
+
+            const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+            const w = img.width * scale;
+            const h = img.height * scale;
+            const x = (canvas.width - w) / 2;
+            const y = (canvas.height - h) / 2;
+
+            if (size <= 1) {
+                ctx.drawImage(img, x, y, w, h);
+            } else {
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = canvas.width / size;
+                tempCanvas.height = canvas.height / size;
+                const tCtx = tempCanvas.getContext('2d');
+                tCtx.drawImage(img, x / size, y / size, w / size, h / size);
+                ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, canvas.width, canvas.height);
+            }
+        }
+
+        function transitionImage(newSrc) {
+            const nextImg = new Image();
+            nextImg.src = newSrc;
+            nextImg.onload = () => {
+                let size = 1;
+                let phase = 1;
+                cancelAnimationFrame(animId);
+                
+                function animate() {
+                    size += phase * 4;
+                    if (size > 40) {
+                        phase = -1;
+                        currentImg = nextImg;
+                    }
+                    if (size <= 1 && phase === -1) {
+                        size = 1;
+                        drawPixelated(currentImg, size);
+                        return;
+                    }
+                    drawPixelated(phase === 1 ? currentImg : nextImg, size);
+                    animId = requestAnimationFrame(animate);
+                }
+                animate();
+            };
+        }
+
+        if (mediaItems.length > 0) {
+            currentImg.src = mediaItems[0].getAttribute('data-src');
+            currentImg.onload = () => drawPixelated(currentImg, 1);
+        }
+
+        window.addEventListener('resize', () => drawPixelated(currentImg, 1));
+
+        mediaItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                if (this.classList.contains('active')) return;
+                mediaItems.forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+                transitionImage(this.getAttribute('data-src'));
+            });
+        });
     </script>
 </body>
 </html>

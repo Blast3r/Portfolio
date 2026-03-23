@@ -301,3 +301,55 @@ body {
     opacity: 0;
     transition: opacity 0.2s ease;
 }
+
+/* --- YENİ DİNAMİK LOGO STİLLERİ --- */
+
+.logo-link.dynamic-logo-container {
+    height: 70px;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    overflow: visible;
+}
+
+.dynamic-logo-svg {
+    height: 100%;
+    width: auto;
+    overflow: visible;
+}
+
+.triangle {
+    fill: var(--c-blk); /* Başlangıç rengi: siyah */
+    stroke: var(--c-blk); /* Çizgiler de siyah */
+    stroke-width: 1; /* Çizgi kalınlığı */
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1); /* Yumuşak geçiş */
+    transform-box: fill-box; /* Transformun elementin kendi kutusuna göre yapılması için */
+}
+
+/* Her üçgenin kendi merkezinden dönmesi için transform-origin hesaplamaları */
+.triangle-1 { transform-origin: 50% 66.5%; } /* Üst */
+.triangle-2 { transform-origin: 50% 66.5%; } /* Sol Alt */
+.triangle-3 { transform-origin: 50% 66.5%; } /* Sağ Alt */
+
+/* --- HOVER EFEKTLERİ --- */
+
+.logo-link.dynamic-logo-container:hover .triangle {
+    fill: var(--c-pur); /* Rengi mora çevir */
+    stroke: var(--c-pur); /* Çizgileri mora çevir */
+    /* Scale artır ve kendi etrafında tam tur döndür */
+    transform: scale(1.2) rotate(360deg); 
+}
+
+/* Üçgenler döndükçe ve büyüdükçe birbirlerinin üzerine binip 
+   karmaşık, düğüm benzeri bir 'farklı şekil' oluştururlar. */
+
+.logo-link.dynamic-logo-container:hover .triangle-group {
+    /* İsteğe bağlı olarak tüm grubu da döndürebiliriz:
+    transform: rotate(-180deg);
+    transform-origin: 50% 50%;
+    transition: transform 1s ease; */
+}

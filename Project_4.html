@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project 4</title>
+    <link rel="stylesheet" href="Project_4.css">
+</head>
+<body>
+
+    <div class="page-transition-overlay origin-left bg-purple"></div>
+
+    <nav class="wireframe-nav">
+        <a href="cv.html" class="nav-item brand">
+            <span class="nav-text">Melih G. Kutsal</span>
+            <span class="nav-sub">[CV]</span>
+        </a>
+        <a href="index.html" class="logo-link">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+        </a>
+        <div class="nav-group">
+            <a href="architecture.html" class="nav-item active">Architecture</a>
+            <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
+        </div>
+    </nav>
+
+    <main class="project-layout">
+        
+        <section class="hero-wide">
+            <div class="hero-img-wrapper">
+                <div class="placeholder-box hero-img-box">
+                    <img src="Images/ArchProject_4/kairakapak.jpg" alt="Main Render" class="zoomable">
+                </div>
+            </div>
+            <div class="hero-info-wide">
+                <div class="hero-logo-box">
+                    <img src="Images/ArchProject_4/kairalogo.svg" alt="Project Logo" class="zoomable">
+                </div>
+                <div class="title-meta">
+                    <h1>Kaira Looro: Women's Circle</h1>
+                    <div class="meta-data">
+                        <span>YEAR: 2021 | Women's Community Center</span>
+                        <span>Competition Project</span>
+                    </div>
+                </div>
+                <div class="desc-text">
+                    <p>Women’s Circle aims to bring women and their children together and serve as a community education and relief space. In Senegal Baghere, the women works hard to grow children and gain their life for their family. After a hard work day, they need a place where they can come together and join the community to discuss the topic of the day and the further issues about the village, they may give decision, give support to each other and share different ideas and then organise for bigger problems. Whenever they come together, they get stronger.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="overlap-row">
+            <div class="placeholder-box overlap-img">
+                <img src="Images/ArchProject_4/map.jpg" alt="Map Diagram" class="zoomable">
+            </div>
+            <div class="overlap-text boxed-text">
+                <h2>01. SITE & CONTEXT</h2>
+                <p>By the light of these inputs, we aimed to create an open welcoming space where women come across with others, bring their children and commend to the caretakers through the day when they are on work, and also which offer a farmer job for those who may want to work as a farmer on the agriculture region of the site. Women can learn to make handcrafts here, and after the production step, the place serves as an exhibition and selling space for their final works. For this exhibition space we used porous facades and make the people connect and see each other when they joined one of the activities inside. </p>
+            </div>
+        </section>
+
+        <section class="overlap-row reverse">
+            <div class="placeholder-box overlap-img">
+                <img src="Images/ArchProject_4/mass.jpg" alt="Mass Diagram" class="zoomable">
+            </div>
+            <div class="overlap-text boxed-text">
+                <h2>02. MASSING STRATEGY</h2>
+                <p>In order to make a community in here, we decided to make this place as sociable as it can be, therefore we divided into modules to increase circulation and social areas.</p>
+            </div>
+        </section>
+
+        <section class="overlap-row">
+            <div class="placeholder-box overlap-img">
+                <img src="Images/ArchProject_4/structure.jpg" alt="Structure Diagram" class="zoomable">
+            </div>
+            <div class="overlap-text boxed-text">
+                <h2>03. STRUCTURAL SYSTEM</h2>
+                <p>The Kaira Looro project is a study in resourcefulness, designed specifically for a limited budget and restricted material access. The construction begins with a foundation of earth-filled tires used to level the site and create a stable, extruded platform. The architectural language is defined by two primary materials: timber and masonry.
+<br><br>
+A timber waffle construction system forms the structural heart of the building, serving as a dynamic exhibition and showcase wall. This system allows the facade to evolve over time, as the objects created and displayed by the community define the building’s exterior appearance. In contrast, the masonry walls are utilized for private zones, providing a closed and secure environment for more intimate functions.</p>
+            </div>
+        </section>
+
+        <section class="technical-sections-stacked">
+            <div class="placeholder-box technical-img-box">
+                <img src="Images/ArchProject_4/plan.jpg" alt="Floor Plan" class="zoomable">
+            </div>
+            <div class="placeholder-box technical-img-box">
+                <img src="Images/ArchProject_4/section.jpg" alt="Cross Section" class="zoomable">
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="project-footer">
+        <a href="architecture.html" class="footer-link"><- BACK_TO_PROJECTS</a>
+        <a href="Project_5.html" class="footer-link">NEXT: PROJECT_5 -></a>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img src="" alt="Zoomed Image" class="lightbox-content" id="lightbox-content">
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const overlay = document.querySelector('.page-transition-overlay');
+            if(overlay) {
+                setTimeout(() => { overlay.classList.add('reveal-x'); }, 50);
+            }
+        });
+
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                const overlay = document.querySelector('.page-transition-overlay');
+                if (overlay) {
+                    overlay.classList.remove('cover-x', 'cover-y');
+                    if (overlay.classList.contains('origin-top') || overlay.classList.contains('origin-bottom')) {
+                        overlay.classList.add('reveal-y');
+                    } else {
+                        overlay.classList.add('reveal-x');
+                    }
+                }
+            }
+        });
+
+        const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
+        transitionLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const targetUrl = this.getAttribute('href');
+                if (!targetUrl || targetUrl === '#') return;
+
+                e.preventDefault(); 
+                const overlay = document.querySelector('.page-transition-overlay');
+                if (overlay) {
+                    overlay.className = 'page-transition-overlay bg-black';
+                    if (targetUrl.includes('cv.html')) {
+                        overlay.classList.add('origin-bottom', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else if (targetUrl.includes('index.html')) {
+                        overlay.classList.add('origin-top', 'reveal-y');
+                        setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
+                    } else {
+                        overlay.classList.add('origin-left', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                }
+                setTimeout(() => { window.location.href = targetUrl; }, 600);
+            });
+        });
+
+        const zoomables = document.querySelectorAll('.zoomable');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        if(zoomables.length > 0 && lightbox) {
+            zoomables.forEach(img => {
+                img.addEventListener('click', function() {
+                    if(this.getAttribute('src')) {
+                        lightboxContent.src = this.src;
+                        lightbox.classList.add('active');
+                    }
+                });
+            });
+
+            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) lightbox.classList.remove('active');
+            });
+        }
+    </script>
+</body>
+</html>
