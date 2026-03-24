@@ -136,3 +136,6 @@ img[src=""] { opacity: 0; }
     .logo-link { display: none; }
     .wireframe-nav { padding: 0; }
 }
+p {
+    text-align: justify;
+}

@@ -10,7 +10,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+p {
+    text-align: justify;
+}
 body {
     font-family: 'Bliss Pro', Courier, monospace;
     font-weight: 400; 

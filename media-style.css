@@ -42,6 +42,10 @@ p { font-size: 1rem; font-weight: 400; color: var(--c-blk); }
     position: fixed; top: 0; width: 100%; height: 60px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--c-blk); background-color: var(--c-wht); z-index: 1000; padding: 0 5%;
 }
 
+/* --- YENİ DİNAMİK LOGO STİLLERİ --- */
+
+/* --- YENİ DİNAMİK LOGO STİLLERİ --- */
+
 .logo-link.dynamic-logo-container {
     height: 70px;
     width: auto;
@@ -57,29 +61,43 @@ p { font-size: 1rem; font-weight: 400; color: var(--c-blk); }
     padding: 0;
     overflow: visible;
 }
-
+p {
+    text-align: justify;
+}
 .dynamic-logo-svg {
     height: 100%;
     width: auto;
     overflow: visible;
 }
 
-.triangle {
-    fill: var(--c-blk);
-    stroke: var(--c-blk);
-    stroke-width: 1;
-    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-    transform-box: fill-box;
+/* Ana grubun normal haline transition ekliyoruz ki hover bitince yumuşakça dönsün */
+.triangle-group {
+    transform-origin: 50% 50%;
+    transition: transform 1s ease;
 }
 
-.triangle-1 { transform-origin: 50% 66.5%; }
-.triangle-2 { transform-origin: 50% 66.5%; }
-.triangle-3 { transform-origin: 50% 66.5%; }
+.triangle {
+    fill: var(--c-blk); /* DEĞİŞTİRİLDİ: var(--line-color) yerine var(--c-blk) */
+    stroke: var(--c-blk); /* DEĞİŞTİRİLDİ: var(--line-color) yerine var(--c-blk) */
+    stroke-width: 1; 
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1); 
+    transform-box: fill-box; 
+}
+
+.triangle-1 { transform-origin: 50% 66.5%; } 
+.triangle-2 { transform-origin: 50% 66.5%; } 
+.triangle-3 { transform-origin: 50% 66.5%; } 
+
+/* --- HOVER EFEKTLERİ --- */
 
 .logo-link.dynamic-logo-container:hover .triangle {
-    fill: var(--c-pur);
-    stroke: var(--c-pur);
-    transform: scale(1.2) rotate(360deg);
+    fill: var(--c-pur); /* DEĞİŞTİRİLDİ: var(--accent-color) yerine var(--c-pur) */
+    stroke: var(--c-pur); /* DEĞİŞTİRİLDİ: var(--accent-color) yerine var(--c-pur) */
+    transform: scale(1.2) rotate(360deg); 
+}
+
+.logo-link.dynamic-logo-container:hover .triangle-group {
+    transform: rotate(-180deg);
 }
 
 .nav-item { display: flex; align-items: center; padding: 0 30px; text-decoration: none; color: var(--c-blk); border-left: 1px solid var(--c-blk); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; transition: background-color 0.2s, color 0.2s; }

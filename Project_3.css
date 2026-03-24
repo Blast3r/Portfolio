@@ -55,7 +55,9 @@ p { font-size: 1rem; font-weight: 400; color: var(--c-blk); }
     width: 100%;
     margin-bottom: 40px;
 }
-
+p {
+    text-align: justify;
+}
 .page-transition-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none; transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
 }

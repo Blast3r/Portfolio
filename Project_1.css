@@ -19,6 +19,12 @@ body {
     line-height: 1.5;
     overflow-x: hidden;
 }
+p {
+    text-align: justify;
+}
+h1, h2, h3, h4, h5, h6 {
+    text-align: justify;
+}
 
 .bg-black { background-color: var(--c-blk); }
 .bg-purple { background-color: var(--c-pur); }
