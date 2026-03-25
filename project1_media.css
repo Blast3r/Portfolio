@@ -130,7 +130,7 @@ p {
 .overlap-row { display: flex; align-items: center; margin-bottom: 100px; position: relative; width: 100%; }
 .overlap-img { width: 65%; height: auto; min-height: 400px; display: flex; align-items: center; z-index: 1; }
 .overlap-img img { width: 100%; height: 100%; object-fit: contain; background-color: transparent; }
-.overlap-text { width: 45%; margin-left: -5%; z-index: 2; position: relative; } /* Increased overlap */
+.overlap-text { border: 1px solid var(--c-blk) ; padding: 20px; background-color: var(--c-wht); width: 45%; margin-left: -5%; z-index: 2; position: relative; } /* Increased overlap */
 .overlap-row.reverse { flex-direction: row-reverse; }
 .overlap-row.reverse .overlap-text { margin-left: 0; margin-right: -5%; }
 

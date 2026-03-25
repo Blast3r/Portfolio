@@ -43,7 +43,7 @@ p {
     background-color: var(--c-wht); 
     border: 1px solid var(--c-blk); 
     padding: 30px; 
-    box-shadow: -10px 10px 0px var(--c-pur-shadow); 
+    
     z-index: 10;
 }
 
