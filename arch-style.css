@@ -270,20 +270,34 @@ body {
 }
 
 @media (max-width: 900px) {
+    body {
+        overflow-y: auto !important;
+    }
+
     .composition-canvas {
         display: flex;
         flex-direction: column;
-        overflow-y: auto;
+        overflow-y: visible;
         height: auto;
+        min-height: 100vh;
+        padding-top: 60px; 
     }
 
-    .logo-link, .ornament { display: none; }
+    .logo-link, .ornament { 
+        display: none; 
+    }
 
     .project-block {
-        position: relative;
-        top: auto !important; left: auto !important;
-        width: 100% !important; height: 15vh !important;
+        position: relative !important;
+        top: auto !important; 
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        transform: none !important; 
+        width: 100% !important; 
+        height: 15vh !important;
         border-bottom: 2px solid var(--c-blk);
+        z-index: 10 !important;
     }
 }
 
@@ -297,6 +311,7 @@ body {
     border: none;
     transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important; 
     border-radius: 0;
+    transform: none !important;
 }
 
 .project-block.expanding .p-num,
