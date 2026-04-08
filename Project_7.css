@@ -118,6 +118,56 @@ p {
 .lightbox-close:hover { color: var(--c-pur); }
 
 @media (max-width: 900px) {
+    @media (max-width: 900px) {
+    /* 1. Menü Kapsayıcısı: Logo ve Linkleri Alt Alta Alır */
+    .wireframe-nav {
+        height: auto !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 5px 0 0 0 !important;
+    }
+
+    /* 2. Logo: Merkeze yerleşir ve diğerlerinin üstüne binmez */
+    .logo-link.dynamic-logo-container {
+        display: flex !important;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        height: 50px !important;
+        margin-bottom: 5px !important;
+    }
+
+    /* 3. Link Grubu: Tam genişlik kaplar ve butonları eşit dağıtır */
+    .nav-group {
+        width: 100% !important;
+        border-top: 1px solid var(--c-blk);
+        display: flex !important;
+    }
+
+    .nav-item {
+        flex: 1;
+        padding: 10px 5px !important;
+        font-size: 0.7rem !important; /* Yazılar sığması için küçüldü */
+        justify-content: center !important;
+        border-left: 1px solid var(--c-blk) !important;
+        text-align: center;
+    }
+
+    /* 4. Marka/İsim: Mobilde yer kazanmak için daraltıldı */
+    .brand {
+        width: 100% !important;
+        justify-content: center !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--c-blk) !important;
+        padding: 8px !important;
+    }
+
+    /* 5. Sayfa İçeriği: Menünün altında kalmaması için üst boşluk */
+    .composition-canvas, .project-layout {
+        margin-top: 140px !important; 
+    }
+}
     .project-layout, .project-footer { width: 95%; }
     
     .three-grid, .four-grid { grid-template-columns: 1fr; }

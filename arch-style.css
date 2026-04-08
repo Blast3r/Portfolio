@@ -268,55 +268,49 @@ body {
     opacity: 0.5; 
     transform: scale(1.1);
 }
-
 @media (max-width: 900px) {
-    body {
-        overflow-y: auto !important;
+    /* Menü yüksekliğini otomatik yap ve esnet */
+    .wireframe-nav {
+        height: auto !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 10px 0 0 0 !important;
     }
 
-    .composition-canvas {
-        display: flex;
-        flex-direction: column;
-        overflow-y: visible;
-        height: auto;
-        min-height: 100vh;
-        padding-top: 60px; 
-    }
-
-    .logo-link, .ornament { 
-        display: none; 
-    }
-
-    .project-block {
+    /* Logoyu görünür yap ve merkeze al */
+    .logo-link.dynamic-logo-container {
+        display: flex !important; /* Gizlemeyi kaldırdık */
         position: relative !important;
-        top: auto !important; 
         left: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        transform: none !important; 
-        width: 100% !important; 
-        height: 15vh !important;
-        border-bottom: 2px solid var(--c-blk);
-        z-index: 10 !important;
+        top: auto !important;
+        transform: none !important;
+        height: 50px !important;
+        margin-bottom: 10px !important;
     }
-}
 
-.project-block.expanding {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    z-index: 9999 !important;
-    border: none;
-    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1) !important; 
-    border-radius: 0;
-    transform: none !important;
-}
+    /* Navigasyon grubunu tam genişlik yap ve alta al */
+    .nav-group {
+        width: 100% !important;
+        border-top: 1px solid var(--c-blk);
+        display: flex !important;
+    }
 
-.project-block.expanding .p-num,
-.project-block.expanding .p-name,
-.project-block.expanding .project-img {
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    .nav-item {
+        flex: 1;
+        padding: 10px 5px !important;
+        font-size: 0.75rem !important;
+        justify-content: center !important;
+        border-left: 1px solid var(--c-blk) !important;
+        text-align: center;
+    }
+
+    /* Sol taraftaki CV/İsim kısmını da uyumlu hale getir */
+    .brand {
+        display: none; /* Mobilde yer kazanmak için ismi gizleyebilirsin veya kalsın istersen 'flex' yap */
+    }
+
+    /* Sayfa içeriğinin menü altında kalmaması için boşluğu arttır */
+    .composition-canvas {
+        margin-top: 110px !important; 
+    }
 }
