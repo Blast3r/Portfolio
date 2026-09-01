@@ -103,6 +103,7 @@ body { font-family: var(--font-sans); }
 .nav-sub, .side-key, .entry-when, .sub-title, .comp-date, .lbl-count,
 .mi-num, .m-idx, .m-menu-foot,
 .hero-tag, .t-num, .toc-label, .toc-download, .refs-label,
+.cv-download,
 .thesis-toc ol a, .t-figure figcaption, .case-meta,
 .meta-pair dt, .lightbox-hint, .img-slot,
 .project-layout h2::before,

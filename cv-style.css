@@ -437,3 +437,65 @@ a.side-val:hover { color: var(--accent-color); border-color: var(--accent-color)
     .cv-label { position: static; }
     .cv-row, .entry { page-break-inside: avoid; }
 }
+
+/* ============================================================
+   CV İNDİRME BUTONU
+   Sayfanın birincil eylemi, o yüzden ismin hemen altında
+   duruyor. Tez sayfasındaki indirme butonuyla aynı dilde.
+   ============================================================ */
+.cv-download {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 26px;
+    padding: 14px 20px;
+    border: 1px solid var(--line-color);
+    text-decoration: none;
+    color: var(--line-color);
+    background: var(--bg-color);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cv-download .dl-arrow {
+    font-size: 0.95rem;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.cv-download .dl-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.cv-download .dl-meta {
+    font-size: 0.6rem;
+    letter-spacing: 1.4px;
+    opacity: 0.5;
+}
+
+.cv-download:hover,
+.cv-download:focus-visible {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-color);
+}
+.cv-download:hover .dl-meta { opacity: 0.8; }
+.cv-download:hover .dl-arrow { transform: translateY(3px); }
+
+@media (max-width: 900px) {
+    .cv-download {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 15px 16px;
+        gap: 10px;
+    }
+    .cv-download .dl-label { font-size: 0.74rem; letter-spacing: 1.5px; }
+    .cv-download .dl-meta { font-size: 0.55rem; }
+}
+
+/* Yazdırırken indirme butonu gerekmiyor */
+@media print { .cv-download { display: none !important; } }

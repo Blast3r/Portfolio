@@ -47,6 +47,12 @@
                 Architect and media artist working between computational design,
                 interactive installation and spatial storytelling.
             </p>
+
+            <a class="cv-download" href="MelihKutsal-CV.pdf" download>
+                <span class="dl-arrow">&darr;</span>
+                <span class="dl-label">Download CV</span>
+                <span class="dl-meta">PDF &middot; 1 page</span>
+            </a>
         </div>
         <div class="header-side">
             <div class="side-row">
@@ -294,7 +300,7 @@
         });
 
         // 2. Tıklama ile yönlendirme animasyonu
-        document.querySelectorAll('a:not([target="_blank"])').forEach(link => {
+        document.querySelectorAll('a:not([target="_blank"]):not([download])').forEach(link => {
             link.addEventListener('click', function (e) {
                 const targetUrl = this.getAttribute('href');
                 if (!targetUrl || targetUrl === '#' || targetUrl.indexOf('mailto:') === 0) return;
