@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Architecture Projects</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="arch-style.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -30,6 +35,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item nav-arch active">Architecture</a>
             <a href="media-art.html" class="nav-item nav-media">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item nav-articles">Articles</a>
         </div>
     </nav>
@@ -41,45 +47,52 @@
         <div class="ornament tri-3 bg-black"></div>
 
         <a href="Project_1.html" class="project-block p1 bg-purple">
-            <img src="Images\ArchProject_1\final-render.jpg" alt="Project 1" class="project-img">
+            <img src="Images/ArchProject_1/final-render.jpg" alt="Project 1" class="project-img">
             <span class="p-num">01</span>
             <span class="p-name">Crystal</span>
+            <span class="p-sub">2021 · Mars Colony Project</span>
         </a>
 
         <a href="Project_2.html" class="project-block p2 bg-black">
-            <img src="Images/ArchProject_2/Kapak.png" alt="Project 2" class="project-img">
+            <img src="Images/ArchProject_2/Kapak.jpg" alt="Project 2" class="project-img">
             <span class="p-num">02</span>
             <span class="p-name">Tri-Morph</span>
+            <span class="p-sub">2025 · Scientific Research · Bauhaus Weimar</span>
         </a>
 
         <a href="Project_3.html" class="project-block p3 bg-white text-black">
             <img src="Images/ArchProject_3/odysseykapak.jpg" alt="Project 3" class="project-img">
             <span class="p-num border-black">03</span>
-            <span class="p-name border-black">Odyssey</span>
+            <span class="p-name">Odyssey</span>
+            <span class="p-sub">2020 · Community Center · WA 35th Winner</span>
         </a>
 
         <a href="Project_4.html" class="project-block p4 bg-purple">
             <img src="Images/ArchProject_4/kairakapak.jpg" alt="Project 4" class="project-img">
             <span class="p-num">04</span>
             <span class="p-name">Kaira Loroo</span>
+            <span class="p-sub">2021 · Women's Community Center · Competition</span>
         </a>
 
         <a href="Project_5.html" class="project-block p5 bg-black">
             <img src="Images/ArchProject_5/Kapak.jpg" alt="Project 5" class="project-img">
             <span class="p-num">05</span>
             <span class="p-name">Maruf'22</span>
+            <span class="p-sub">2022 · Marmara Urban Forum · AURA Istanbul</span>
         </a>
 
         <a href="Project_6.html" class="project-block p6 bg-white text-black">
             <img src="Images/ArchProject_6/Kapak2.jpg" alt="Project 6" class="project-img">
             <span class="p-num border-black">06</span>
-            <span class="p-name border-black">AURA Istanbul</span>
+            <span class="p-name">AURA Istanbul</span>
+            <span class="p-sub">2021 · Interactive Play Research · AURA</span>
         </a>
 
         <a href="Project_7.html" class="project-block p7 bg-purple">
-            <img src="Images\ArchProject_7\Revit_Page_03.jpg" alt="Project 7" class="project-img">
+            <img src="Images/ArchProject_7/Revit_Page_03.jpg" alt="Project 7" class="project-img">
             <span class="p-num">07</span>
             <span class="p-name">Other Works</span>
+            <span class="p-sub">Various Years · Technical Research & Practice</span>
         </a>
 
     </main>
@@ -111,7 +124,7 @@
                     this.classList.add('expanding');
                     setTimeout(() => {
                         window.location.href = targetUrl;
-                    }, 600);
+                    }, window.__transitionDelay());
                     return; 
                 }
 
@@ -119,7 +132,11 @@
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
                     
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } 
@@ -139,7 +156,7 @@
 
                 setTimeout(() => {
                     window.location.href = targetUrl;
-                }, 600);
+                }, window.__transitionDelay());
             });
         });
         window.addEventListener('pageshow', function(event) {

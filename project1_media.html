@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media Art - Project 1</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="project1_media.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -28,6 +33,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item">Architecture</a>
             <a href="media-art.html" class="nav-item active">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -64,7 +70,7 @@ Keywords: Cognitive side of architectural experience, time, cartographic study, 
 
         <section class="overlap-row custom-theory-row">
             <div class="clean-img-box overlap-img">
-                <img src="Images/MediaArt_1/1.PNG" alt="Theoretical Foundation" class="zoomable">
+                <img src="Images/MediaArt_1/1.jpg" alt="Theoretical Foundation" class="zoomable">
             </div>
             <div class="overlap-text boxed-text">
                 <h2>Time Collapses</h2>
@@ -80,12 +86,12 @@ Keywords: Cognitive side of architectural experience, time, cartographic study, 
                 <h2>Animation of the Memory Mapping</h2>
             </div>
             <div class="four-grid animation-grid">
-                <div class="clean-img-box"><img src="Images/MediaArt_1/ani.png" alt="Simulation Frame 1" class="zoomable"></div>
-                <div class="clean-img-box"><img src="Images/MediaArt_1/ani2.png" alt="Simulation Frame 2" class="zoomable"></div>
-                <div class="clean-img-box"><img src="Images/MediaArt_1/ani3.png" alt="Simulation Frame 3" class="zoomable"></div>
-                <div class="clean-img-box"><img src="Images/MediaArt_1/ani4.png" alt="Simulation Frame 4" class="zoomable"></div>
+                <div class="clean-img-box"><img src="Images/MediaArt_1/ani.jpg" alt="Simulation Frame 1" class="zoomable"></div>
+                <div class="clean-img-box"><img src="Images/MediaArt_1/ani2.jpg" alt="Simulation Frame 2" class="zoomable"></div>
+                <div class="clean-img-box"><img src="Images/MediaArt_1/ani3.jpg" alt="Simulation Frame 3" class="zoomable"></div>
+                <div class="clean-img-box"><img src="Images/MediaArt_1/ani4.jpg" alt="Simulation Frame 4" class="zoomable"></div>
             </div>
-            <div class="boxed-text full-width-text" style="margin-top: 40px;">
+            <div class="boxed-text full-width-text text-center" style="margin-top: 40px;">
                 <p>We simulated an animation in order to showcase the cognitive mind of Istanbul. The animation tried to summarize the cognitive mind of Istanbul through metro stations and what those stations represent by their name.</p>
             </div>
         </section>
@@ -161,7 +167,11 @@ Keywords: Cognitive side of architectural experience, time, cartographic study, 
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -172,30 +182,12 @@ Keywords: Cognitive side of architectural experience, time, cartographic study, 
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 1</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="Project_1.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -24,9 +29,11 @@
         </g>
     </svg>
     <span class="nav-logo-text" style="display: none;">Odyssey</span>
+</a>
         <div class="nav-group">
             <a href="architecture.html" class="nav-item active">Architecture</a>
             <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -36,12 +43,12 @@
         <section class="hero-wide">
             <div class="hero-img-wrapper">
                 <div class="hero-img-box">
-                    <img src="Images\ArchProject_1\İsometric.jpg" alt="Hero Render" class="zoomable">
+                    <img src="Images/ArchProject_1/İsometric.jpg" alt="Hero Render" class="zoomable">
                 </div>
             </div>
             <div class="hero-info-wide">
                 <div class="hero-logo-box">
-                    <img src="Images\ArchProject_1\MarsLogo.svg" alt="Project Logo" class="zoomable">
+                    <img src="Images/ArchProject_1/MarsLogo.svg" alt="Project Logo" class="zoomable">
                 </div>
                 <div class="title-meta">
                     <h1>CRYSTAL</h1>
@@ -67,7 +74,7 @@
 
         <section class="overlap-row">
             <div class="overlap-img">
-                <img src="Images\ArchProject_1\Designİdea.jpg" alt="Massing" class="zoomable">
+                <img src="Images/ArchProject_1/Designİdea.jpg" alt="Massing" class="zoomable">
             </div>
             <div class="overlap-text boxed-text">
                 <h2>Design Idea</h2>
@@ -114,7 +121,7 @@
 
         <section class="full-width-render">
             <div class="render-container">
-                <img src="Images\ArchProject_1\final-render.jpg" alt="Geniş Render" class="zoomable">
+                <img src="Images/ArchProject_1/final-render.jpg" alt="Geniş Render" class="zoomable">
             </div>
         </section>
 
@@ -130,13 +137,13 @@
 </p>
                 </div>
                 <div class="evo-img-small">
-                    <img src="Images\ArchProject_1\bigplan.jpg" alt="Küçük Eskiz" class="zoomable">
+                    <img src="Images/ArchProject_1/bigplan.jpg" alt="Küçük Eskiz" class="zoomable">
                 </div>
             </div>
             
             <div class="evo-row-center">
                 <div class="evo-img-detailed">
-                    <img src="Images/ArchProject_1/cityplan.png" alt="Detaylı Plan" class="zoomable">
+                    <img src="Images/ArchProject_1/cityplan.jpg" alt="Detaylı Plan" class="zoomable">
                 </div>
                 <div class="evo-text-center boxed-text">
                     
@@ -153,13 +160,13 @@
         <section class="technical-section">
             <div class="plans-grid">
                 <div class="placeholder-box tech-img-box">
-                    <img src="Images/ArchProject_1/1stPlan copy.png" alt="Plan 1" class="zoomable">
+                    <img src="Images/ArchProject_1/1stPlan copy.jpg" alt="Plan 1" class="zoomable">
                 </div>
                 <div class="placeholder-box tech-img-box">
-                    <img src="Images/ArchProject_1/2ndplan.png" alt="Plan 2" class="zoomable">
+                    <img src="Images/ArchProject_1/2ndplan.jpg" alt="Plan 2" class="zoomable">
                 </div>
                 <div class="placeholder-box tech-img-box">
-                    <img src="Images/ArchProject_1/plan3.png" alt="Plan 3" class="zoomable">
+                    <img src="Images/ArchProject_1/plan3.jpg" alt="Plan 3" class="zoomable">
                 </div>
             </div>
 
@@ -240,7 +247,11 @@ By placing the farm at the bottom of the central axis, the design ensures the en
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -251,30 +262,12 @@ By placing the farm at the bottom of the central axis, the design ensures the en
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

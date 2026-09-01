@@ -212,13 +212,16 @@ body {
     mix-blend-mode: normal;
     transform: scale(1.1);
 }
-/* Yeni 7 Proje Koordinatları */
+/* Yeni 7 Proje Koordinatları
+   Not: p3'ün boyu ve p6'nın genişliği, proje adlarının komşu
+   bloğun altında kalmaması için ayarlandı (03 ODYSSEY ve
+   06 AURA ISTANBUL yazıları önceden görünmüyordu). */
 .p1 { top: 15%; left: 8%; width: 10%; height: 70%; z-index: 10; }
 .p2 { top: 50%; left: 5%; width: 35%; height: 16%; z-index: 20; }
-.p3 { top: 5%; left: 30%; width: 10%; height: 55%; z-index: 15; }
+.p3 { top: 5%; left: 30%; width: 10%; height: 42%; z-index: 15; }
 .p4 { top: 25%; left: 35%; width: 35%; height: 16%; z-index: 25; }
 .p5 { top: 40%; left: 55%; width: 10%; height: 50%; z-index: 5; }
-.p6 { top: 70%; left: 50%; width: 40%; height: 16%; z-index: 30; }
+.p6 { top: 70%; left: 50%; width: 28%; height: 16%; z-index: 30; }
 .p7 { top: 10%; left: 80%; width: 10%; height: 75%; z-index: 35; }
 
 /* Hover Expansion Logic */
@@ -268,49 +271,139 @@ body {
     opacity: 0.5; 
     transform: scale(1.1);
 }
+
+/* Masaüstünde alt başlıklar gizli — kompozisyonun sadeliği bozulmasın */
+.p-sub { display: none; }
+
+/* Kompozisyon içinde gezinme ipucu (sadece masaüstü) */
+.canvas-hint {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.35;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ============================================================
+   MOBİL  (<= 900px)
+   Masaüstündeki dağınık kompozisyon telefonda okunamıyordu
+   (kutular 35px genişliğe düşüp üst üste biniyordu).
+   Telefonda aynı renk ritmi korunarak dikey kart listesine
+   dönüşür. Masaüstü düzeni hiç değişmez.
+   ============================================================ */
 @media (max-width: 900px) {
-    /* Menü yüksekliğini otomatik yap ve esnet */
-    .wireframe-nav {
-        height: auto !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        padding: 10px 0 0 0 !important;
-    }
 
-    /* Logoyu görünür yap ve merkeze al */
-    .logo-link.dynamic-logo-container {
-        display: flex !important; /* Gizlemeyi kaldırdık */
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        height: 50px !important;
-        margin-bottom: 10px !important;
-    }
+    body { overflow: auto; }
 
-    /* Navigasyon grubunu tam genişlik yap ve alta al */
-    .nav-group {
-        width: 100% !important;
-        border-top: 1px solid var(--c-blk);
-        display: flex !important;
-    }
-
-    .nav-item {
-        flex: 1;
-        padding: 10px 5px !important;
-        font-size: 0.75rem !important;
-        justify-content: center !important;
-        border-left: 1px solid var(--c-blk) !important;
-        text-align: center;
-    }
-
-    /* Sol taraftaki CV/İsim kısmını da uyumlu hale getir */
-    .brand {
-        display: none; /* Mobilde yer kazanmak için ismi gizleyebilirsin veya kalsın istersen 'flex' yap */
-    }
-
-    /* Sayfa içeriğinin menü altında kalmaması için boşluğu arttır */
     .composition-canvas {
-        margin-top: 110px !important; 
+        position: static;
+        width: 100%;
+        height: auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0 0 40px 0;
+    }
+
+    /* Dekoratif üçgenler kartların üstüne binmesin */
+    .ornament, .canvas-hint { display: none; }
+
+    .project-block {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 124px;
+        border: none !important;
+        border-bottom: 1px solid var(--c-blk) !important;
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        padding: 22px 20px 22px 66px;
+        box-shadow: none !important;
+        transition: none;
+    }
+
+    /* Hover'a bağlı büyüme/kayma mobilde tamamen kapalı */
+    .project-block:hover,
+    .p1:hover, .p2:hover, .p3:hover, .p4:hover,
+    .p5:hover, .p6:hover, .p7:hover {
+        top: auto !important;
+        left: auto !important;
+        width: 100% !important;
+        height: auto !important;
+        z-index: auto !important;
+        box-shadow: none !important;
+    }
+
+    /* Kapak görseli kartın arkasında, okunabilirliği bozmadan */
+    .project-img {
+        opacity: 0.30 !important;
+        mix-blend-mode: normal !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    .project-block:hover .project-img { opacity: 0.30 !important; transform: none !important; }
+
+    /* Beyaz kartlarda görsel biraz daha soluk dursun */
+    .project-block.bg-white .project-img { opacity: 0.22 !important; }
+
+    /* Numara: sol kenarda sabit bir sütun */
+    .p-num {
+        position: absolute;
+        top: 50%;
+        left: 18px;
+        transform: translateY(-50%);
+        font-size: 0.95rem;
+        padding: 6px 8px;
+        border: 1px solid currentColor;
+        opacity: 0.9;
+    }
+
+    .p-name {
+        position: static;
+        font-size: 1.15rem;
+        letter-spacing: 0;
+        padding: 0;
+        border: none;
+        z-index: 50;
+        line-height: 1.15;
+    }
+
+    .p-sub {
+        display: block;
+        position: static;
+        z-index: 50;
+        margin-top: 6px;
+        font-size: 0.68rem;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        opacity: 0.75;
+        line-height: 1.35;
+    }
+
+    /* Dokunma geri bildirimi */
+    .project-block:active { filter: brightness(1.25); }
+    .project-block:active .project-img { opacity: 0.5 !important; }
+
+    /* Listenin başında ne olduğunu söyleyen başlık */
+    .composition-canvas::before {
+        content: "ARCHITECTURE / 07 PROJECTS";
+        display: block;
+        padding: 20px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        border-bottom: 1px solid var(--c-blk);
+        opacity: 0.5;
     }
 }

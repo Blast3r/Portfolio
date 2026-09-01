@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 3</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="Project_3.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -28,6 +33,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item active">Architecture</a>
             <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -74,11 +80,11 @@ During the site analysis, it was discovered that the neighborhood still maintain
             <div class="three-grid">
                 <div class="placeholder-box grid-img-box">
                     
-                    <img src="Images/ArchProject_3/odyseysketch.png" alt="Idea 1" class="zoomable">
+                    <img src="Images/ArchProject_3/odyseysketch.jpg" alt="Idea 1" class="zoomable">
                 </div>
                 <div class="placeholder-box grid-img-box">
                     
-                    <img src="Images/ArchProject_3/odyseysketch2.png" alt="Idea 2" class="zoomable">
+                    <img src="Images/ArchProject_3/odyseysketch2.jpg" alt="Idea 2" class="zoomable">
                 </div>
                 <div class="placeholder-box grid-img-box">
                     
@@ -252,7 +258,11 @@ During the site analysis, it was discovered that the neighborhood still maintain
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -263,30 +273,12 @@ During the site analysis, it was discovered that the neighborhood still maintain
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

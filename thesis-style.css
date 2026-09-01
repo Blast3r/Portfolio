@@ -1,0 +1,721 @@
+:root {
+    --c-blk: #111111;
+    --c-wht: #ffffff;
+    --c-pur: #8a2be2;
+    --c-placeholder: #eeeeee;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Bliss Pro', Courier, monospace;
+    font-weight: 400;
+    background-color: var(--c-wht);
+    color: var(--c-blk);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.bg-black { background-color: var(--c-blk); }
+.bg-purple { background-color: var(--c-pur); }
+
+/* --- SAYFA GEÇİŞİ --- */
+.page-transition-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 9999; pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.origin-left { transform-origin: left; }
+.origin-right { transform-origin: right; }
+.origin-top { transform-origin: top; }
+.origin-bottom { transform-origin: bottom; }
+.reveal-x { transform: scaleX(0); }
+.reveal-y { transform: scaleY(0); }
+.cover-x { transform: scaleX(1); }
+.cover-y { transform: scaleY(1); }
+
+/* --- NAVİGASYON (diğer sayfalarla birebir aynı) --- */
+.wireframe-nav {
+    position: fixed; top: 0; width: 100%; height: 60px;
+    display: flex; justify-content: space-between;
+    border-bottom: 1px solid var(--c-blk);
+    background-color: var(--c-wht);
+    z-index: 1000; padding: 0 5%;
+}
+.nav-item {
+    display: flex; align-items: center; padding: 0 30px;
+    text-decoration: none; color: var(--c-blk);
+    border-left: 1px solid var(--c-blk);
+    font-size: 0.9rem; font-weight: 500; text-transform: uppercase;
+    transition: background-color 0.2s, color 0.2s;
+}
+.nav-group { display: flex; }
+.nav-group .nav-item:first-child { border-left: 1px solid var(--c-blk); }
+.brand { border-left: none; border-right: 1px solid var(--c-blk); font-weight: 700; gap: 10px; }
+.nav-item:hover, .nav-item.active { background-color: var(--c-blk); color: var(--c-wht); }
+.nav-sub { font-size: 0.7rem; font-weight: 400; opacity: 0.6; }
+
+.logo-link.dynamic-logo-container {
+    height: 70px; width: auto;
+    position: absolute; left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex; align-items: center; justify-content: center;
+    background-color: transparent; border: none; padding: 0; overflow: visible;
+}
+.dynamic-logo-svg { height: 100%; width: auto; overflow: visible; }
+.triangle-group { transform-origin: 50% 50%; transition: transform 1s ease; }
+.triangle {
+    fill: var(--c-blk); stroke: var(--c-blk); stroke-width: 1;
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1); transform-box: fill-box;
+}
+.triangle-1, .triangle-2, .triangle-3 { transform-origin: 50% 66.5%; }
+.logo-link.dynamic-logo-container:hover .triangle {
+    fill: var(--c-pur); stroke: var(--c-pur); transform: scale(1.2) rotate(360deg);
+}
+.logo-link.dynamic-logo-container:hover .triangle-group { transform: rotate(-180deg); }
+
+/* ============================================================
+   TEZ SAYFASI DÜZENİ
+   ============================================================ */
+.thesis-layout {
+    width: 85%;
+    max-width: 1400px;
+    margin: 140px auto 100px auto;
+}
+
+/* --- KAPAK --- */
+.thesis-hero {
+    border: 1px solid var(--c-blk);
+    padding: 60px 50px 50px;
+    margin-bottom: 100px;
+    position: relative;
+}
+
+.hero-tag {
+    position: absolute;
+    top: 0; left: 0;
+    background: var(--c-blk);
+    color: var(--c-wht);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 8px 14px;
+}
+
+.thesis-title {
+    font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+    color: var(--c-pur);
+    max-width: 20ch;
+    margin-bottom: 22px;
+}
+
+.thesis-subtitle {
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.45;
+    max-width: 60ch;
+    opacity: 0.85;
+    margin-bottom: 44px;
+}
+
+.thesis-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--c-blk);
+}
+
+.meta-pair {
+    padding: 18px 20px 4px 0;
+    border-right: 1px solid rgba(17, 17, 17, 0.15);
+}
+.meta-pair:last-child { border-right: none; }
+
+.meta-pair dt {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.45;
+    margin-bottom: 6px;
+}
+
+.meta-pair dd { font-size: 0.92rem; font-weight: 500; }
+
+/* --- GÖVDE: İÇİNDEKİLER + METİN --- */
+.thesis-body {
+    display: grid;
+    grid-template-columns: 210px 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.thesis-toc {
+    position: sticky;
+    top: 110px;
+    border-left: 1px solid var(--c-blk);
+    padding-left: 18px;
+}
+
+.toc-label {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.45;
+    margin-bottom: 14px;
+}
+
+.thesis-toc ol { list-style: none; counter-reset: toc; }
+
+.thesis-toc li { counter-increment: toc; margin-bottom: 2px; }
+
+.thesis-toc ol a {
+    display: block;
+    padding: 6px 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--c-blk);
+    opacity: 0.6;
+    transition: opacity 0.2s, color 0.2s, padding-left 0.2s;
+}
+
+.thesis-toc ol a::before {
+    content: counter(toc, decimal-leading-zero) "  ";
+    opacity: 0.4;
+    font-size: 0.68rem;
+}
+
+.thesis-toc ol a:hover { opacity: 1; color: var(--c-pur); }
+
+.thesis-toc ol a.current {
+    opacity: 1;
+    color: var(--c-pur);
+    font-weight: 700;
+    padding-left: 6px;
+}
+
+.toc-download {
+    display: inline-block;
+    margin-top: 26px;
+    padding: 10px 14px;
+    border: 1px solid var(--c-blk);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--c-blk);
+    transition: background-color 0.2s, color 0.2s;
+}
+.toc-download:hover { background: var(--c-pur); color: var(--c-wht); border-color: var(--c-pur); }
+
+/* --- BÖLÜMLER --- */
+.t-section { margin-bottom: 90px; scroll-margin-top: 90px; }
+
+.t-section h2 {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    color: var(--c-pur);
+    padding-bottom: 14px;
+    margin-bottom: 26px;
+    border-bottom: 1px solid var(--c-blk);
+}
+
+.t-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--c-blk);
+    border: 1px solid var(--c-blk);
+    padding: 3px 7px;
+    flex-shrink: 0;
+}
+
+.t-section p {
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 68ch;          /* okuma satırı: gözü yormayan uzunluk */
+    margin-bottom: 18px;
+}
+
+.t-lead p {
+    font-size: 1.22rem;
+    line-height: 1.6;
+    max-width: 62ch;
+}
+
+.t-quote {
+    border-left: 3px solid var(--c-pur);
+    padding: 6px 0 6px 24px;
+    margin: 6px 0 28px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.35;
+    max-width: 50ch;
+}
+
+.t-list, .t-steps {
+    max-width: 66ch;
+    margin: 0 0 22px 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.t-list li, .t-steps li {
+    position: relative;
+    padding: 12px 0 12px 34px;
+    border-bottom: 1px dashed rgba(17, 17, 17, 0.25);
+    font-size: 0.95rem;
+}
+
+.t-list li::before {
+    content: ">";        /* Bliss Pro'da "→" glifi yok; site zaten ASCII ok kullanıyor */
+    position: absolute;
+    left: 4px;
+    color: var(--c-pur);
+    font-weight: 700;
+}
+
+.t-steps { counter-reset: step; }
+.t-steps li { counter-increment: step; }
+.t-steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--c-pur);
+    top: 15px;
+}
+
+/* --- BULGULAR --- */
+.t-findings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 28px 0 40px;
+}
+
+.finding {
+    border: 1px solid var(--c-blk);
+    padding: 22px 18px;
+}
+
+.finding .f-num {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--c-pur);
+    line-height: 1;
+    margin-bottom: 12px;
+}
+
+.finding p { font-size: 0.88rem; line-height: 1.55; margin: 0; }
+
+/* --- GÖRSELLER --- */
+.t-figure { margin: 34px 0; }
+.t-figure-wide { margin: 44px 0; }
+
+.t-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid var(--c-blk);
+}
+
+.t-figure figcaption {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.5px;
+    opacity: 0.6;
+}
+
+.t-figure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 34px 0;
+}
+.t-figure-grid .t-figure { margin: 0; }
+
+/* --- ÖRNEK İNCELEMELER --- */
+.t-case {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 44px;
+}
+.t-case.reverse .case-img { order: 2; }
+
+.case-img { min-height: 260px; }
+.case-img img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--c-blk); }
+
+.case-text h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.case-meta {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    opacity: 0.55;
+    margin-bottom: 14px;
+}
+
+/* --- KAYNAKÇA --- */
+.t-refs {
+    border-top: 1px solid var(--c-blk);
+    padding-top: 22px;
+    margin-top: 40px;
+}
+.refs-label {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    opacity: 0.45;
+    margin-bottom: 12px;
+}
+.t-refs ul { list-style: none; }
+.t-refs li { font-size: 0.85rem; padding: 7px 0; opacity: 0.8; }
+
+/* ============================================================
+   DOLDURULMAYI BEKLEYEN ALANLAR
+   Bu stiller sadece placeholder'ları görünür kılmak için var.
+   İçeriği yazdıkça  data-fill  ve  data-slot  niteliklerini sil,
+   işaretler kendiliğinden kaybolur.
+   ============================================================ */
+[data-fill] {
+    position: relative;
+    background: linear-gradient(0deg, rgba(138, 43, 226, 0.07), rgba(138, 43, 226, 0.07));
+    outline: 1px dashed rgba(138, 43, 226, 0.5);
+    outline-offset: 3px;
+}
+
+.img-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    text-align: center;
+    min-height: 240px;
+    padding: 28px 22px;
+    border: 1px dashed var(--c-pur);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(138, 43, 226, 0.04) 0 12px,
+        rgba(138, 43, 226, 0.09) 12px 24px
+    );
+    color: var(--c-pur);
+}
+
+.img-slot .slot-fig {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: var(--c-pur);
+    color: var(--c-wht);
+    padding: 4px 9px;
+}
+
+.img-slot .slot-desc {
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.45;
+    max-width: 34ch;
+    color: var(--c-blk);
+}
+
+.img-slot code {
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    opacity: 0.85;
+    background: var(--c-wht);
+    padding: 5px 9px;
+    border: 1px solid rgba(138, 43, 226, 0.35);
+    word-break: break-all;
+}
+
+.img-slot .slot-hint {
+    font-size: 0.6rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+/* --- ALT BAŞLIK --- */
+.t-sub {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 46px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(17, 17, 17, 0.28);
+}
+
+/* --- TEKNİK ÖZET TABLOSU --- */
+.t-specs {
+    border: 1px solid var(--c-blk);
+    padding: 24px 26px;
+    margin: 34px 0;
+    background: rgba(17, 17, 17, 0.02);
+}
+
+.t-specs dl { display: grid; gap: 0; }
+
+.t-specs dl > div {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 18px;
+    padding: 11px 0;
+    border-bottom: 1px dashed rgba(17, 17, 17, 0.18);
+}
+.t-specs dl > div:last-child { border-bottom: none; }
+
+.t-specs dt {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    padding-top: 3px;
+}
+
+.t-specs dd { margin: 0; font-size: 0.9rem; line-height: 1.55; }
+
+.t-figure-wide .img-slot { min-height: 340px; }
+
+/* --- ALT BAR --- */
+.project-footer {
+    display: flex; justify-content: space-between; height: 60px; width: 85%;
+    max-width: 1400px; margin: 0 auto 100px auto; border: 1px solid var(--c-blk);
+}
+.footer-link {
+    width: 50%; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: var(--c-blk); font-weight: 700; font-size: 0.85rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+.footer-link:first-child { border-right: 1px solid var(--c-blk); }
+.footer-link:hover { background-color: var(--c-pur); color: var(--c-wht); }
+
+/* --- LIGHTBOX --- */
+.lightbox {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-color: rgba(17, 17, 17, 0.95); z-index: 2000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.lightbox.active { opacity: 1; pointer-events: auto; }
+.lightbox-content { max-width: 90vw; max-height: 90vh; object-fit: contain; border: 1px solid var(--c-wht); }
+.lightbox-close {
+    position: absolute; top: 30px; right: 40px; color: var(--c-wht);
+    font-size: 3rem; cursor: pointer; transition: color 0.2s;
+}
+.lightbox-close:hover { color: var(--c-pur); }
+.zoomable { cursor: zoom-in; transition: transform 0.3s; }
+.zoomable:hover { transform: scale(1.02); }
+
+/* ============================================================
+   MOBİL
+   ============================================================ */
+@media (max-width: 1100px) {
+    .thesis-body { grid-template-columns: 1fr; gap: 34px; }
+
+    /* İçindekiler mobilde üstte yatay bir şerit olur */
+    .thesis-toc {
+        position: static;
+        border-left: none;
+        border-top: 1px solid var(--c-blk);
+        border-bottom: 1px solid var(--c-blk);
+        padding: 16px 0;
+    }
+    .thesis-toc ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 14px;
+    }
+    .thesis-toc li { margin: 0; }
+    .thesis-toc a { padding: 4px 0; font-size: 0.72rem; }
+    .thesis-toc a.current { padding-left: 0; }
+}
+
+@media (max-width: 900px) {
+    .thesis-layout { width: 92%; margin: 84px auto 60px auto; }
+    .project-footer { width: 92%; }
+
+    .thesis-hero { padding: 46px 20px 26px; margin-bottom: 50px; }
+    .thesis-title { letter-spacing: -1px; max-width: 100%; }
+    .thesis-subtitle { font-size: 1rem; margin-bottom: 28px; }
+
+    .thesis-meta { grid-template-columns: 1fr 1fr; }
+    .meta-pair { padding: 14px 14px 10px 0; border-bottom: 1px solid rgba(17,17,17,0.12); }
+    .meta-pair:nth-child(2n) { border-right: none; }
+
+    .t-section { margin-bottom: 58px; }
+    .t-section h2 { font-size: 1.25rem; gap: 10px; }
+    .t-lead p { font-size: 1.05rem; }
+    .t-quote { font-size: 1.1rem; padding-left: 16px; }
+
+    .t-findings { grid-template-columns: 1fr; gap: 12px; }
+    .t-figure-grid { grid-template-columns: 1fr; gap: 20px; }
+
+    .t-case, .t-case.reverse { grid-template-columns: 1fr; gap: 16px; }
+    .t-case.reverse .case-img { order: 0; }
+    .case-img { min-height: 200px; }
+
+    .img-slot { min-height: 170px; padding: 20px 14px; gap: 7px; }
+    .img-slot .slot-desc { font-size: 0.74rem; }
+    .t-sub { font-size: 0.88rem; margin: 32px 0 12px; }
+    .t-specs { padding: 18px 16px; }
+    .t-specs dl > div { grid-template-columns: 1fr; gap: 3px; padding: 10px 0; }
+    .t-figure-wide .img-slot { min-height: 220px; }
+    .img-slot code { display: none; }
+}
+
+/* --- FİGÜR GENİŞLİKLERİ -------------------------------------
+   Görsellerin en-boy oranı çok değişken: bazıları 2:1 yatay,
+   bazıları çapraz aksonometrik çizim olduğu için 1:2 dikey.
+   Her figür kendi oranına uygun kutuya yerleşiyor.           */
+.t-figure-portrait { max-width: 460px; margin-left: auto; margin-right: auto; }
+.t-figure-mid      { max-width: 660px; margin-left: auto; margin-right: auto; }
+
+.t-figure-portrait figcaption,
+.t-figure-mid figcaption { text-align: left; }
+
+@media (max-width: 900px) {
+    .t-figure-portrait, .t-figure-mid { max-width: 100%; }
+}
+
+/* İkili ızgarada farklı oranlar: her görsel kendi oranını korur,
+   yüksekliği sınırlanır, kutusunda ortalanır. Böylece çapraz
+   aksonometrik çizimlerle yatay fotoğraflar yan yana durabiliyor. */
+.t-figure-grid { align-items: start; }
+
+.t-figure-grid .t-figure img {
+    width: auto;
+    max-width: 100%;
+    max-height: 520px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 900px) {
+    .t-figure-grid .t-figure img { max-height: 380px; }
+}
+
+/* ============================================================
+   HİZALAMA
+   Yanında görsel olmayan metinler ortalanır. Yanında görsel
+   olan tek blok örnek incelemeler (.t-case) — orada metin
+   görselin yanında durduğu için sola yaslı kalır.
+   ============================================================ */
+.t-section > p,
+.t-lead p,
+.t-list li,
+.t-steps li,
+.t-findings .finding p,
+.t-figure figcaption,
+.thesis-hero .thesis-subtitle {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* "The Plug-In Bench" bölümünün alt başlıkları */
+.t-sub { text-align: center; }
+
+/* Alıntı bloğu: ortalanınca sol kenardaki mor şerit dengesiz
+   duruyordu; üst ve alt kısa çizgilere çevrildi. */
+.t-quote {
+    text-align: center;
+    border-left: none;
+    border-top: 2px solid var(--c-pur);
+    border-bottom: 2px solid var(--c-pur);
+    padding: 22px 0;
+    margin: 30px auto 34px;
+}
+
+/* Madde işaretleri ortalanmış satırın soluna değil,
+   metnin hemen başına gelsin */
+.t-list li, .t-steps li { padding-left: 0; padding-right: 0; }
+
+.t-list li::before {
+    position: static;
+    display: inline;
+    margin-right: 10px;
+}
+
+.t-steps li::before {
+    position: static;
+    display: inline;
+    margin-right: 10px;
+    top: auto;
+}
+
+/* Örnek incelemelerde metin görselin yanında: sola yaslı kalır */
+.t-case .case-text,
+.t-case .case-text :is(h3, p, span) { text-align: left; }
+
+/* Kaynakça ve teknik tablo: yapısal veri, sola yaslı kalır */
+.t-refs li, .t-specs dd, .t-specs dt { text-align: left; }
+
+/* ============================================================
+   YAN YANA GÖRSELLER — ORTA NOKTADAN HİZALAMA
+   Alt yazıların uzunluğu farklı olduğu için üst kenardan
+   hizalamak görselleri kaydırıyordu. subgrid ile görseller
+   ortak bir satırı paylaşıyor ve dikey merkezleri çakışıyor;
+   alt yazılar kendi satırında hizalanıyor.
+   ============================================================ */
+.t-figure-grid { align-items: center; }   /* subgrid desteklemeyen tarayıcı */
+
+@supports (grid-template-rows: subgrid) {
+    .t-figure-grid {
+        grid-template-rows: auto auto;
+        align-items: stretch;
+    }
+    .t-figure-grid .t-figure {
+        display: grid;
+        grid-row: span 2;
+        grid-template-rows: subgrid;
+    }
+    .t-figure-grid .t-figure img { align-self: center; }
+    .t-figure-grid .t-figure figcaption { align-self: start; }
+}
+
+/* Örnek incelemelerde görsel ve metin zaten dikey ortalı */
+.t-case { align-items: center; }
+
+/* --- ORTALANMIŞ MADDE LİSTESİ -------------------------------
+   İki sorun vardı: (1) liste bloğu 66ch genişlikte ama sola
+   sabitliydi, paragraflar ortalıyken liste sola kaçıyordu;
+   (2) satır başındaki ">" işareti ortalanmış metinde her
+   satırı farklı yerden başlatıp dağınık gösteriyordu.
+   Blok ortalandı, işaret kaldırıldı — ayrımı kesikli çizgiler
+   zaten yapıyor.                                             */
+.t-list, .t-steps {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.t-list li::before { content: none; }
+
+.t-list li {
+    padding: 14px 12px;
+    line-height: 1.55;
+}

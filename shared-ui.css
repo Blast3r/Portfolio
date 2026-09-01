@@ -1,0 +1,518 @@
+/* ============================================================
+   SHARED UI  —  Melih G. Kutsal
+   Bu dosya HER SAYFADA, sayfanın kendi CSS'inden SONRA yüklenir.
+   Amaç: 1) tanımsız değişkenleri kapatmak
+         2) mobil navigasyonu tek bir yerden yönetmek
+         3) masaüstü tasarımına DOKUNMADAN mobil deneyimi düzeltmek
+   Masaüstü (>= 901px) görünümü bilinçli olarak değiştirilmemiştir.
+   ============================================================ */
+
+/* --- 1. DEĞİŞKEN GÜVENLİĞİ ---------------------------------
+   Bazı sayfalar --c-blk / --c-pur, bazıları --line-color /
+   --accent-color kullanıyordu. Tanımsız kalan her isim burada
+   karşılığını buluyor, böylece hiçbir renk "invalid" düşmüyor. */
+:root {
+    --c-blk: #111111;
+    --c-wht: #ffffff;
+    --c-pur: #8a2be2;
+    --c-placeholder: #eeeeee;
+
+    --line-color: #111111;
+    --bg-color: #ffffff;
+    --accent-color: #8a2be2;
+
+    /* Mobil menü ölçüleri */
+    --m-nav-h: 56px;
+
+    /* Tipografi
+       Bliss Pro dosyaları Fonts/ klasörüne konduğunda otomatik
+       devreye girer. Yoksa sistemin sans yazı tipine düşer —
+       eskiden Courier'a düşüyordu, bu da uzun metinleri ve
+       telefon okumasını zorlaştıran asıl sebeplerden biriydi. */
+    --font-sans: 'Bliss Pro', system-ui, -apple-system, 'Segoe UI',
+                 Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo,
+                 Consolas, 'Liberation Mono', monospace;
+}
+
+/* --- 1b. BLISS PRO -----------------------------------------
+   Dosyaları şu adlarla  Portfolio/Fonts/  klasörüne koy:
+
+       Fonts/BlissPro-Regular.woff2   (400)
+       Fonts/BlissPro-Medium.woff2    (500)
+       Fonts/BlissPro-Bold.woff2      (700)
+
+   .woff2 yoksa .woff / .otf / .ttf de çalışır; aşağıdaki src
+   listesi dördünü de deniyor. Dosya bulunamazsa tarayıcı
+   sessizce sistem yazı tipine düşer, sayfa bozulmaz.
+   ---------------------------------------------------------- */
+@font-face {
+    font-family: 'Bliss Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('Fonts/BlissPro-Regular.woff2') format('woff2'),
+         url('Fonts/BlissPro-Regular.woff')  format('woff'),
+         url('Fonts/BlissPro-Regular.otf')   format('opentype'),
+         url('Fonts/BlissPro-Regular.ttf')   format('truetype');
+}
+
+@font-face {
+    font-family: 'Bliss Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url('Fonts/BlissPro-Medium.woff2') format('woff2'),
+         url('Fonts/BlissPro-Medium.woff')  format('woff'),
+         url('Fonts/BlissPro-Medium.otf')   format('opentype'),
+         url('Fonts/BlissPro-Medium.ttf')   format('truetype');
+}
+
+@font-face {
+    font-family: 'Bliss Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('Fonts/BlissPro-Bold.woff2') format('woff2'),
+         url('Fonts/BlissPro-Bold.woff')  format('woff'),
+         url('Fonts/BlissPro-Bold.otf')   format('opentype'),
+         url('Fonts/BlissPro-Bold.ttf')   format('truetype');
+}
+
+@font-face {
+    font-family: 'Bliss Pro';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url('Fonts/BlissPro-Italic.woff2') format('woff2'),
+         url('Fonts/BlissPro-Italic.woff')  format('woff'),
+         url('Fonts/BlissPro-Italic.otf')   format('opentype'),
+         url('Fonts/BlissPro-Italic.ttf')   format('truetype');
+}
+
+/* Gövde yazı tipi: her sayfanın kendi body kuralını geçersiz kılar */
+body { font-family: var(--font-sans); }
+
+/* --- 1c. TEKNİK ETİKETLER MONOSPACE -------------------------
+   [FIG. 01], SYS.ONLINE, bölüm numaraları, yıl etiketleri…
+   Tasarımın "wireframe / teknik" dilini taşıyan küçük yazılar
+   monospace kalır; okunacak asıl metin sans olur.            */
+.sys-text, .panel-fig, .panel-cta, .panel-dest,
+.foot-name, .foot-role, .foot-sys,
+.crosshair, .p-num, .p-sub,
+.nav-sub, .side-key, .entry-when, .sub-title, .comp-date, .lbl-count,
+.mi-num, .m-idx, .m-menu-foot,
+.hero-tag, .t-num, .toc-label, .toc-download, .refs-label,
+.thesis-toc ol a, .t-figure figcaption, .case-meta,
+.meta-pair dt, .lightbox-hint, .img-slot,
+.project-layout h2::before,
+.composition-canvas::before, .media-list::before {
+    font-family: var(--font-mono);
+}
+
+/* --- 2. GLOBAL DAVRANIŞ ------------------------------------ */
+html {
+    -webkit-text-size-adjust: 100%;   /* iOS'ta yatayda yazıyı şişirmesin */
+}
+
+img, video, svg {
+    max-width: 100%;
+}
+
+/* Yatay taşmayı kes: tek bir geniş görsel tüm sayfayı kaydırılabilir yapmasın */
+@media (max-width: 900px) {
+    html, body { overflow-x: hidden; }
+}
+
+/* Hareket azaltma tercihi olan kullanıcıda geçiş animasyonları kapanır */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .page-transition-overlay { display: none !important; }
+}
+
+/* Klavye ile gezenler için görünür odak halkası (erişilebilirlik) */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--c-pur);
+    outline-offset: 2px;
+}
+
+/* --- 3. MOBİL MENÜ BUTONU ---------------------------------- */
+.m-menu-btn {
+    display: none;
+    position: relative;
+    z-index: 1002;
+    width: 52px;
+    height: var(--m-nav-h);
+    border: none;
+    border-left: 1px solid var(--c-blk);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.m-menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--c-blk);
+    transition: transform 0.3s cubic-bezier(0.77, 0, 0.175, 1),
+                opacity 0.2s ease;
+}
+
+.m-menu-btn[aria-expanded="true"] span { background: var(--c-wht); }
+.m-menu-btn[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.m-menu-btn[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.m-menu-btn[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* --- 4. TAM EKRAN MOBİL MENÜ ------------------------------- */
+.m-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    background: var(--c-blk);
+    color: var(--c-wht);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--m-nav-h) 24px 40px;
+    transform: translateY(-100%);
+    transition: transform 0.45s cubic-bezier(0.77, 0, 0.175, 1);
+    visibility: hidden;
+    overflow-y: auto;
+}
+
+.m-menu.open {
+    transform: translateY(0);
+    visibility: visible;
+}
+
+.m-menu a {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 18px 0;
+    color: var(--c-wht);
+    text-decoration: none;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    transform: translateY(14px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease, color 0.2s ease;
+}
+
+.m-menu.open a { transform: translateY(0); opacity: 1; }
+.m-menu.open a:nth-child(1) { transition-delay: 0.10s; }
+.m-menu.open a:nth-child(2) { transition-delay: 0.15s; }
+.m-menu.open a:nth-child(3) { transition-delay: 0.20s; }
+.m-menu.open a:nth-child(4) { transition-delay: 0.25s; }
+.m-menu.open a:nth-child(5) { transition-delay: 0.30s; }
+.m-menu.open a:nth-child(6) { transition-delay: 0.35s; }
+
+.m-menu a .m-idx {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    opacity: 0.55;
+    flex-shrink: 0;
+}
+
+.m-menu a[aria-current="page"] { color: var(--c-pur); }
+.m-menu a:active { color: var(--c-pur); }
+
+.m-menu-foot {
+    margin-top: 32px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    opacity: 0.45;
+}
+
+/* Menü açıkken arkadaki sayfa kaymasın */
+body.m-menu-open { overflow: hidden !important; }
+
+/* --- 5. MOBİLDE NAVİGASYONUN YENİDEN KURULMASI --------------
+   Eski mobil düzen logoyu ve 3-4 butonu alt alta yığıp
+   140px'e varan bir başlık yaratıyordu. Yerine tek satırlık
+   56px'lik bir çubuk + tam ekran menü geliyor.            */
+@media (max-width: 900px) {
+
+    .wireframe-nav {
+        height: var(--m-nav-h) !important;
+        min-height: var(--m-nav-h);
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 0 0 16px !important;
+        border-bottom: 1px solid var(--c-blk) !important;
+    }
+
+    /* Logo: solda, küçük, çubuğun içinde */
+    .wireframe-nav .logo-link.dynamic-logo-container {
+        display: flex !important;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        transform: none !important;
+        height: 30px !important;
+        width: 30px !important;
+        margin: 0 !important;
+        order: 1;
+    }
+
+    /* Marka adı: logonun yanında, küçük */
+    .wireframe-nav .brand {
+        order: 2;
+        flex: 1;
+        width: auto !important;
+        border: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+        justify-content: flex-start !important;
+        padding: 0 0 0 12px !important;
+        font-size: 0.75rem !important;
+        letter-spacing: 0.5px;
+        background: transparent !important;
+        color: var(--c-blk) !important;
+        gap: 6px;
+    }
+
+    .wireframe-nav .brand .nav-sub { font-size: 0.6rem; }
+
+    /* Eski yatay link grubu mobilde gizlenir; içeriği menüye taşınır */
+    .wireframe-nav .nav-group { display: none !important; }
+
+    .m-menu-btn { display: flex; order: 3; }
+
+    /* İçerik artık sabit 56px'lik çubuğun altından başlar */
+    .composition-canvas,
+    .project-layout,
+    .thesis-layout,
+    .cv-header {
+        margin-top: var(--m-nav-h) !important;
+    }
+
+    .media-layout { padding-top: var(--m-nav-h) !important; }
+
+    .project-footer { width: 92%; }
+}
+
+/* --- 6. DOKUNMA HEDEFLERİ ---------------------------------- */
+@media (max-width: 900px) {
+    .footer-link {
+        min-height: 56px;
+        font-size: 0.8rem;
+    }
+    /* Parmakla basılan her yerde en az 44px yükseklik */
+    .media-item { min-height: 64px; }
+}
+
+/* --- 7. LIGHTBOX İYİLEŞTİRMESİ ------------------------------
+   Kapatma butonu mobilde parmak boyutunda, görsel ekrana sığar. */
+.lightbox-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    line-height: 1;
+    user-select: none;
+}
+
+.lightbox-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .lightbox-close { top: 12px !important; right: 12px !important; font-size: 2.2rem !important; }
+    .lightbox-content { max-width: 96vw !important; max-height: 82vh !important; }
+    .lightbox-hint { display: none; }
+}
+
+/* --- 8. MOBİLDE TİPOGRAFİ ---------------------------------
+   Uzun satırlar telefonda yorucu; blok metinler sola yaslanır
+   (justify mobilde kelime aralarında çirkin boşluklar açıyordu). */
+@media (max-width: 900px) {
+    /* Not: kurallar sadece içerik alanlarını hedefler. Ana sayfadaki
+       kelime oyunu başlıkları kendi akışkan ölçeğini korusun diye
+       buradan bilinçli olarak dışarıda tutuldu. */
+    .project-layout :is(p, h1, h2, h3, h4, h5, h6),
+    .cv-grid        :is(p, h1, h2, h3, h4, h5, h6),
+    .media-list     :is(p, h2) {
+        text-align: left !important;
+        hyphens: auto;
+    }
+    /* Tez sayfası kendi hizalamasını yönetiyor (thesis-style.css),
+       burada sola zorlanmıyor. */
+    .thesis-layout :is(p, h1, h2, h3, h4, h5, h6) { hyphens: auto; }
+
+    .boxed-text { padding: 22px 18px !important; }
+
+    .project-layout h1, .thesis-layout h1 { font-size: 2.1rem !important; line-height: 1.1; }
+    .project-layout h2, .thesis-layout h2 { font-size: 1.4rem !important; line-height: 1.15; }
+    .project-layout p,  .thesis-layout p  { font-size: 0.95rem !important; line-height: 1.6; }
+}
+
+/* ============================================================
+   9. PROJE SAYFALARI — OKUMA VE RİTİM
+   Bu blok bütün proje sayfalarına ortak uygulanır.
+   ============================================================ */
+
+/* --- 9.1 Okuma satırı uzunluğu ---------------------------
+   Geniş ekranda paragraflar 1400px boyunca uzuyordu; göz
+   satır sonundan satır başına dönerken kayboluyor. Satır
+   uzunluğunu ~68 karaktere sabitliyoruz.                  */
+.project-layout p,
+.project-layout li {
+    max-width: 68ch;
+}
+/* Ortalanmış metin blokları kendi genişliğini korusun */
+.project-layout .centered-text p { max-width: 68ch; margin-left: auto; margin-right: auto; }
+
+/* --- 9.2 Hizalama ----------------------------------------
+   İki yana yaslı (justify) metin, tireleme olmadığı için
+   kelimeler arasında düzensiz beyaz nehirler açıyordu.
+   Sola yaslı + otomatik tireleme çok daha temiz okunuyor.
+   Eski hâli isterseniz: bu iki kuralı silmek yeterli.      */
+.project-layout p,
+.project-layout li,
+.project-layout h1,
+.project-layout h2,
+.project-layout h3 {
+    text-align: left;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+.project-layout .centered-text,
+.project-layout .centered-text p { text-align: center; }
+
+.project-layout p { line-height: 1.72; }
+
+/* Proje başlıkları akışkan ölçek: Project_6 gibi çok uzun bir
+   başlık, sabit 3.5rem'de kapak kutusunu taşırıyordu. */
+.project-layout h1 {
+    font-size: clamp(1.8rem, 2.6vw + 0.6rem, 3.2rem);
+    line-height: 1.06;
+    letter-spacing: -1px;
+}
+.project-layout h2 { font-size: clamp(1.15rem, 1.1vw + 0.75rem, 1.85rem); line-height: 1.15; }
+
+/* Paragraflar arası nefes payı (<br> yerine gerçek boşluk) */
+.project-layout .boxed-text p + p,
+.project-layout .desc-text p + p { margin-top: 1em; }
+
+/* --- 9.3 Bölüm numaralandırması --------------------------
+   Bazı projelerde başlıklar "01." ile numaralıydı, bazılarında
+   değildi. Numara artık CSS sayacıyla otomatik veriliyor;
+   yeni bölüm eklerken elle numara yazmaya gerek yok.       */
+.project-layout { counter-reset: sect; }
+
+/* Kapak (hero) bloğundaki başlıklar bölüm sayılmaz */
+.project-layout h2 {
+    counter-increment: sect;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.project-layout .hero-wide h2,
+.project-layout .desc-title h2,
+.project-layout .title-meta h2 { counter-increment: none; display: block; }
+
+.project-layout .hero-wide h2::before,
+.project-layout .desc-title h2::before,
+.project-layout .title-meta h2::before { content: none !important; }
+
+.project-layout h2::before {
+    content: counter(sect, decimal-leading-zero);
+    flex-shrink: 0;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--c-blk);
+    border: 1px solid var(--c-blk);
+    padding: 3px 6px;
+    transform: translateY(-2px);
+}
+
+.project-layout .centered-text h2 { justify-content: center; }
+
+/* --- 9.4 Görsellerde ortak davranış ---------------------- */
+.project-layout img { background-color: transparent; }
+
+.zoomable { cursor: zoom-in; }
+
+/* Büyütülebilir görselin üstüne gelince küçük bir ipucu */
+.project-layout .placeholder-box,
+.project-layout .placeholder-box2,
+.project-layout .clean-img-box,
+.project-layout .grid-img-box,
+.project-layout .overlap-img { position: relative; }
+
+.project-layout .zoomable::after { content: none; }
+
+/* --- 9.5 Okuma ilerleme çubuğu --------------------------- */
+.read-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--c-pur);
+    z-index: 1100;
+    transition: width 0.1s linear;
+    pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .project-layout p, .project-layout li { max-width: 100%; }
+    .project-layout h2 { gap: 10px; }
+    .project-layout h2::before { font-size: 0.55rem; padding: 2px 5px; }
+    /* Mobilde geniş görseller ekrana tam otursun */
+    .project-layout img, .thesis-layout img { height: auto; }
+}
+
+/* --- 9.6 ORTALANMIŞ METİN BLOKLARI -----------------------
+   9.2'deki sola yaslama kuralı, sayfaların kendi ortalama
+   sınıflarını da eziyordu. Tam genişlikteki kutularda metin
+   68ch ile sınırlı olduğu için sağ tarafta boşluk kalıyordu.
+   Bu bloklar artık hem ortalanıyor hem kutuya ortalanıyor.  */
+.project-layout :is(.text-center, .center-typography, .centered-text,
+                    .grid-center-text, .poem-container),
+.project-layout :is(.text-center, .center-typography, .centered-text,
+                    .grid-center-text, .poem-container) :is(p, h2, h3, li) {
+    text-align: center !important;
+}
+
+/* Satır ölçüsü korunur ama blok kutunun ortasına yerleşir */
+.project-layout :is(.text-center, .center-typography, .centered-text,
+                    .grid-center-text, .poem-container, .full-width-boxed) p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Şiir bloğu: satır sonları şairin koyduğu yerde kalsın */
+.poem-container p, .poem-container .poem-text {
+    max-width: 60ch;
+    white-space: pre-line;
+    line-height: 1.9;
+}

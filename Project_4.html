@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 4</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="Project_4.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -28,6 +33,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item active">Architecture</a>
             <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -67,7 +73,7 @@
                 <img src="Images/ArchProject_4/Map.jpg" alt="Map Diagram" class="zoomable">
             </div>
             <div class="overlap-text boxed-text">
-                <h2>01. SITE & CONTEXT</h2>
+                <h2>SITE & CONTEXT</h2>
                 <p>By the light of these inputs, we aimed to create an open welcoming space where women come across with others, bring their children and commend to the caretakers through the day when they are on work, and also which offer a farmer job for those who may want to work as a farmer on the agriculture region of the site. Women can learn to make handcrafts here, and after the production step, the place serves as an exhibition and selling space for their final works. For this exhibition space we used porous facades and make the people connect and see each other when they joined one of the activities inside. </p>
             </div>
         </section>
@@ -77,7 +83,7 @@
                 <img src="Images/ArchProject_4/mass.jpg" alt="Mass Diagram" class="zoomable">
             </div>
             <div class="overlap-text boxed-text">
-                <h2>02. MASSING STRATEGY</h2>
+                <h2>MASSING STRATEGY</h2>
                 <p>In order to make a community in here, we decided to make this place as sociable as it can be, therefore we divided into modules to increase circulation and social areas.</p>
             </div>
         </section>
@@ -87,7 +93,7 @@
                 <img src="Images/ArchProject_4/structure.jpg" alt="Structure Diagram" class="zoomable">
             </div>
             <div class="overlap-text boxed-text">
-                <h2>03. STRUCTURAL SYSTEM</h2>
+                <h2>STRUCTURAL SYSTEM</h2>
                 <p>The Kaira Looro project is a study in resourcefulness, designed specifically for a limited budget and restricted material access. The construction begins with a foundation of earth-filled tires used to level the site and create a stable, extruded platform. The architectural language is defined by two primary materials: timber and masonry.
 <br><br>
 A timber waffle construction system forms the structural heart of the building, serving as a dynamic exhibition and showcase wall. This system allows the facade to evolve over time, as the objects created and displayed by the community define the building’s exterior appearance. In contrast, the masonry walls are utilized for private zones, providing a closed and secure environment for more intimate functions.</p>
@@ -147,7 +153,11 @@ A timber waffle construction system forms the structural heart of the building, 
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -158,30 +168,12 @@ A timber waffle construction system forms the structural heart of the building, 
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

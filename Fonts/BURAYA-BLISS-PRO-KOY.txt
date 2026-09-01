@@ -1,0 +1,25 @@
+BLISS PRO DOSYALARINI BURAYA KOY
+================================
+
+Beklenen dosya adlari (woff2 tercih edilir):
+
+    BlissPro-Regular.woff2      -> normal metin  (400)
+    BlissPro-Medium.woff2       -> ara kalinlik  (500)
+    BlissPro-Bold.woff2         -> basliklar     (700)
+    BlissPro-Italic.woff2       -> italik        (opsiyonel)
+
+.woff2 yoksa .woff / .otf / .ttf de calisir; ayni adlarla
+uzantiyi degistirmen yeterli. Ornek:
+
+    BlissPro-Regular.otf
+    BlissPro-Bold.otf
+
+Dosyalari koydugun anda site otomatik olarak Bliss Pro'ya gecer;
+baska hicbir sey degistirmen gerekmez.
+
+Dosya adlarin farkliysa (ornegin "BlissPro-Light.otf" gibi),
+shared-ui.css icindeki @font-face bloklarinda src satirlarini
+kendi adlarinla degistir.
+
+NOT: .otf/.ttf dosyalari .woff2'ye gore 2-4 kat daha buyuktur.
+Elinde sadece otf/ttf varsa bana soyle, woff2'ye cevirebilirim.

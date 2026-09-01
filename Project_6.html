@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project 6</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="Project_6.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -28,6 +33,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item active">Architecture</a>
             <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -84,7 +90,7 @@ To tackle this issue, the research will begin by discussing the role of games in
         <section class="overlap-row custom-map-row">
             <div class="placeholder-box overlap-img custom-map-img">
                 
-                <img src="Images/ArchProject_6/map.svg" alt="Idea Map 1" class="zoomable">
+                <img src="Images/ArchProject_6/map-full.jpg" alt="Idea Map 1" class="zoomable">
             </div>
             <div class="overlap-text boxed-text custom-map-text">
                 <h2>What is Game?</h2>
@@ -97,7 +103,7 @@ To tackle this issue, the research will begin by discussing the role of games in
         <section class="overlap-row reverse custom-map-row">
             <div class="placeholder-box overlap-img custom-map-img">
                 
-                <img src="Images/ArchProject_6/map2.svg" alt="Idea Map 2" class="zoomable">
+                <img src="Images/ArchProject_6/map2-full.jpg" alt="Idea Map 2" class="zoomable">
             </div>
             <div class="overlap-text boxed-text custom-map-text">
                 <h2>Game & Cosmic Relationship</h2>
@@ -219,7 +225,11 @@ One of the main reasons the reward system is planned this way is to allow the pl
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -230,30 +240,12 @@ One of the main reasons the reward system is planned this way is to allow the pl
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

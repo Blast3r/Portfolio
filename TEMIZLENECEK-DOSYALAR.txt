@@ -1,0 +1,86 @@
+ARTIK KULLANILMAYAN DOSYALAR
+================================================================
+
+Bu dosyalara hicbir sayfa artik referans vermiyor.
+Silmek guvenli; toplam 74.9 MB yer acar.
+Once siteyi test edin, sonra silin. (Git kullaniyorsaniz
+eski surumler zaten commit gecmisinde duruyor.)
+
+37 dosya:
+----------------------------------------------------------------
+    9.83 MB   Images/ArchProject_1/1stPlan copy.svg
+              (hiçbir sayfada kullanılmıyor)
+    8.21 MB   Images/ArchProject_7/upscalesonra2.png
+              (JPG'ye dönüştürüldü -> upscalesonra2.jpg)
+    7.96 MB   Images/ArchProject_7/uspcalesonra.png
+              (JPG'ye dönüştürüldü -> uspcalesonra.jpg)
+    5.71 MB   Images/ArchProject_6/map.svg
+              (JPG'ye dönüştürüldü -> map-full.jpg)
+    5.39 MB   Images/ArchProject_6/map2.svg
+              (JPG'ye dönüştürüldü -> map2-full.jpg)
+    4.89 MB   Images/ArchProject_1/plan3.svg
+              (hiçbir sayfada kullanılmıyor)
+    2.78 MB   Images/ArchProject_1/2ndplan.svg
+              (hiçbir sayfada kullanılmıyor)
+    2.51 MB   Images/ArchProject_2/Kapak.png
+              (JPG'ye dönüştürüldü -> Kapak.jpg)
+    2.45 MB   Images/MediaArt_1/ani4.png
+              (JPG'ye dönüştürüldü -> ani4.jpg)
+    2.44 MB   Images/MediaArt_1/ani.png
+              (JPG'ye dönüştürüldü -> ani.jpg)
+    2.40 MB   Images/MediaArt_1/ani3.png
+              (JPG'ye dönüştürüldü -> ani3.jpg)
+    2.39 MB   Images/MediaArt_1/ani2.png
+              (JPG'ye dönüştürüldü -> ani2.jpg)
+    2.24 MB   Images/ArchProject_1/cityplan.png
+              (JPG'ye dönüştürüldü -> cityplan.jpg)
+    2.06 MB   Images/MediaArt_4/Foto (9).jpg
+              (hiçbir sayfada kullanılmıyor)
+    2.04 MB   Images/ArchProject_1/1stPlan copy.png
+              (JPG'ye dönüştürüldü -> 1stPlan copy.jpg)
+    1.80 MB   Images/MediaArt_4/Foto (13).jpg
+              (hiçbir sayfada kullanılmıyor)
+    1.79 MB   Images/MediaArt_4/Foto (10).jpg
+              (hiçbir sayfada kullanılmıyor)
+    1.46 MB   Images/MediaArt_4/Foto (12).jpg
+              (hiçbir sayfada kullanılmıyor)
+    1.39 MB   Images/ArchProject_1/2ndplan.png
+              (JPG'ye dönüştürüldü -> 2ndplan.jpg)
+    1.26 MB   Images/ArchProject_1/plan3.png
+              (JPG'ye dönüştürüldü -> plan3.jpg)
+    1.01 MB   Images/ArchProject_2/Sketch1.png
+              (JPG'ye dönüştürüldü -> Sketch1.jpg)
+    0.39 MB   Images/ArchProject_3/odyseysketch.png
+              (JPG'ye dönüştürüldü -> odyseysketch.jpg)
+    0.38 MB   Images/ArchProject_2/print.png
+              (JPG'ye dönüştürüldü -> print.jpg)
+    0.26 MB   Images/ArchProject_2/structur4.png
+              (JPG'ye dönüştürüldü -> structur4.jpg)
+    0.24 MB   Images/ArchProject_3/odyseysketch2.png
+              (JPG'ye dönüştürüldü -> odyseysketch2.jpg)
+    0.22 MB   Images/ArchProject_2/Concept1.png
+              (JPG'ye dönüştürüldü -> Concept1.jpg)
+    0.22 MB   Images/ArchProject_2/Concept2.png
+              (JPG'ye dönüştürüldü -> Concept2.jpg)
+    0.22 MB   Images/ArchProject_2/structur3.png
+              (JPG'ye dönüştürüldü -> structur3.jpg)
+    0.21 MB   Images/ArchProject_2/structur2.png
+              (JPG'ye dönüştürüldü -> structur2.jpg)
+    0.19 MB   Images/ArchProject_2/structur1.png
+              (JPG'ye dönüştürüldü -> structur1.jpg)
+    0.12 MB   Images/MediaArt_1/1.PNG
+              (JPG'ye dönüştürüldü -> 1.jpg)
+    0.11 MB   Images/ArchProject_6/map.jpg
+              (hiçbir sayfada kullanılmıyor)
+    0.11 MB   Images/ArchProject_2/Concept3.png
+              (JPG'ye dönüştürüldü -> Concept3.jpg)
+    0.10 MB   Images/ArchProject_2/Concept4.png
+              (JPG'ye dönüştürüldü -> Concept4.jpg)
+    0.08 MB   Images/ArchProject_6/map2.jpg
+              (hiçbir sayfada kullanılmıyor)
+    0.02 MB   Images/ArchProject_3/odyssey-logo.jpg
+              (hiçbir sayfada kullanılmıyor)
+    0.00 MB   Images/MediaArt_2/logo.svg
+              (hiçbir sayfada kullanılmıyor)
+----------------------------------------------------------------
+TOPLAM: 74.9 MB

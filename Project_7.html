@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Technical Explorations</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="Project_7.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -18,6 +23,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item active">Architecture</a>
             <a href="media-art.html" class="nav-item">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
         <a href="index.html" class="logo-link dynamic-logo-container">
@@ -49,7 +55,7 @@
 
         <section class="technical-section">
             <div class="section-divider">
-                <h2>01. BIM & Architectural Detailing (Revit)</h2>
+                <h2>BIM & Architectural Detailing (Revit)</h2>
                 <p>This architectural project was designed and modeled entirely during a specialized Revit training program. The documentation includes the overall project visuals, floor plans, cross-sections, and detailed structural component views, demonstrating proficiency in Building Information Modeling.</p>
             </div>
 
@@ -82,7 +88,7 @@
 
         <section class="technical-section">
             <div class="section-divider">
-                <h2>02. Exhibition Design: "Uncanny"</h2>
+                <h2>Exhibition Design: "Uncanny"</h2>
                 <p>As part of the exhibition design team for the Soviet-era "Uncanny" exhibition at the Bauhaus Museum, my task involved preparing historical drawings by Tchelitchew for a mechanical mutoscope display.</p>
             </div>
 
@@ -101,8 +107,8 @@
                     <div class="clean-img-box"><img src="Images/ArchProject_7/upscaleönce2.jpg" alt="Before 2" class="zoomable"></div>
                 </div>
                 <div class="ba-column">
-                    <div class="clean-img-box"><img src="Images/ArchProject_7/uspcalesonra.png" alt="After 1" class="zoomable"></div>
-                    <div class="clean-img-box"><img src="Images/ArchProject_7/upscalesonra2.png" alt="After 2" class="zoomable"></div>
+                    <div class="clean-img-box"><img src="Images/ArchProject_7/uspcalesonra.jpg" alt="After 1" class="zoomable"></div>
+                    <div class="clean-img-box"><img src="Images/ArchProject_7/upscalesonra2.jpg" alt="After 2" class="zoomable"></div>
                 </div>
             </div>
             <p class="caption-text">AI Upscale: Before & After</p>
@@ -127,7 +133,7 @@
 
         <section class="technical-section">
             <div class="section-divider">
-                <h2>03. Hardware Modification: Tattoo Machine</h2>
+                <h2>Hardware Modification: Tattoo Machine</h2>
                 <p>For an academic course, I undertook the challenge of modifying an Ultimaker 3D printer into a functional, automated tattoo machine. This required precise hardware modifications and custom toolpath programming.</p>
             </div>
 
@@ -217,7 +223,11 @@
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -228,30 +238,12 @@
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
-        const zoomables = document.querySelectorAll('.zoomable');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxContent = document.getElementById('lightbox-content');
-        const closeBtn = document.getElementById('lightbox-close');
+        // Lightbox artık shared-ui.js tarafından yönetiliyor
 
-        if(zoomables.length > 0 && lightbox) {
-            zoomables.forEach(img => {
-                img.addEventListener('click', function() {
-                    if(this.getAttribute('src')) {
-                        lightboxContent.src = this.src;
-                        lightbox.classList.add('active');
-                    }
-                });
-            });
-
-            closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) lightbox.classList.remove('active');
-            });
-        }
     </script>
 </body>
 </html>

@@ -1,0 +1,139 @@
+TEZ SAYFASI — GORSEL REHBERI
+============================================================
+
+14 gorsel yeri var. Dosyalari asagidaki adlarla bu klasore
+(Images/Thesis/) koy. Adlar birebir ayni olmali; HTML'de
+zaten bu adlar yazili.
+
+Bir gorseli koyduktan sonra thesis.html icinde o slotu bul ve
+tum <div class="img-slot" ...>...</div> blogunu su satirla
+degistir:
+
+    <img src="Images/Thesis/DOSYAADI.jpg" alt="ACIKLAMA" class="zoomable">
+
+Altindaki <figcaption> zaten yazili, ona dokunma.
+
+------------------------------------------------------------
+BOLUM 01 — ABSTRACT
+------------------------------------------------------------
+1) collage.jpg                          [PDF Sekil 3.3]
+   Psycho-Rhythmic Collage
+   Dikey. Tam genislik. Sayfanin en guclu gorseli, kapak gibi
+   calisiyor. Tezdeki en yuksek cozunurluklu halini kullan.
+
+------------------------------------------------------------
+BOLUM 04 — METHOD  (yan yana iki gorsel)
+------------------------------------------------------------
+2) anadol.jpg                           [PDF Sekil 1.1]
+   Refik Anadol, Alkazar Ruyasi, 2021, HOPE Alkazar Istanbul
+   Yatay. Kaynak: Aynen Dergi
+
+3) lewin.jpg                            [PDF Sekil 1.2]
+   Jen Lewin, Chandelier Harp, 2012
+   Yatay.
+
+------------------------------------------------------------
+BOLUM 05 — CASE STUDIES  (metnin yaninda, 1:1'e yakin)
+------------------------------------------------------------
+4) case-monocle.jpg                     [tezde yok, bulman gerek]
+   Mon Oncle'dan bir kare. Villa Arpel'in duzenli geometrisi
+   ya da Mr. Hulot'nun evi. Ikisini yan yana gosteren bir kare
+   varsa en iyisi o olur.
+   Yatay 4:3.
+
+5) case-sectiondor.jpg                  [tezde yok, bulman gerek]
+   Section d'Or grubundan bir tablo. Metin Kubizm + Orphism +
+   Fauvist renk uzerinden ilerliyor, o yuzden renkli bir eser
+   sec.  Dikey ya da kare.
+
+6) case-newbabylon.jpg                  [tezde yok, bulman gerek]
+   New Babylon (Constant) maketi/cizimi. Istersen Fun Palace
+   ile birlikte bir gorsel de olabilir.
+   Yatay.
+
+------------------------------------------------------------
+BOLUM 06 — PSYCHO-RHYTHMIC ANALYSIS  (yan yana iki gorsel)
+------------------------------------------------------------
+7) hundertwasser.jpg                    [PDF Sekil 3.1]
+   Hundertwasserhaus, Viyana, 1983-1985
+   Dikey.
+
+8) collagehouse.jpg                     [PDF Sekil 3.2]
+   Collage House, S+PS Architects, Navi Mumbai, 2015
+   Yatay.
+
+------------------------------------------------------------
+BOLUM 07 — THE PLUG-IN BENCH
+------------------------------------------------------------
+9)  site-bench.jpg                      [PDF Sekil 3.4]
+    Secilen bank, Bauhaus-Universitat Weimar ana bina arkasi
+    Yatay, tam genislik.
+
+10) module-vocabulary.jpg               [PDF Sekil 3.7]
+    Module Vocabulary — aksonometrik moduller + tetromino
+    izleri.  Yatay.
+    NOT: Tezin kendi ifadesiyle "tasarim onerisini olusturan
+    sey herhangi bir modul degil, bu cizimdir." Sayfadaki en
+    onemli teknik gorsel bu.
+
+11) variations.jpg                      [PDF Sekil 3.8]
+    Different Variations — uc farkli dizilim
+    Yatay.
+
+12) joint-failure.jpg                   [PDF Sekil 3.9]
+    Groove cut railing failure — MDF'in yirtildigi 3 fotograf
+    Yatay.
+
+13) joint-rebate.jpg                    [PDF Sekil 3.10]
+    L-Shaped rebate — calisan cozumun cizimi
+    Yatay.
+
+14) movement-storage.jpg                [PDF Sekil 3.13 + 3.14]
+    Movement sequence ve Storage sequence.
+    Ikisini tek bir yatay gorselde birlestirebilirsin ya da
+    sadece 3.13'u koyup 3.14'u atlayabilirsin.
+    Yatay, tam genislik.
+
+15) fabrication-panels.jpg              [PDF Sekil 3.15 + 3.16]
+    MDF paneller ve tutamak yariklari + railing ile
+    birlestirilmis iki modul.  Yatay.
+
+16) curved-module.jpg                   [PDF Sekil 3.17]
+    Basarisiz ve yeniden yapilan kavisli modul (sol/sag)
+    Yatay.
+
+17) led-night.jpg                       [PDF Sekil 3.22]
+    LED lights turned on — karanlikta sahadaki moduller
+    Yatay.  Tezdeki en carpici fotograflardan biri.
+
+18) electronics.jpg                     [PDF Sekil 3.25]
+    Hall effect sensor / regulator karti / tam montaj
+    Yatay (3 dikey fotograf yan yana).
+
+19) assembly-sequence.jpg               [PDF Sekil 3.26]
+    Assembly sequence — bes asamali kurulum cizimi
+    Yatay, tam genislik.
+
+------------------------------------------------------------
+BOLUM 08 — DEPLOYMENT & FINDINGS
+------------------------------------------------------------
+20) deployment.jpg                      [PDF Sekil 3.27]
+    summaery 2026 — insanlar yapiyi kullanirken
+    Yatay, tam genislik.
+
+21) children.jpg                        [PDF Sekil 3.28]
+    Curious children at the structure
+    Yatay, tam genislik.
+    Bu fotograf tezin en onemli bulgusunun kaniti: cocuklar
+    tereddut etmeden yaklasti, yetiskinler bekledi.
+
+============================================================
+ONERI — hangi gorselleri once koyarsan sayfa hemen calisir:
+    collage.jpg, site-bench.jpg, module-vocabulary.jpg,
+    led-night.jpg, deployment.jpg, children.jpg
+Bu alti tanesi sayfanin belkemigi. Digerleri sonra eklenebilir.
+
+PDF LINKI: sol taraftaki "FULL PDF" butonunun href'ini
+thesis.html icinde guncelle. PDF'i siteye koyacaksan
+Portfolio klasorune at ve href="MelihKutsal-Thesis.pdf" yap.
+============================================================

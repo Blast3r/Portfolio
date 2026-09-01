@@ -166,72 +166,109 @@ p {
     display: block;
 }
 
-@media (max-width: 900px) {
-    .media-layout {
-        flex-direction: column-reverse;
-        overflow-y: auto;
-    }
-    @media (max-width: 900px) {
-    /* 1. Menü Kapsayıcısı: Logo ve Linkleri Alt Alta Alır */
-    .wireframe-nav {
-        height: auto !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        padding: 5px 0 0 0 !important;
-    }
+/* Liste öğesi içindeki numara ve küçük kapak — masaüstünde gizli */
+.mi-thumb { display: none; }
 
-    /* 2. Logo: Merkeze yerleşir ve diğerlerinin üstüne binmez */
-    .logo-link.dynamic-logo-container {
-        display: flex !important;
-        position: relative !important;
-        left: auto !important;
-        top: auto !important;
-        transform: none !important;
-        height: 50px !important;
-        margin-bottom: 5px !important;
-    }
-
-    /* 3. Link Grubu: Tam genişlik kaplar ve butonları eşit dağıtır */
-    .nav-group {
-        width: 100% !important;
-        border-top: 1px solid var(--c-blk);
-        display: flex !important;
-    }
-
-    .nav-item {
-        flex: 1;
-        padding: 10px 5px !important;
-        font-size: 0.7rem !important; /* Yazılar sığması için küçüldü */
-        justify-content: center !important;
-        border-left: 1px solid var(--c-blk) !important;
-        text-align: center;
-    }
-
-    /* 4. Marka/İsim: Mobilde yer kazanmak için daraltıldı */
-    .brand {
-        width: 100% !important;
-        justify-content: center !important;
-        border-right: none !important;
-        border-bottom: 1px solid var(--c-blk) !important;
-        padding: 8px !important;
-    }
-
-    /* 5. Sayfa İçeriği: Menünün altında kalmaması için üst boşluk */
-    .composition-canvas, .project-layout {
-        margin-top: 140px !important; 
-    }
+.mi-num {
+    display: inline-block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.45;
+    margin-bottom: 6px;
 }
+
+.media-item:hover .mi-num, .media-item.active .mi-num { opacity: 0.75; }
+
+/* ============================================================
+   MOBİL  (<= 900px)
+   Masaüstündeki pikselli tuval önizlemesi fareyle çalışıyor;
+   dokunmatikte hiç tetiklenmiyor ve boş gri bir alan olarak
+   kalıyordu. Telefonda tuval kapatılır, her proje kendi kapak
+   görselini taşıyan bir karta dönüşür.
+   ============================================================ */
+@media (max-width: 900px) {
+
+    body { overflow: auto; }
+
+    .media-layout {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: visible;
+    }
+
+    /* Fareye bağlı önizleme mobilde kapalı */
+    .media-preview { display: none; }
+
     .media-list {
         width: 100%;
         height: auto;
         border-right: none;
+        overflow: visible;
     }
-    .media-preview {
-        width: 100%;
-        height: 50vh;
+
+    /* Liste başlığı */
+    .media-list::before {
+        content: "MEDIA ART / 04 WORKS";
+        display: block;
+        padding: 20px;
+        font-size: 0.62rem;
+        font-weight: 700;
+        letter-spacing: 2px;
         border-bottom: 1px solid var(--c-blk);
-        flex-shrink: 0;
+        opacity: 0.5;
     }
-    .logo-link.dynamic-logo-container { display: none; }
-    .wireframe-nav { padding: 0; }
+
+    .media-item {
+        position: relative;
+        overflow: hidden;
+        padding: 26px 20px;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: var(--c-blk);
+        color: var(--c-wht);
+    }
+
+    /* Kapak görseli kartın arkasında */
+    .mi-thumb {
+        display: block;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.5;
+        z-index: 0;
+    }
+
+    .media-item .mi-num,
+    .media-item h2,
+    .media-item p { position: relative; z-index: 1; }
+
+    .media-item .mi-num { color: var(--c-wht); opacity: 0.7; }
+
+    .media-item h2 {
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+        line-height: 1.15;
+        color: var(--c-wht);
+    }
+
+    .media-item p {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.4;
+    }
+
+    /* Mor vurgu dokunulunca gelir; 'active' sınıfı mobilde anlamsız */
+    .media-item.active { background-color: var(--c-blk); }
+    .media-item:active .mi-thumb { opacity: 0.22; }
+    .media-item:active { background-color: var(--c-pur); }
+
+    .logo-link.dynamic-logo-container { display: flex; }
+    .wireframe-nav { padding: 0 0 0 16px; }
 }

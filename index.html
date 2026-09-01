@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Melih G. Kutsal - Index</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="shared-ui.css">
 </head>
 <body>
 
@@ -12,41 +16,58 @@
 
     <header class="top-bar">
         <a href="cv.html" class="name-link">Melih G. Kutsal [CV]</a>
-        
+
         <a href="index.html" class="logo-link dynamic-logo-container">
-    <svg class="dynamic-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <g class="triangle-group">
-            <polygon class="triangle triangle-1" points="50,15 70,50 30,50" />
-            <polygon class="triangle triangle-2" points="30,50 50,85 10,85" />
-            <polygon class="triangle triangle-3" points="70,50 90,85 50,85" />
-        </g>
-    </svg>
-    <span class="nav-logo-text" style="display: none;">Odyssey</span>
-</a>
+            <svg class="dynamic-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="triangle-group">
+                    <polygon class="triangle triangle-1" points="50,15 70,50 30,50" />
+                    <polygon class="triangle triangle-2" points="30,50 50,85 10,85" />
+                    <polygon class="triangle triangle-3" points="70,50 90,85 50,85" />
+                </g>
+            </svg>
+        </a>
 
         <span class="sys-text">SYS.ONLINE</span>
     </header>
 
     <main class="wireframe-container">
-        
-        <a href="media-art.html" class="split-panel left-panel">
-            <span class="label-top-left">[FIG. 01]</span>
-            
+
+        <!-- ÜST SATIR:  MEDIA · ARCHITECT  (kelime oyunu) -->
+        <a href="media-art.html" class="split-panel panel-tl">
+            <span class="panel-fig">[FIG. 01]</span>
             <h1 class="wordplay-text align-right">
                 MEDIA<span class="reveal">&nbsp;ART</span>
             </h1>
-
-            <span class="label-btm-right">VIEW_WORKS -></span>
+            <span class="panel-dest">MEDIA ART</span>
+            <span class="panel-cta cta-br">VIEW_WORKS -&gt;</span>
         </a>
 
-        <a href="architecture.html" class="split-panel right-panel">
-            <span class="label-top-right">[FIG. 02]</span>
-            
+        <a href="architecture.html" class="split-panel panel-tr">
+            <span class="panel-fig">[FIG. 02]</span>
             <h1 class="wordplay-text align-left">
                 ARCHITECT<span class="reveal">URE</span>
             </h1>
+            <span class="panel-dest">ARCHITECTURE</span>
+            <span class="panel-cta cta-bl">&lt;- VIEW_PROJECTS</span>
+        </a>
 
-            <span class="label-btm-left"><- VIEW_PROJECTS</span>
+        <!-- ALT SATIR:  RESEARCH · THESIS -->
+        <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" rel="noopener" class="split-panel panel-bl">
+            <span class="panel-fig">[FIG. 03]</span>
+            <h1 class="wordplay-text align-right">
+                RESEARCH<span class="reveal">&nbsp;ARTICLES</span>
+            </h1>
+            <span class="panel-dest">RESEARCH ARTICLES</span>
+            <span class="panel-cta cta-tr">EXTERNAL_LOGS -&gt;</span>
+        </a>
+
+        <a href="thesis.html" class="split-panel panel-br">
+            <span class="panel-fig">[FIG. 04]</span>
+            <h1 class="wordplay-text align-left">
+                THESIS<span class="reveal">&nbsp;WORK</span>
+            </h1>
+            <span class="panel-dest">THESIS WORK</span>
+            <span class="panel-cta cta-tl">&lt;- READ_THESIS</span>
         </a>
 
         <div class="crosshair center-cross">+</div>
@@ -54,20 +75,18 @@
     </main>
 
     <footer class="status-bar">
-        <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="article-link">
-            <span class="blink-cursor">></span> 
-            READ_EXTERNAL_LOGS [ARTICLES]
-        </a>
+        <span class="foot-name">MELIH G. KUTSAL</span>
+        <span class="foot-role">"MEDIA" ARCHITECT</span>
+        <span class="foot-sys"><span class="blink-cursor">&gt;</span> SYS.ONLINE</span>
     </footer>
 
+    <script src="shared-ui.js" defer></script>
     <script>
         // 1. Sayfa Açılış Animasyonu
         window.addEventListener('load', () => {
             const overlay = document.querySelector('.page-transition-overlay');
-            if(overlay) {
-                setTimeout(() => {
-                    overlay.classList.add('reveal-y');
-                }, 50);
+            if (overlay) {
+                setTimeout(() => { overlay.classList.add('reveal-y'); }, 50);
             }
         });
 
@@ -75,30 +94,26 @@
         const transitionLinks = document.querySelectorAll('a:not([target="_blank"])');
 
         transitionLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
+            link.addEventListener('click', function (e) {
                 const targetUrl = this.getAttribute('href');
                 if (!targetUrl || targetUrl === '#') return;
 
-                e.preventDefault(); 
-                
-                // Panel Genişleme Animasyonları (Media Art ve Architecture)
+                e.preventDefault();
+
+                // Panel Genişleme Animasyonu (dört kutudan hangisiyse o büyür)
                 if (this.classList.contains('split-panel')) {
-                    if (this.classList.contains('left-panel')) {
-                        this.classList.add('expand-left');
-                    } else {
-                        this.classList.add('expand-right');
-                    }
-                } 
+                    this.classList.add('expanding');
+                }
                 // Üst Bar Yönlendirme Animasyonları (CV ve Ana Sayfa)
                 else {
                     const overlay = document.querySelector('.page-transition-overlay');
                     if (overlay) {
                         overlay.className = 'page-transition-overlay bg-black';
-                        
+
                         if (targetUrl.includes('cv.html')) {
                             overlay.classList.add('origin-bottom', 'reveal-y');
                             setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
-                        } 
+                        }
                         else if (targetUrl.includes('index.html')) {
                             overlay.classList.add('origin-top', 'reveal-y');
                             setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
@@ -108,32 +123,23 @@
 
                 setTimeout(() => {
                     window.location.href = targetUrl;
-                }, 600);
+                }, window.__transitionDelay());
             });
         });
 
         // 3. Tarayıcı Geri Tuşu (BFCache) Düzeltmesi
-        window.addEventListener('pageshow', function(event) {
+        window.addEventListener('pageshow', function (event) {
             if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
-                // 3.1 Geçiş ekranını (overlay) sıfırla
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.classList.remove('cover-x', 'cover-y');
-                    // Index sayfasının açılış yönüne göre sınıf ekle (origin-top ve reveal-y)
                     overlay.classList.add('origin-top', 'reveal-y');
                 }
-                
-                // 3.2 Büyüyen panelleri eski haline getir
-                const expandedLeft = document.querySelectorAll('.expand-left');
-                expandedLeft.forEach(el => el.classList.remove('expand-left'));
-
-                const expandedRight = document.querySelectorAll('.expand-right');
-                expandedRight.forEach(el => el.classList.remove('expand-right'));
+                document.querySelectorAll('.expanding')
+                        .forEach(el => el.classList.remove('expanding'));
             }
         });
-
     </script>
-    
 
 </body>
 </html>

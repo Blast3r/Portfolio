@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media Art</title>
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="stylesheet" href="media-style.css">
+    <link rel="stylesheet" href="shared-ui.css">
+    <script src="shared-ui.js" defer></script>
 </head>
 <body>
 
@@ -28,6 +33,7 @@
         <div class="nav-group">
             <a href="architecture.html" class="nav-item">Architecture</a>
             <a href="media-art.html" class="nav-item active">Media Art</a>
+            <a href="thesis.html" class="nav-item">Thesis</a>
             <a href="https://parametric-architecture.com/author/holymelee/" target="_blank" class="nav-item">Articles</a>
         </div>
     </nav>
@@ -35,18 +41,26 @@
     <main class="media-layout">
         <div class="media-list">
             <a href="project1_media.html" class="media-item active" data-src="Images/MediaArt_1/Kolaj.jpg">
-                <h2>Memmory Mapping</h2>
-                <p>Research & Digital Mapping</p>
+                <img class="mi-thumb" src="Images/MediaArt_1/Kolaj.jpg" alt="" aria-hidden="true">
+                <span class="mi-num">01</span>
+                <h2>Memory Mapping</h2>
+                <p>Research &amp; Digital Mapping</p>
             </a>
             <a href="project2_media.html" class="media-item" data-src="Images/MediaArt_2/Cover.jpg">
+                <img class="mi-thumb" src="Images/MediaArt_2/Cover.jpg" alt="" aria-hidden="true">
+                <span class="mi-num">02</span>
                 <h2>Tilted</h2>
                 <p>Interactive Installation</p>
             </a>
             <a href="project3_media.html" class="media-item" data-src="Images/MediaArt_3/sonuc3.jpg">
+                <img class="mi-thumb" src="Images/MediaArt_3/sonuc3.jpg" alt="" aria-hidden="true">
+                <span class="mi-num">03</span>
                 <h2>Dynamic Facades</h2>
                 <p>AI Projection Mapping on Facade</p>
             </a>
             <a href="project4_media.html" class="media-item" data-src="Images/MediaArt_4/Foto (3).jpg">
+                <img class="mi-thumb" src="Images/MediaArt_4/Foto (3).jpg" alt="" aria-hidden="true">
+                <span class="mi-num">04</span>
                 <h2>"Thank You" Particle Simulation</h2>
                 <p>AI image generation with sound and particles</p>
             </a>
@@ -89,7 +103,11 @@
                 const overlay = document.querySelector('.page-transition-overlay');
                 if (overlay) {
                     overlay.className = 'page-transition-overlay bg-black';
-                    if (targetUrl.includes('cv.html')) {
+                    if (targetUrl.includes('thesis')) {
+                        overlay.classList.add('origin-right', 'reveal-x');
+                        setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
+                    }
+                    else if (targetUrl.includes('cv.html')) {
                         overlay.classList.add('origin-bottom', 'reveal-y');
                         setTimeout(() => overlay.classList.replace('reveal-y', 'cover-y'), 10);
                     } else if (targetUrl.includes('index.html')) {
@@ -100,7 +118,7 @@
                         setTimeout(() => overlay.classList.replace('reveal-x', 'cover-x'), 10);
                     }
                 }
-                setTimeout(() => { window.location.href = targetUrl; }, 600);
+                setTimeout(() => { window.location.href = targetUrl; }, window.__transitionDelay());
             });
         });
 
@@ -110,7 +128,12 @@
         let currentImg = new Image();
         let animId;
 
+        // Önizleme tuvali sadece masaüstünde çalışır. Mobilde tuval
+        // gizlendiği için (genişlik 0) hem gereksiz hem de hatalı çiziyordu.
+        const previewActive = () => canvas.parentElement.offsetWidth > 0;
+
         function drawPixelated(img, size) {
+            if (!previewActive() || !img || !img.complete || !img.naturalWidth) return;
             const rect = canvas.parentElement.getBoundingClientRect();
             canvas.width = rect.width;
             canvas.height = rect.height;
@@ -135,6 +158,7 @@
         }
 
         function transitionImage(newSrc) {
+            if (!previewActive()) return;
             const nextImg = new Image();
             nextImg.src = newSrc;
             nextImg.onload = () => {
@@ -165,10 +189,27 @@
             currentImg.onload = () => drawPixelated(currentImg, 1);
         }
 
-        window.addEventListener('resize', () => drawPixelated(currentImg, 1));
+        // Yerleşim tam oturduktan sonra bir kez daha çiz. Önceden ilk
+        // çizim, panel son genişliğine ulaşmadan yapıldığı için
+        // görselin iki yanında boş şerit kalıyordu.
+        window.addEventListener('load', () => drawPixelated(currentImg, 1));
+        if (window.ResizeObserver) {
+            new ResizeObserver(() => drawPixelated(currentImg, 1))
+                .observe(canvas.parentElement);
+        }
 
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => drawPixelated(currentImg, 1), 150);
+        });
+
+        // Fare ile üzerine gelince önizleme değişir (masaüstü).
+        // Dokunmatikte 'mouseenter' hiç tetiklenmediği için mobilde
+        // liste zaten kendi kapak görselleriyle çalışıyor.
         mediaItems.forEach(item => {
             item.addEventListener('mouseenter', function() {
+                if (!previewActive()) return;
                 if (this.classList.contains('active')) return;
                 mediaItems.forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
