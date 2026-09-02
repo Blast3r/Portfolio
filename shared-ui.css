@@ -517,3 +517,66 @@ body.m-menu-open { overflow: hidden !important; }
     white-space: pre-line;
     line-height: 1.9;
 }
+
+/* ==========================================================
+   10. PROJE LOGOLARI - MOBİL BOYUTLANDIRMA
+   ----------------------------------------------------------
+   Sayfaların kendi CSS'lerinde logolar `scale:` ve
+   `transform: scale()` ile büyütülüyor. Bu iki özellik
+   yerleşimi (layout) DEĞİŞTİRMEZ: kutu eski küçük ölçüsünde
+   kalır, görüntü ise kutunun dışına taşar. Masaüstünde
+   etrafta yeterince boşluk olduğu için sorun görünmüyor,
+   telefonda ise logo hem yazıların üstüne biniyor hem de
+   ekranın solundan dışarı taşıyor.
+
+   Aşağıdaki kurallar SADECE mobilde geçerli. Ölçekleme
+   iptal ediliyor ve logoya gerçek bir boyut veriliyor, böylece
+   kendi yerini kaplıyor. Masaüstü tasarımı olduğu gibi kalır.
+   ========================================================== */
+@media (max-width: 900px) {
+
+    /* --- Media Art sayfaları (Memory Mapping, Tilted) ----- */
+    .project-layout .hero-logo-line {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding-bottom: 16px;
+        margin-bottom: 24px;
+        overflow: hidden;
+    }
+    .project-layout .project-logo-svg,
+    .project-layout .project-logo-png {
+        scale: 1;
+        transform: none;
+        width: auto;
+        height: auto;
+        max-width: min(58%, 190px);
+        max-height: 88px;
+        object-fit: contain;
+    }
+
+    /* --- Mimari proje sayfaları (Odyssey, Tri-Morph, vb.) -- */
+    .project-layout .hero-logo-box {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        margin: 0 0 18px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: hidden;
+    }
+    .project-layout .hero-logo-box img {
+        scale: 1;
+        transform: none;
+        width: auto;
+        height: auto;
+        max-width: min(62%, 210px);
+        max-height: 104px;
+        object-fit: contain;
+    }
+}
