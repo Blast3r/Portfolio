@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16 MARCH: SHATTERED</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="16mart.css">
+  <link rel="stylesheet" href="mobile.css">
+  <script src="mobile.js" defer></script>
+</head>
+<body>
+
+    <div class="shattered-container">
+        
+        <div class="panel deg1">
+            <video class="bg-video" muted loop playsinline>
+                <source src="img/16mart/16mart-11.mp4" type="video/mp4">
+            </video>
+            
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="vertical-title">13:45</h2>
+                <div class="inner-text">
+                    <h1>Beyazıt Square</h1>
+                    <p class="typewriter">
+                       The massacre targeting Istanbul University students 
+                       on March 16, 1978, was not a random act of violence but a 
+                       pre-planned conspiracy. Days before the incident, intelligence 
+                       reports reached the police department warning that "dynamite would be 
+                       thrown at leftist students," yet no precautions were taken. On the day 
+                       of the attack, the usual police protection was withdrawn under the pretext 
+                       of "other duties." Students were forced to exit the university’s main gate 
+                       into Beyazıt Square in a group, 
+                       making them vulnerable targets.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel deg2">
+            <video class="bg-video" muted loop playsinline>
+                <source src="img/16mart/16mart-22.mp4" type="video/mp4">
+            </video>
+
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="vertical-title">TNT</h2>
+                <div class="inner-text">
+                    <h1>Bombing and Assault</h1>
+                    <p class="typewriter">
+                        As soon as the students exited,
+                        attackers from within right-wing 
+                        groups threw American-made TNT bombs—registered in 
+                        the NATO inventory—into the crowd while shouting 
+                        "Down with communists." Immediately after the explosion, 
+                        a volley of gunfire was opened on the defenseless students. 
+                        This brutal attack resulted in the deaths of 7 students and left
+                        41 others seriously injured. The fact that the police chief on the scene, 
+                        Reşat Altay, ordered officers who wanted to pursue the attackers to 
+                        "stop" revealed the
+                        internal state cooperation in the organization of the assault.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel deg3">
+            <video class="bg-video" muted loop playsinline>
+                <source src="img/16mart/16mart-3.mp4" type="video/mp4">
+            </video>
+            
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="vertical-title">VICTIMS</h2>
+                <div class="inner-text">
+                    <h1>Confessions and Coordination</h1>
+                    <p class="typewriter">
+                        Evidence proved that the 
+                        names behind the massacre were directly linked to the 
+                        MHP and the Grey Wolves (Ülkü Ocakları). Years later, 
+                        it was revealed that Abdullah Çatlı supplied the bombs and
+                        Zülküf İsot was the individual who threw them. The name of police
+                        officer Reşat Altay continued to appear in connection with similar 
+                        negligence in later dark events, such as the Gazi Massacre and the Hrant 
+                        Dink assassination. The limited number of defendants tried in the case
+                        were acquitted through lack of evidence or 
+                        political interference, fostering a culture of impunity.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel deg4">
+            <video class="bg-video" muted loop playsinline>
+                <source src="img/16mart/16mart4.mp4" type="video/mp4">
+            </video>
+
+            <div class="overlay"></div>
+            <div class="content">
+                <h2 class="vertical-title">STATE</h2>
+                <div class="inner-text">
+                    <h1>COMPLICITY</h1>
+                    <p class="typewriter">
+                        Despite decades of legal struggle and the emergence of new evidence,
+                        the March 16 Massacre case was closed in 2008 during the AKP government’s 
+                        term on the grounds of the statute of limitations. This decision was upheld
+                        by the Court of Appeals in 2010. This massacre went down in history as one
+                        of the bloodiest links in the counter-guerrilla activities designed to
+                        drag society into chaos and create the image that the "state had lost
+                        control," 
+                        thereby preparing the ground for the September 12, 1980, military coup.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const panels = document.querySelectorAll('.panel');
+
+        panels.forEach(panel => {
+            const video = panel.querySelector('video');
+
+            // Mouse panelin üzerine gelince video oynasın
+            panel.addEventListener('mouseenter', () => {
+                if (video) {
+                    video.play();
+                }
+            });
+
+            // Mouse panelden gidince video dursun
+            panel.addEventListener('mouseleave', () => {
+                if (video) {
+                    video.pause();
+                }
+            });
+        });
+    </script>
+
+
+<a href="sayfa2.html" class="side-strip left-strip">
+        <div class="strip-content">What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - </div>
+    </a>
+    <a href="sayfa2.html" class="side-strip left-strip2">
+        <div class="strip-content">What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - </div>
+    </a>
+    <a href="sayfa2.html" class="side-strip left-strip3">
+        <div class="strip-content">What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - What is Ülkücü? - </div>
+    </a>
+
+    <a href="kanlimayis.html" class="side-strip right-strip">
+        <div class="strip-content">Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - </div>
+    </a>
+    <a href="kanlimayis.html" class="side-strip right-strip2">
+        <div class="strip-content">Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - </div>
+    </a>
+    <a href="kanlimayis.html" class="side-strip right-strip3">
+        <div class="strip-content">Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - Bloody May - </div>
+    </a>
+
+
+<!-- Portfolyoya dönüş (portfolyo entegrasyonu için eklendi) -->
+<style>
+.pf-back{position:fixed;left:14px;bottom:14px;z-index:99999;display:inline-flex;
+  align-items:center;gap:8px;padding:7px 12px;background:rgba(8,8,8,.82);
+  border:1px solid rgba(255,255,255,.28);color:#e8e8e8;text-decoration:none;
+  font-family:ui-monospace,"Courier New",monospace;font-size:11px;letter-spacing:.09em;
+  text-transform:uppercase;line-height:1;backdrop-filter:blur(3px);
+  transition:background .2s,border-color .2s,color .2s;opacity:.6}
+.pf-back:hover{opacity:1;background:#8a2be2;border-color:#8a2be2;color:#fff}
+.pf-back span{transition:transform .2s}
+.pf-back:hover span{transform:translateX(-3px)}
+@media(max-width:700px){.pf-back{left:10px;bottom:10px;font-size:10px;padding:6px 10px}}
+@media print{.pf-back{display:none}}
+</style>
+<a class="pf-back" href="../project5_media.html"><span>&lt;-</span>Melih G. Kutsal</a>
+
+</body>
+</html>

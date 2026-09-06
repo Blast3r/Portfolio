@@ -1,0 +1,172 @@
+/* --- TEMEL AYARLAR --- */
+:root {
+    --bg-color: #050505;
+    --card-bg: #111;
+    --text-color: #e0e0e0;
+    --highlight: #ff0000;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier Prime', monospace;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* --- YAN NAVİGASYON (ORİJİNAL) --- */
+a.side-strip {
+    position: fixed; top: -10%; height: 120vh; width: 40px; 
+    writing-mode: vertical-rl; display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.4); text-decoration: none; color: #c71616;
+    border: 1px dashed #333; pointer-events: auto; cursor: pointer;
+    mix-blend-mode: exclusion; transition: all 0.4s ease;
+}
+.left-strip.layer-1 { left: 5px; z-index: 100; opacity: 0.9; }
+.left-strip.layer-2 { left: 35px; transform: rotate(5deg); z-index: 99; opacity: 0.6; border-color: var(--highlight); }
+.left-strip.layer-3 { left: 65px; transform: rotate(-5deg); z-index: 98; opacity: 0.4; }
+.right-strip.layer-1 { right: 5px; z-index: 100; opacity: 0.9; }
+.right-strip.layer-2 { right: 35px; transform: rotate(-5deg); z-index: 99; opacity: 0.6; border-color: var(--highlight); }
+.right-strip.layer-3 { right: 65px; transform: rotate(5deg); z-index: 98; opacity: 0.4; }
+a.side-strip:hover {
+    opacity: 1 !important; background: var(--highlight); color: #000; z-index: 200 !important;
+    transform: scale(1.1) rotate(0deg) !important; box-shadow: 0 0 25px var(--highlight);
+}
+.strip-content { animation: scroll-v 15s linear infinite; font-family: 'Chakra Petch'; font-weight: bold; letter-spacing: 3px; white-space: nowrap; }
+.right-strip .strip-content { animation-direction: reverse; }
+@keyframes scroll-v { from {transform: translateY(0);} to {transform: translateY(-50%);} }
+
+/* --- HEADER --- */
+.header-overlay {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    text-align: center; z-index: 50; pointer-events: none;
+}
+.header-overlay h1 { font-family: 'Chakra Petch'; font-size: 3rem; color: #ffffff; letter-spacing: 5px; }
+.header-overlay p { font-size: 1rem; color: var(--highlight); }
+
+/* --- ORİJİNAL ARŞİV KONTEYNERİ (GÖRSELLER) --- */
+.archive-container {
+    display: flex; flex-direction: column; justify-content: center;
+    height: 100vh; padding: 60px 0; gap: 10px;
+    position: relative; 
+    z-index: 1; /* Arka planda kal */
+    opacity: 0.4; /* Biraz soluk yap ki metin öne çıksın */
+    filter: grayscale(100%) contrast(120%); /* Dramatik etki */
+}
+
+/* HAREKETLİ SATIRLAR */
+.scroll-row {
+    width: 100%; height: 22vh; overflow: hidden; position: relative;
+    border-top: 1px solid #222; border-bottom: 1px solid #222;
+    background: #0a0a0a; display: flex; align-items: center;
+}
+.row-inner { display: flex; gap: 20px; padding: 0 20px; width: max-content; }
+.left-scroll .row-inner { animation: scroll-left 50s linear infinite; }
+.right-scroll .row-inner { animation: scroll-right 50s linear infinite; }
+.scroll-row:hover .row-inner { animation-play-state: paused; }
+
+/* KART YAPISI (Görseller) */
+.archive-card {
+    position: relative; height: 18vh; min-width: 250px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer; border: 1px solid #333; overflow: hidden;
+}
+.archive-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: 0.4s; }
+.archive-card:hover { transform: scale(1.5); z-index: 100; box-shadow: 0 0 30px #b67777; border-color: var(--highlight); min-width: 450px; }
+.archive-card:hover img { filter: grayscale(0%); width: 50%; float: left; }
+
+.info-box {
+    position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+    background: rgba(0,0,0,0.9); padding: 10px;
+    display: flex; flex-direction: column; justify-content: center;
+    opacity: 0; transition: 0.3s 0.1s; border-left: 2px solid var(--highlight);
+}
+.archive-card:hover .info-box { opacity: 1; }
+.info-box h3 { font-family: 'Chakra Petch'; color: red; font-size: 0.7rem; margin-bottom: 5px; }
+.info-box p { font-size: 0.5rem; color: #ffffff; }
+
+@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+
+.noise-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif');
+    opacity: 0.05; pointer-events: none; z-index: -1;
+}
+
+
+/* --- YENİ: MERKEZİ METİN ŞERİDİ (TEXT FEED) --- */
+.central-text-stream {
+    position: fixed;
+    top: 0; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 500px; /* Şeridin genişliği */
+    height: 100vh;
+    z-index: 2000; /* EN ÜSTTE! */
+    overflow: hidden;
+    
+    /* Alttan ve üstten yumuşak geçiş (Maskeleme) */
+    mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    
+    border-left: 1px dashed #333;
+    border-right: 1px dashed #333;
+    background: rgba(0,0,0,0.4); /* Hafif karartma */
+}
+
+.stream-track {
+    width: 100%;
+    animation: scroll-up-feed 60s linear infinite; /* Yavaşça yukarı kay */
+}
+
+/* Fareyle üzerine gelince metin akışı dursun */
+.central-text-stream:hover .stream-track {
+    animation-play-state: paused;
+}
+
+.text-card {
+    background: rgba(10, 10, 10, 0.9); /* Okunabilirlik için koyu zemin */
+    padding: 30px;
+    margin: 20px;
+    border: 1px solid #333;
+    border-left: 4px solid var(--highlight); /* Sol taraf kırmızı çizgi */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.text-card:hover {
+    border-color: #fff;
+    transform: scale(1.02); /* Hafif büyüme */
+    background: #000;
+}
+
+.text-card h4 {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+}
+
+.text-card h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.5rem;
+    color: var(--highlight);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.text-card p {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+@keyframes scroll-up-feed {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); } /* İçerik kopyalandığı için %50 */
+}

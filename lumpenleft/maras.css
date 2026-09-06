@@ -1,0 +1,240 @@
+/* --- TEMEL AYARLAR --- */
+:root {
+    --bg-color: #050505;
+    --text-color: #e0e0e0;
+    --punk-red: #ff0000;
+    --punk-yellow: #ffff00;
+    --cursor-x: 50%;
+    --cursor-y: 50%;
+}
+
+* { box-sizing: border-box; cursor: crosshair; }
+
+body {
+    margin: 0; padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Special Elite', monospace;
+    overflow-x: hidden;
+}
+
+/* --- ANA SAHNE VE IŞIK --- */
+#main-stage {
+    position: relative; min-height: 100vh;
+    opacity: 0; transition: opacity 5s ease-in;
+}
+
+.flashlight-layer {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 100;
+    background: radial-gradient(circle 250px at var(--cursor-x) var(--cursor-y), transparent 0%, rgba(0,0,0,0.98) 100%);
+    mix-blend-mode: multiply;
+}
+
+.noise-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -10;
+    opacity: 0.15; /* Arka plan olduğu için silik */
+    filter: grayscale(100%) contrast(150%);
+    pointer-events: none;
+    object-fit: cover; /* VİDEO İÇİN ÖNEMLİ: Ekranı kapla */
+}
+/* --- İÇERİK DÜZENİ --- */
+.container {
+    max-width: 900px; margin: 0 auto; padding: 100px 20px;
+    position: relative; z-index: 10;
+}
+
+.cutout-header {
+    font-family: 'Rubik Glitch', cursive; font-size: 6vw; color: #fff;
+    background: transparent; padding: 0; display: inline-block;
+    border: none; margin-bottom: 50px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5); /* Hafif parlama */
+}
+
+/* --- SADELEŞTİRİLMİŞ SANSÜR BLOKLARI --- */
+.censor-block {
+    background: #0a0a0a; /* Düz, koyu gri zemin */
+    padding: 30px; margin: 40px 0; position: relative;
+    overflow: hidden; 
+    border: 1px solid #222; /* Çok ince, belirsiz çerçeve */
+}
+
+.truth-text {
+    opacity: 0; transition: 0.5s; position: relative; z-index: 2;
+    font-size: 1.2rem; line-height: 1.6; color: #ddd;
+}
+
+/* Sansür perdesi artık düz siyah */
+.censor-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; /* Desenler kalktı, sadece siyah */
+    display: flex; justify-content: center; align-items: center;
+    font-family: 'Bebas Neue'; font-size: 3rem; color: #444;
+    z-index: 1; transition: 0.5s;
+    letter-spacing: 2px;
+}
+
+.censor-block:hover .censor-overlay {
+    opacity: 0; transform: translateX(10%); /* Hafifçe yana kaybolsun */
+}
+.censor-block:hover .truth-text {
+    opacity: 1; 
+}
+
+/* --- HEDEF KELİMELER (SARI ARKAPLAN KALKTI) --- */
+.target {
+    color: var(--punk-red); /* Sadece kırmızı yazı */
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: help; position: relative;
+    display: inline-block;
+}
+
+.target:hover::after {
+    content: attr(data-desc); position: absolute; bottom: -210%; left: 50%;
+    transform: translateX(-50%);
+    background: #111; color: #fff; border: 1px solid #444;
+    padding: 15px; width: 250px; font-family: 'Bebas Neue'; font-size: 1rem;
+    z-index: 999; 
+}
+
+/* --- SADELEŞTİRİLMİŞ YAN ŞERİTLER --- */
+/* --- GÜNCELLENMİŞ KAOTİK YAN ŞERİTLER (MARAŞ) --- */
+
+a.side-strip {
+    position: fixed; 
+    top: -10%; 
+    height: 120vh; /* Ekrandan uzun */
+    width: 45px; 
+    z-index: 100; /* İçeriğin üzerinde dursun */
+    opacity: 0.6; 
+    writing-mode: vertical-rl; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; /* Maraş fontu */
+    font-size: 1.5rem; 
+    letter-spacing: 5px; 
+    color: #888;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    background: rgba(0,0,0,0.3); /* Hafif şeffaf siyah */
+    
+    /* EN ÖNEMLİ EFEKT: Renklerin birbirine karışması */
+    mix-blend-mode: exclusion; 
+}
+
+/* --- SOL TARAFTAKİ KAOS --- */
+.left-strip { 
+    left: 5px; 
+    transform: rotate(2deg); 
+    border-right: 1px dashed #444;
+}
+.left-strip2 { 
+    left: 45px; 
+    transform: rotate(-1.5deg) translateY(20px);
+    z-index: 99;
+}
+.left-strip3 { 
+    left: 85px; 
+    transform: rotate(1deg) translateY(-20px);
+    z-index: 98;
+    opacity: 0.4;
+}
+
+/* --- SAĞ TARAFTAKİ KAOS --- */
+.right-strip { 
+    right: 5px; 
+    transform: rotate(-2deg); 
+    border-left: 1px dashed #444;
+}
+.right-strip2 { 
+    right: 45px; 
+    transform: rotate(1.5deg) translateY(30px);
+    z-index: 99;
+}
+.right-strip3 { 
+    right: 85px; 
+    transform: rotate(-1deg) translateY(-10px);
+    z-index: 98;
+    opacity: 0.4;
+}
+
+/* İçerik Animasyonu */
+.strip-content { animation: scroll-strip 20s linear infinite; }
+
+/* Sağ taraftakiler ters yöne aksın */
+.right-strip .strip-content, 
+.right-strip2 .strip-content, 
+.right-strip3 .strip-content { 
+    animation-direction: reverse; 
+}
+
+/* --- HOVER EFEKTLERİ --- */
+a.side-strip:hover {
+    opacity: 1 !important;
+    background: var(--punk-red); 
+    color: #000;
+    z-index: 200 !important; /* En öne getir */
+    transform: scale(1.05) rotate(0deg) !important; /* Düzelt ve büyüt */
+    mix-blend-mode: normal; /* Karışım modunu kapat, net görünsün */
+    box-shadow: 0 0 20px var(--punk-red);
+    cursor: pointer;
+}
+
+a.side-strip:hover .strip-content {
+    font-weight: bold;
+    color: #000;
+    text-shadow: none;
+}
+
+/* Animasyon Tanımı */
+@keyframes scroll-strip {
+    from { transform: translateY(0); } 
+    to { transform: translateY(-50%); }
+}
+
+/* MOBİL GİZLEME */
+@media (max-width: 768px) {
+    .left-strip2, .left-strip3, .right-strip2, .right-strip3 {
+        display: none; 
+    }
+    .left-strip, .right-strip {
+        width: 30px;
+        font-size: 1rem;
+    }
+}
+
+/* --- GÖRSEL AYARLARI (EKLENECEK KISIM) --- */
+.evidence-img {
+    max-width: 100%; /* Görsel asla konteynerdan taşmasın */
+    height: auto;    /* Oranları korusun */
+    display: block;  /* Blok element olsun */
+    margin: 0 auto;  /* Ortala */
+    box-shadow: 0 0 15px rgba(0,0,0,0.8); /* Biraz gölge iyi durur */
+    border: 1px solid #333; /* İnce bir çerçeve */
+}
+
+
+/* --- GÜNCELLENMİŞ WRAPPER --- */
+.punk-image-wrapper {
+    width: 100%;       /* Genişliği ebeveyne yay */
+    max-width: 800px;  /* Çok devasa olmasını engelle */
+    margin: 60px auto; /* Dikeyde boşluk, yatayda ortala */
+    text-align: center;
+    position: relative;
+    padding: 10px;
+    /* transform özellikleri HTML'den geliyor, buraya dokunma */
+}
+/* Animasyonlar */
+@keyframes text-flicker {
+    0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; }
+}
+@keyframes scroll-down {
+    from { transform: translateY(0); } to { transform: translateY(-50%); }
+}

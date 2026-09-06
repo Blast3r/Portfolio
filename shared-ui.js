@@ -46,17 +46,29 @@
                          blank: a.getAttribute('target') === '_blank' });
         });
 
-        // Marka linkini (CV / Index) sona ekle
+        // Marka linki sona eklenir. CV sayfasındayken marka
+        // ana sayfaya gidiyor ve etiketi [INDEX] oluyor — o
+        // durumda "Home" diye yazılsın.
         if (brand) {
+            var bhref = brand.getAttribute('href');
             var bt = brand.querySelector('.nav-sub');
-            links.push({ href: brand.getAttribute('href'),
-                         text: bt ? bt.textContent.replace(/[\[\]]/g, '').trim() : 'CV',
-                         blank: false });
+            var btext = bt ? bt.textContent.replace(/[\[\]]/g, '').trim() : 'CV';
+            if (bhref === 'index.html' || /^index$/i.test(btext)) btext = 'Home';
+            links.push({ href: bhref, text: btext, blank: false });
         }
         // Ana sayfa her zaman erişilebilir olsun
         if (here !== 'index.html') {
-            links.push({ href: 'index.html', text: 'Index', blank: false });
+            links.push({ href: 'index.html', text: 'Home', blank: false });
         }
+
+        // Aynı hedefi iki kez listeleme (CV sayfasında marka da
+        // ana sayfaya gidiyordu, "Home" iki satır çıkıyordu).
+        var seenHref = {};
+        links = links.filter(function (l) {
+            if (!l.href || seenHref[l.href]) return false;
+            seenHref[l.href] = true;
+            return true;
+        });
 
         var html = '';
         links.forEach(function (l, i) {

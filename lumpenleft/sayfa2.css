@@ -1,0 +1,458 @@
+/* General Reset */
+body {
+  background-color: rgb(15, 15, 15);
+  margin: 0;
+  color: white;
+  font-family: sans-serif;
+  overflow-x: hidden;
+}
+
+/* Background Video - Ekrana Sabit */
+.video-bg-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  opacity: 0.52;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.video-bg-container video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Ana İçerik ve Ortalama */
+.left-content {
+  width: 100%;
+  position: relative; /* Bu şart */
+  min-height: 2500px; /* Görsellerin görünmesi için sayfa uzun olmalı */
+  display: block; /* Flexbox'ı iptal et ki kutuları merkeze zorlamasın */
+}
+
+.text-wrapper {
+  position: relative;
+  margin: 0 auto;
+  z-index: 5;
+  max-width: 800px;
+}
+
+.glitch-small {
+  margin: 20px auto;
+  font-size: 8rem;
+  rotate: -2deg;
+}
+
+.left-content h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #ff00008f;
+  margin-top: 0;
+}
+
+.text-body {
+  position: relative;
+  left: -200px;
+  width: 100%;
+  display: flex;
+  flex-direction:column;
+}
+
+.text-body p {
+  font-size: 2rem;
+  background-color: rgba(15, 15, 15, 0.9);
+  padding: 25px;
+  border-radius: 10px;
+  color: #a0a0a0;
+  line-height: 1.7;
+  width: 85%;
+  max-width: 500px;
+  margin-bottom: 30px;
+  border-left: 4px solid #ff0000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+.report {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5rem;
+  color: #ff0000;
+  margin: 20px 0 20px 0;
+  text-align: justify;
+  transform: translate(-250px, -80px) rotate(-5deg);
+}
+
+/* İnteraktif Metinler (Tıklayınca Açılanlar) */
+.hidden-text {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in;
+}
+
+.reveal-show {
+  display: block !important;
+  opacity: 1 !important;
+  animation: body-text-glitch 10s infinite;
+}
+
+.clickable-para {
+  cursor: pointer;
+  border-bottom: 1px dashed #ff0000;
+}
+
+
+#part1, #part2, #part3, #part4 {
+  position: absolute; 
+}
+/* Örnek Lokasyonlar - Bu değerleri istediğin gibi değiştir */
+
+#part1 {
+  top: 1300px;
+  right: -400px;
+  rotate: -5deg;
+}
+
+#part2 {
+  top: 1600px;
+  right: -400px;
+  rotate: 15deg;
+}
+
+#part3 {
+  top: 1550px;
+  left: 20px;
+}
+
+#part4 {
+  top: 1450px;
+  right: 500px;
+  rotate: -10deg;
+}
+
+
+
+
+
+/* Hedef kelimelerin stili */
+.target-info {
+  font-weight: bold;
+  color: #ff0000; /* Punk kırmızısı */
+  text-decoration: underline wavy #ff0000;
+  cursor: help;
+  position: relative;
+  display: inline-block;
+}
+
+/* Hover durumunda açıklama kutusu (Tooltip) */
+.target-info::after {
+  content: attr(data-desc); /* HTML'deki data-desc içeriğini çeker */
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  border: 1px solid #ff0000;
+  font-size: 0.9rem;
+  font-family: 'Courier New', monospace;
+  white-space: normal;
+  width: 200px;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  box-shadow: 5px 5px 0px #ff0000;
+}
+
+.target-info:hover::after {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Sayfa çok darsa kutunun kaymasını engeller */
+.target-info:hover {
+  background: #ff0000;
+  color: #000;
+}
+
+
+
+
+
+
+
+/* Başlık Glitch Efekti */
+.term-title {
+  position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem; /* Boyutu korundu */
+  color: #ff0000;
+  margin: 0;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.term-title::before,
+.term-title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.7;
+  display: block;
+}
+
+.term-title::after {
+  color: #ffffff;
+  z-index: -1;
+  animation: constant-glitch 8s infinite;
+}
+
+.term-title::before {
+  color: #a0a0a0;
+  z-index: -2;
+  animation: constant-glitch 8s infinite 0.2s;
+}
+
+/* Hover'da Glitch Durur */
+.term-item:hover .term-title::before,
+.term-item:hover .term-title::after {
+  animation: none;
+  opacity: 0;
+}
+
+/* Kutuların Konteyneri */
+.terms-container {
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+.term-item {
+  background: rgba(15, 15, 15, 0.8);
+  border-left: 4px solid #ff0000;
+  padding: 15px 25px;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  width: 90%;
+  max-width: 500px;
+}
+
+.term-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  transition: all 0.5s ease-in-out;
+}
+
+.term-item:hover .term-content {
+  max-height: 300px;
+  opacity: 1;
+  margin-top: 15px;
+}
+
+/* LOKASYON KONTROLLERİ (Translate kullanarak özgürleştirme) */
+#box-yurtsever {
+  transform: translate(500px, -80px) rotate(-15deg);
+}
+
+#box-milliyetci {
+  transform: translate(600px, 50px) rotate(15deg);
+}
+
+#box-ulkucu {
+  transform: translate(-200px, -150px) rotate(1deg);
+}
+
+/* Keyframes */
+@keyframes constant-glitch {
+  0%, 92%, 100% { transform: translate(0); opacity: 0; }
+  93% { transform: translate(-4px, 2px); opacity: 0.7; }
+  94% { transform: translate(4px, -2px); }
+  95% { transform: translate(-2px, 3px) skewX(15deg); opacity: 0.8; }
+  96% { transform: translate(0); opacity: 0; }
+}
+
+@keyframes body-text-glitch {
+  0%, 94%, 100% { transform: translate(0); opacity: 1; }
+  95% { transform: translate(-2px, 1px); opacity: 0.8; }
+  96% { transform: translate(2px, -1px); }
+  99% { transform: translate(-3px, 0); opacity: 0.7; }
+}
+
+
+
+
+.glitch-img-box {
+  position: absolute;
+  width: 350px; /* Boyutu sabitledim */
+  height: auto;
+}
+.hidden-image {
+  width: 100%;
+  opacity: 0;
+  filter: brightness(0);
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Yazı başlangıçta gizli */
+.img-caption {
+  position: absolute;
+  top: 100%; /* Görselin hemen altında başlar */
+  left: 0;
+  color: #ff0000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 5px 10px;
+  pointer-events: none;
+}
+
+/* Kutuya hover olunca hem görseli hem yazıyı aç */
+.glitch-img-box:hover .hidden-image,
+.glitch-img-box:hover .img-caption {
+  opacity: 1;
+  filter: brightness(1);
+}
+/* Sürekli çalışan Glitch Efekti (Kenarlık/Gölge gibi) */
+.glitch-img-box::before,
+.glitch-img-box::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid #ff0000;
+  opacity: 0.5;
+  z-index: 1;
+  animation: constant-noise 2s infinite;
+}
+
+.glitch-img-box::after {
+  border-color: #00ffff;
+  animation-delay: 0.1s;
+  animation-direction: reverse;
+}
+
+/* Kaotik Titreşim Animasyonu */
+@keyframes constant-noise {
+  0% { transform: translate(0); }
+  10% { transform: translate(-2px, -1px) scaleX(1.05); }
+  20% { transform: translate(2px, 1px) skewX(5deg); opacity: 0.8; }
+  30% { transform: translate(-1px, 2px); }
+  40% { transform: translate(1px, -1px); opacity: 0.4; }
+  50% { transform: translate(-2px, 1px); border-width: 1px; }
+  100% { transform: translate(0); }
+}
+
+/* MANUEL LOKASYONLAR */
+#loc-1 { 
+  scale: 1.5;
+  top: 100px; 
+  left: 60%; 
+  rotate: 5deg; 
+  z-index: 10;
+}
+
+#loc-2 { 
+  scale: 1.4;
+  top: 450px; 
+  right: 5%; 
+  rotate: 10deg; 
+  z-index: 10;
+}
+
+#loc-3 { 
+  scale: 1.5;
+  top: 700px; 
+  left: 55%; 
+  rotate: -5deg; 
+  z-index: 10;
+}
+
+
+
+
+
+
+
+
+.side-link {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0.15;
+  transition: opacity 0.5s;
+  /* Yazıları dikey yapar */
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.left-side { left: 30px; rotate: 182deg; }
+.left-side2 { left: 80px; rotate:1deg; }
+.left-side3 { left: 140px; rotate: 178deg; }
+
+.right-side { right: 20px; rotate: 2deg; }
+.right-side2 { right: 100px; rotate:-2deg; }
+.right-side3 { right: 60px; rotate: -180deg; }
+
+.side-link:hover { opacity: 0.8; }
+
+/* Şeritleri yan yana getiren kapsayıcı */
+.strip-group {
+  display: flex;
+  flex-direction: row; /* Sütunları yan yana dizer */
+  text-decoration: none;
+  color: inherit;
+}
+
+.film-strip-wrap {
+  display: flex;
+  animation: film-scroll 12s linear infinite;
+}
+
+/* Yan yana duran ikinci şeridi biraz farklı hızda yaparsan daha kaotik/punk durur */
+.film-strip-wrap:nth-child(2) {
+  animation-duration: 15s;
+  margin-right: 20px; /* İki dikey sütun arasındaki boşluk */
+}
+
+@keyframes film-scroll {
+  from { transform: translateY(0); }
+  to { transform: translateY(-40%); }
+}
+
+.film-strip-wrap span {
+  font-size: 1.8rem;
+  padding: 40px 0;
+  white-space: nowrap;
+}
+
+
+
+
+

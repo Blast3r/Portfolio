@@ -1,0 +1,346 @@
+/* --- TEMEL AYARLAR --- */
+:root {
+    --bg-color: #050505;
+    --text-color: #ddd;
+    --punk-red: #cc0000;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier Prime', monospace;
+    overflow: hidden;
+    height: 100vh; width: 100vw;
+}
+
+/* --- YATAY SCROLL YAPISI --- */
+.horizontal-scroll-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%; height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: none; scrollbar-width: none; 
+}
+.horizontal-scroll-wrapper::-webkit-scrollbar { display: none; }
+
+/* --- GENEL PANEL AYARLARI --- */
+.panel {
+    min-width: 100vw; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px dashed #222;
+    position: relative;
+    padding: 0;
+}
+
+/* --- METİN PANELLERİ VE ARKA PLAN VİDEOSU --- */
+
+/* 1. Panel Genel Ayarları */
+.text-panel, .text-panel2 {
+    position: relative;
+    border-right: 1px dashed #333;
+    overflow: hidden; 
+    z-index: 5;
+    background: #000; /* Video yüklenmezse siyah kalsın */
+}
+
+/* 2. Video Kapsayıcısı (En Arkada) */
+.panel-bg-video-container {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0 !important; /* KESİNLİKLE ARKADA */
+    pointer-events: none;
+}
+
+/* 3. Videonun Kendisi */
+.panel-bg-video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+/* 4. Siyah Karartma Perdesi */
+.panel-bg-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(5, 5, 5, 0.85); /* %85 Karartma */
+    z-index: 1; 
+}
+
+/* 5. YAZILARI ÖNE ÇIKARMA (KRİTİK DÜZELTME) */
+/* Video konteyneri HARİÇ panel içindeki her şeyi en üste taşı */
+.text-panel > *:not(.panel-bg-video-container),
+.text-panel2 > *:not(.panel-bg-video-container) {
+    position: relative;
+    z-index: 10;
+}
+
+/* Metin Stilleri */
+.text-panel h1, .text-panel2 h1 { 
+    font-family: 'Oswald', sans-serif; 
+    font-size: 5rem; 
+    color: var(--punk-red); 
+    margin-bottom: 20px;
+}
+.text-panel p, .text-panel2 p { 
+    max-width: 600px; 
+    text-align: center; 
+    line-height: 1.5; 
+    font-size: 1.2rem; 
+}
+.scroll-hint { 
+    margin-top: 50px; 
+    color: #555; 
+    animation: blink 2s infinite; 
+}
+
+/* --- KOLAJ ALANLARI (SCRATCH CARDS) --- */
+.collage-panel {
+    background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+.collage-area, .collage-area2 {
+    position: relative;
+    width: 100%; height: 100%;
+}
+
+/* Kolaj Arka Plan Videosu */
+.collage-video-layer {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.collage-bg-video {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.3);
+    opacity: 0.75;
+    filter: grayscale(100%) contrast(120%);
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+/* --- KAZIMA KARTLARI (SCRATCH WRAPPER) --- */
+.scratch-wrapper {
+    position: absolute;
+    background: #000;
+    box-shadow: 10px 10px 30px rgba(0,0,0,0.8);
+    border: 1px solid #333;
+    padding: 5px;
+    cursor: crosshair;
+    transition: transform 0.3s;
+    z-index: 10;
+}
+
+.scratch-wrapper:hover {
+    z-index: 50 !important;
+    border-color: var(--punk-red);
+}
+
+.evidence-media {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(50%) contrast(120%) grayscale(50%);
+}
+
+.scratch-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 10;
+}
+
+.label-tag {
+    position: absolute;
+    bottom: -25px; left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #444;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Kart Pozisyonları */
+.pos-1 { top: 15%; left: 10%; width: 400px; height: 300px; transform: rotate(-5deg); }
+.pos-2 { bottom: 15%; right: 15%; width: 450px; height: 320px; transform: rotate(3deg); }
+.pos-3 { top: 35%; left: 40%; width: 350px; height: 250px; transform: rotate(10deg); }
+
+/* --- KAOTİK YAN ŞERİTLER (GÜNCELLENMİŞ) --- */
+a.side-strip {
+    position: fixed; 
+    top: -10%; 
+    height: 120vh; /* Ekrandan daha uzun */
+    width: 40px; 
+    
+    /* Dikey Yazı */
+    writing-mode: vertical-rl; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    
+    /* Görsel Stil */
+    background: rgba(0,0,0,0.6); 
+    text-decoration: none; 
+    color: #555;
+    border: 1px dashed #333; 
+    
+    /* Etkileşim */
+    pointer-events: auto; 
+    cursor: pointer;
+    
+    /* Glitch Etkisi */
+    mix-blend-mode: exclusion; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- SOL TARAFTAKİ AYRIŞMA (16 MART) --- */
+/* Katman 1: Ana (En solda) */
+.left-strip.layer-1 {
+    left: 0;
+    z-index: 999;
+    opacity: 0.9;
+    border-right: 1px solid #333;
+}
+
+/* Katman 2: +5 Derece ve Uzaklaştırılmış */
+.left-strip.layer-2 {
+    left: 30px; 
+    transform: rotate(4deg);
+    z-index: 998;
+    opacity: 0.5;
+    border-color: var(--punk-red);
+}
+
+/* Katman 3: -5 Derece ve Daha da Uzaklaştırılmış */
+.left-strip.layer-3 {
+    left: 60px; 
+    transform: rotate(-3deg);
+    z-index: 997;
+    opacity: 0.3;
+}
+
+/* --- SAĞ TARAFTAKİ AYRIŞMA (MARAŞ) --- */
+/* Katman 1: Ana (En sağda) */
+.right-strip.layer-1 {
+    right: 0;
+    z-index: 999;
+    opacity: 0.9;
+    border-left: 1px solid #333;
+}
+
+/* Katman 2: -5 Derece ve Uzaklaştırılmış */
+.right-strip.layer-2 {
+    right: 30px; 
+    transform: rotate(-4deg);
+    z-index: 998;
+    opacity: 0.5;
+    border-color: var(--punk-red);
+}
+
+/* Katman 3: +5 Derece ve Daha da Uzaklaştırılmış */
+.right-strip.layer-3 {
+    right: 60px; 
+    transform: rotate(3deg);
+    z-index: 997;
+    opacity: 0.3;
+}
+
+/* --- HOVER EFEKTLERİ --- */
+a.side-strip:hover {
+    opacity: 1 !important;
+    background: var(--punk-red); 
+    color: #000;
+    z-index: 1000 !important; /* Tıklanan en öne gelir */
+    
+    /* Hover olunca düzelsin ve büyüsün */
+    transform: scale(1.1) rotate(0deg) !important; 
+    box-shadow: 0 0 25px var(--punk-red);
+}
+
+/* --- YAZI ANİMASYONU --- */
+.strip-content { 
+    animation: scroll-v 15s linear infinite; 
+    font-weight: bold;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+/* Sağ taraftakiler ters yöne aksın */
+.right-strip .strip-content {
+    animation-direction: reverse;
+}
+
+@keyframes scroll-v { 
+    from {transform: translateY(0);} 
+    to {transform: translateY(-50%);} 
+}
+
+/* Mobilde sadece ana şerit kalsın */
+@media (max-width: 768px) {
+    .layer-2, .layer-3 { display: none; }
+}
+/* --- GİZLİ SES OYNATICI (AUDIO) --- */
+/* (Not: HTML5 <audio> kullandığımız için bu sınıf aslında boş kalabilir ama yedek olarak dursun) */
+.hidden-sound {
+    position: fixed; top: -100px; left: -100px;
+    width: 1px; height: 1px; opacity: 0; pointer-events: none;
+}
+
+/* --- MÜZİK BİLGİ KUTUSU --- */
+.music-info-container {
+    position: fixed; bottom: 30px; right: 30px;
+    z-index: 9999;
+    display: flex; flex-direction: column; align-items: flex-end;
+    font-family: 'Courier Prime', monospace;
+}
+
+.music-trigger {
+    background: #000; color: #666;
+    padding: 10px 15px; border: 1px solid #333;
+    font-size: 0.9rem; font-weight: bold;
+    cursor: help; transition: 0.3s; letter-spacing: 2px;
+}
+.music-info-container:hover .music-trigger {
+    background: var(--punk-red); color: #000; border-color: var(--punk-red);
+}
+
+.music-details {
+    position: absolute; bottom: 50px; right: 0;
+    width: 300px; background: #0a0a0a;
+    border: 1px solid var(--punk-red); padding: 20px;
+    box-shadow: -10px -10px 20px rgba(0,0,0,0.8);
+    opacity: 0; visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.music-info-container:hover .music-details {
+    opacity: 1; visibility: visible; transform: translateY(0);
+}
+
+.artist-name { margin: 0 0 5px 0; color: var(--punk-red); font-family: 'Oswald', sans-serif; font-size: 1.5rem; text-transform: uppercase; }
+.track-info { font-size: 0.8rem; color: #fff; border-bottom: 1px dashed #444; padding-bottom: 10px; margin-bottom: 10px; }
+.bio-text { font-size: 0.85rem; line-height: 1.5; color: #ccc; text-align: left; }
+
+/* --- ANİMASYONLAR --- */
+@keyframes scroll-v { from {transform: translateY(0);} to {transform: translateY(-50%);} }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.5;} }

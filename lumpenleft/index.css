@@ -1,0 +1,197 @@
+/* --- General Reset --- */
+body {
+  background-color: rgb(22, 22, 22); 
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  color: #e0e0e0;
+}
+
+/* --- Video Arka Plan --- */
+.video-background {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -10; overflow: hidden; background-color: #000;
+}
+
+.video-background video {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%; min-height: 100%; width: auto; height: auto;
+  object-fit: cover; opacity: 0.3; 
+  filter: grayscale(100%) contrast(120%); 
+  animation: bg-flicker 10s infinite;
+}
+
+.scanline {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none; z-index: 1;
+}
+
+@keyframes bg-flicker {
+  0% { opacity: 0.3; } 5% { opacity: 0.25; } 10% { opacity: 0.3; } 100% { opacity: 0.3; }
+}
+
+/* --- Film Şeritleri --- */
+.film-strip {
+  scale: 1; position: fixed; top: 0; width: 100px; height: 100vh;
+  overflow: hidden; opacity: 0.6; pointer-events: none; 
+}
+
+/* Şerit Konumları ve Hızları */
+.left { transform: scale(1, 1.2); left: 2%; rotate: 25deg; z-index: -2; }
+.right { right: 15%; rotate: -90deg; z-index: -2; }
+.left2 { scale: 2; left: 18%; rotate: 15deg; z-index: -3; }
+.right2 { right: 40%; rotate: -180deg; z-index: -3; }
+.left3 { opacity: 0.8; z-index: -5; scale: 2; transform: scale(1.8, 1.2); left: 80%; rotate: -25deg; }
+.right3 { transform: scale(1.2) scaleY(2.8); right: 15%; rotate: -80deg; z-index: -5; }
+
+.strip-content { display: flex; flex-direction: column; gap: 20px; animation: scroll-vertical 60s linear infinite; }
+.right .strip-content { animation-duration: 55s; animation-direction: reverse; }
+.left2 .strip-content { animation-duration: 70s; }
+.right2 .strip-content { animation-duration: 45s; animation-direction: reverse; }
+.left3 .strip-content { animation-duration: 80s; }
+.right3 .strip-content { animation-duration: 50s; animation-direction: reverse; }
+
+.strip-img {
+  width: 100%; filter: invert(100%) grayscale(100%);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5); border: 1px solid #444;
+  animation: image-glitch 8s step-end infinite;
+}
+
+@keyframes image-glitch {
+  0% { transform: translate(0, 0); filter: invert(100%) grayscale(100%); }
+  1% { transform: translate(-5px, 2px) skewX(10deg); filter: invert(100%) sepia(1) saturate(5) hue-rotate(90deg); }
+  2% { transform: translate(5px, -2px) skewX(-10deg); }
+  3% { transform: translate(0, 0); filter: invert(100%) grayscale(100%); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes scroll-vertical { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+
+/* --- Layout ve Metin Kutuları --- */
+.center {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 50px 0; position: relative; z-index: 10;
+}
+
+/* ANA KUTULAR (.top, .bottom) */
+.top, .bottom {
+  background-color: rgba(15, 15, 15, 0.95);
+  padding: 30px;
+  border-radius: 2px;
+  color: #a0a0a0;
+  font-family: sans-serif;
+  line-height: 1.6;
+  width: 35vw; /* Sabit genişlik ama artık sorun yok */
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  border: 1px solid #333;
+  position: relative; /* Çocuklar buna göre hizalanacak */
+}
+
+/* ANA YAZI STİLİ (BÜYÜTÜLDÜ) */
+#part1, #part3, #part2 p, #part4 p {
+    font-size: 1.8rem; /* İSTEDİĞİN GİBİ BÜYÜK */
+    margin: 0;
+}
+
+.align-left { rotate: -15deg; margin-right: auto !important; margin-left: 10% !important; border-right: 3px solid #ff0000; }
+.align-right { rotate: 15deg; margin-left: auto !important; margin-right: 10% !important; border-left: 3px solid #ff0000; }
+
+.click-hint { color: #ff0000; font-size: 1rem; font-weight: bold; letter-spacing: 2px; }
+
+/* --- GİZLİ KUTULAR (AYRI VE DAĞINIK) --- */
+/* Buradaki ayarlar kutuların ana kutudan sarkmasını sağlar */
+
+.hidden-text {
+  display: none; 
+  opacity: 0; 
+  cursor: pointer;
+}
+
+.reveal-show {
+  display: block !important;
+  animation: text-glitch-in 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* PART 2 ÖZEL KONUM (Üst kutudan sarkıt) */
+#part2 {
+  position: absolute;
+  top: 95%; /* Kutunun hemen altından başlasın */
+  left: 10%; /* Hafif sağa kayık */
+  width: 110%; /* Ana kutudan biraz daha geniş */
+  padding: 20px;
+  
+  /* Farklı Görünüm (Ayrı kutu hissi) */
+  background-color: rgba(10, 10, 10, 0.98);
+  border: 1px solid #ff0000; /* Kırmızı çerçeve */
+  border-left: 8px solid #ff0000; /* Sol taraf kalın */
+  box-shadow: 15px 15px 0px rgba(0,0,0,0.8); /* Sert gölge */
+  
+  rotate: 5deg; /* Zıt yöne biraz yatır */
+  z-index: 100;
+}
+
+/* PART 4 ÖZEL KONUM (Alt kutudan sarkıt) */
+#part4 {
+  position: absolute;
+  top: 95%;
+  right: 5%;
+  width: 100%;
+  padding: 20px;
+  
+  background-color: rgba(10, 10, 10, 0.98);
+  border: 1px solid #ff0000;
+  border-right: 8px solid #ff0000; /* Sağ taraf kalın */
+  box-shadow: -15px 15px 0px rgba(0,0,0,0.8);
+  
+  rotate: -8deg; /* Zıt yöne yatır */
+  z-index: 100;
+}
+
+@keyframes text-glitch-in {
+  0% { opacity: 0; transform: translateY(20px) skewX(10deg); filter: blur(5px); }
+  100% { opacity: 1; transform: translateY(0) skewX(0); filter: blur(0); }
+}
+
+.clickable-para { cursor: pointer; transition: color 0.3s; }
+.clickable-para:hover { text-shadow: 2px 2px 5px rgba(255,0,0,0.5); color: #fff; }
+
+/* --- Başlıklar --- */
+.heading-wrapper-2 { rotate: calc(15deg); transform: translate(400px, -300px); position: relative; z-index: 20; }
+.heading-wrapper { rotate: calc(-15deg); transform: translate(-400px,300px); position: relative; z-index: 20; }
+
+.glitch {
+  font-weight: 200; font-size: 5rem; text-transform: uppercase; color: white;
+  letter-spacing: 3px; position: relative; display: inline-block;
+}
+.glitch:before, .glitch:after { content: attr(data-text); position: absolute; top: 0; left: 0; height: 100%; width: 100%; }
+.glitch:after { color: #f0f; z-index: -2; }
+.glitch:before { color: #0ff; z-index: -1; }
+.glitch:hover:before { animation: glitch-anim 0.3s infinite; }
+.glitch:hover:after { animation: glitch-anim 0.3s reverse infinite; }
+
+@keyframes glitch-anim {
+  0% { transform: translate(0); } 20% { transform: translate(-3px, 3px); } 40% { transform: translate(-3px, -3px); } 60% { transform: translate(3px, 3px); } 80% { transform: translate(3px, -3px); } 100% { transform: translate(0); }
+}
+
+.hover-text {
+  padding: 10px; position: absolute; border-style: groove; z-index: 100;
+  background-color: #111111; color: #d10101; font-size: 1.2rem; opacity: 0;
+  transform: translateY(-10px); transition: all 0.3s ease; letter-spacing: 5px;
+  pointer-events: none; width: 300px;
+}
+.heading-wrapper-2:hover .hover-text, .heading-wrapper:hover .hover-text { opacity: 1; transform: translateY(0); }
+
+/* --- Mobil Uyumluluk --- */
+@media only screen and (max-width: 1024px) {
+  .film-strip { display: none; }
+  .top, .bottom { width: 85%; max-width: 90%; margin: 20px auto !important; transform: none !important; rotate: 0deg !important; }
+  .heading-wrapper, .heading-wrapper-2 { transform: none; rotate: 0deg; margin: 20px 0; text-align: center; }
+  .glitch { font-size: 3rem; }
+  /* Mobilde dağınıklığı kapat, alt alta diz */
+  #part2, #part4 { position: static; width: 100%; rotate: 0deg; margin-top: 15px; border-width: 2px; }
+}
