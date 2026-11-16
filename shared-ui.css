@@ -580,3 +580,159 @@ body.m-menu-open { overflow: hidden !important; }
         object-fit: contain;
     }
 }
+
+/* ==========================================================
+   11. KARANLIK TEMA (isteğe bağlı)
+   ----------------------------------------------------------
+   Varsayılan açık tema sitenin asıl tasarımıdır ve hiçbir
+   şekilde değişmez. Ziyaretçi nav'daki düğmeyle karanlığa
+   geçerse <html data-theme="dark"> olur.
+
+   Tasarım baştan sona değişkenlerle kurulduğu için karanlık
+   tema çoğunlukla değişkenleri çevirmek: --c-blk (yazı,
+   çizgiler) açık olur, --c-wht (zemin) koyu olur.
+   `html[data-theme]` seçicisi :root'tan daha güçlü olduğu
+   için sayfaların kendi CSS'lerindeki tanımları ezer.
+   ========================================================== */
+html[data-theme="dark"] {
+    color-scheme: dark;
+
+    --c-blk: #e8e8e6;
+    --c-wht: #121212;
+    /* Mor koyu zeminde okunurluk için biraz açıldı
+       (#121212 üzerinde ~5.9:1 kontrast) */
+    --c-pur: #a874ff;
+    --c-pur-shadow: rgba(168, 116, 255, 0.22);
+    --c-placeholder: transparent;
+
+    --line-color: #e8e8e6;
+    --bg-color: #121212;
+    --accent-color: #a874ff;
+    --rule-soft: rgba(232, 232, 230, 0.14);
+}
+
+/* --- 11.1 Zaten "hep koyu" tasarlanmış parçalar ---------
+   Mobil menü ve lightbox renklerini değişkenden alıyor ama
+   tasarım gereği her zaman koyu olmalılar. Değişkenleri
+   yalnızca bu kutuların içinde açık temadaki hâline geri
+   çeviriyoruz.                                            */
+html[data-theme="dark"] .m-menu,
+html[data-theme="dark"] .lightbox {
+    --c-blk: #0b0b0b;
+    --c-wht: #ededed;
+}
+html[data-theme="dark"] .m-menu-btn[aria-expanded="true"] span { background: #ededed; }
+html[data-theme="dark"] .page-transition-overlay.bg-black { background-color: #050505; }
+
+/* --- 11.2 Logolar ----------------------------------------
+   Proje logoları açık gri bir leke üzerine koyu çizgiden
+   oluşuyor; lekenin dışına taşan çizgiler koyu zeminde
+   kayboluyordu. Tersine çevirmek logonun doğal bir karanlık
+   sürümünü veriyor: leke koyulaşıyor, çizgiler açılıyor.
+   Fotoğraflara ve çizimlere dokunulmuyor.                 */
+html[data-theme="dark"] .hero-logo-box img,
+html[data-theme="dark"] .project-logo-svg,
+html[data-theme="dark"] .project-logo-png {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* --- 11.3 Sabit yazılmış ince çizgiler ------------------- */
+html[data-theme="dark"] .meta-pair { border-right-color: rgba(232, 232, 230, 0.15); }
+html[data-theme="dark"] :is(.t-list, .t-steps) li { border-bottom-color: rgba(232, 232, 230, 0.22); }
+html[data-theme="dark"] .t-sub { border-bottom-color: rgba(232, 232, 230, 0.26); }
+html[data-theme="dark"] .t-specs { background: rgba(255, 255, 255, 0.03); }
+html[data-theme="dark"] .t-specs dl > div { border-bottom-color: rgba(232, 232, 230, 0.16); }
+html[data-theme="dark"] .build-specs :is(dt, dd) { border-bottom-color: rgba(232, 232, 230, 0.16); }
+@media (max-width: 900px) {
+    html[data-theme="dark"] .meta-pair { border-bottom-color: rgba(232, 232, 230, 0.12); }
+}
+
+/* --- 11.4 Tema düğmesi ----------------------------------- */
+.theme-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.theme-toggle .tt-icon { width: 14px; height: 14px; flex-shrink: 0; }
+.theme-toggle:focus-visible { outline: 2px solid var(--c-pur); outline-offset: -2px; }
+
+/* Masaüstü nav: isim hücresinin yanında, nav hücresi görünümünde.
+   margin-right:auto, flex'teki boşluğu yutarak düğmeyi sola
+   yaslar; aksi halde space-between onu ortaya, logonun üstüne
+   koyardı. */
+.wireframe-nav .theme-toggle.nav-item {
+    height: 100%;
+    margin-right: auto;
+    padding: 0 18px;
+    border-left: none;
+    border-right: 1px solid var(--c-blk);
+    color: var(--c-blk);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.wireframe-nav .theme-toggle.nav-item:hover {
+    background-color: var(--c-blk);
+    color: var(--c-wht);
+}
+@media (max-width: 900px) {
+    /* Telefonda düğme menünün içinde; çubukta yer kaplamasın */
+    .wireframe-nav .theme-toggle.tt-nav { display: none !important; }
+}
+
+/* Dar masaüstü / yatay tablet (901–1260px): sağdaki link grubu
+   bu aralıkta ortadaki üçgen logonun üstüne biniyordu (tema
+   düğmesinden bağımsız, önceden var olan bir sorun). Bu aralıkta
+   grup yerine telefondaki menü düğmesi kullanılıyor. */
+@media (min-width: 901px) and (max-width: 1260px) {
+    .wireframe-nav .nav-group { display: none !important; }
+    .wireframe-nav .m-menu-btn {
+        display: flex;
+        height: 100%;
+        width: 60px;
+        margin-left: auto;
+    }
+}
+
+/* Ana sayfa üst barı */
+.tt-top-wrap { display: flex; align-items: center; height: 100%; }
+.theme-toggle.tt-top {
+    height: 100%;
+    padding: 0 16px;
+    color: var(--line-color);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-left: 1px solid var(--line-color);
+    transition: background-color 0.2s, color 0.2s;
+}
+.theme-toggle.tt-top:hover { background: var(--line-color); color: var(--bg-color); }
+
+/* Mobil menü: liste satırlarıyla aynı hizada, numarasız */
+.theme-toggle.tt-menu {
+    width: 100%;
+    padding: 18px 0;
+    margin-top: 6px;
+    color: var(--c-wht);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.theme-toggle.tt-menu .tt-icon { width: 16px; height: 16px; }
+
+/* Masaüstü nav düğmesi telefonda nav-group ile birlikte gizli
+   kalır; telefonda düğme menünün içindedir. */
+@media print { .theme-toggle { display: none !important; } }

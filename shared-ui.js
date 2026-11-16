@@ -214,9 +214,82 @@
         update();
     }
 
-    /* ---------- 6. BAŞLAT ---------- */
+    /* ---------- 6. KARANLIK TEMA ----------
+       Varsayılan açık tema (sitenin asıl tasarımı). İsteyen düğmeyle
+       karanlığa geçer, seçim localStorage'da saklanır. Sayfa açılırken
+       beyaz flaş olmasın diye her sayfanın <head>'inde tek satırlık bir
+       script temayı CSS yüklenmeden ÖNCE uyguluyor; burası sadece
+       düğmeleri kurar ve değişimi yönetir. */
+    var THEME_KEY = 'mk-theme';
+    var THEME_ICON =
+        '<svg class="tt-icon" viewBox="0 0 16 16" aria-hidden="true">' +
+        '<circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
+        '<path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor"/></svg>';
+
+    function isDark() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
+
+    function syncThemeToggles() {
+        var dark = isDark();
+        Array.prototype.forEach.call(document.querySelectorAll('.theme-toggle'), function (b) {
+            b.setAttribute('aria-pressed', dark ? 'true' : 'false');
+            b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+            b.title = dark ? 'Light mode' : 'Dark mode';
+            var l = b.querySelector('.tt-label');
+            if (l) l.textContent = dark ? 'Light' : 'Dark';
+        });
+    }
+
+    function setTheme(theme) {
+        if (theme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+        else document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem(THEME_KEY, theme); } catch (e) { /* gizli sekme vb. */ }
+        syncThemeToggles();
+    }
+
+    function makeThemeToggle(extra) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'theme-toggle ' + (extra || '');
+        b.innerHTML = THEME_ICON + '<span class="tt-label"></span>';
+        b.addEventListener('click', function () { setTheme(isDark() ? 'light' : 'dark'); });
+        return b;
+    }
+
+    function buildThemeToggle() {
+        if (document.querySelector('.theme-toggle')) return;
+
+        // Masaüstü: isim hücresinin hemen sağı. Sağdaki link grubuna
+        // eklemek grubu sola itip ortadaki üçgen logoya çarptırıyordu;
+        // solda ise en dar masaüstünde bile ~180px boşluk var.
+        var group = document.querySelector('.wireframe-nav .nav-group');
+        var brand = document.querySelector('.wireframe-nav .brand');
+        if (brand) brand.parentNode.insertBefore(makeThemeToggle('nav-item tt-nav'), brand.nextSibling);
+
+        // Mobil: açılır menünün içinde, alt yazının üstünde
+        var menu = document.querySelector('.m-menu');
+        if (menu) menu.insertBefore(makeThemeToggle('tt-menu'), menu.querySelector('.m-menu-foot'));
+
+        // Ana sayfa: sağ üstteki SYS.ONLINE yazısının yanı.
+        // Üst bar 3 öğeli bir flex düzeni; logo ortada kalsın diye
+        // düğme ile yazı tek bir kutuda toplanıyor.
+        var topbar = document.querySelector('.top-bar');
+        if (topbar && !group) {
+            var sys = topbar.querySelector('.sys-text');
+            var wrap = document.createElement('div');
+            wrap.className = 'tt-top-wrap';
+            if (sys) { topbar.insertBefore(wrap, sys); wrap.appendChild(sys); }
+            else topbar.appendChild(wrap);
+            wrap.appendChild(makeThemeToggle('tt-top'));
+        }
+        syncThemeToggles();
+    }
+
+    /* ---------- 7. BAŞLAT ---------- */
     function init() {
         buildMobileMenu();
+        buildThemeToggle();
         enhanceLightbox();
         lazifyImages();
         readProgress();
